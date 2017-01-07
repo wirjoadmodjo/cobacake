@@ -1,4 +1,6 @@
-# CakePHP DebugKit [![Build Status](https://secure.travis-ci.org/cakephp/debug_kit.png?branch=master)](http://travis-ci.org/cakephp/debug_kit)
+# CakePHP DebugKit
+[![Build Status](https://secure.travis-ci.org/cakephp/debug_kit.png?branch=master)](http://travis-ci.org/cakephp/debug_kit)
+[![Coverage Status](https://img.shields.io/codecov/c/github/cakephp/debug_kit.svg?style=flat-square)](https://codecov.io/github/cakephp/debug_kit)
 
 DebugKit provides a debugging toolbar and enhanced debugging tools for CakePHP applications.
 
@@ -103,6 +105,7 @@ There are several built-in panels, they are:
  * **Log** Display any entries made to the log files this request.
  * **Variables** Display View variables set in controller.
  * **Environment** Display environment variables related to PHP + CakePHP.
+ * **Routes** Display all the routes connected in your application, highlighting the current route.
 
 ## Configuration
 
@@ -183,7 +186,7 @@ the panel.
 ```php
 Configure::write(
 	'DebugKit.panels',
-	array_merge((array)Configure::read('DebugKit.panels'), ['MyPlugin.MyCustomPanel'])
+	array_merge((array)Configure::read('DebugKit.panels'), ['MyPlugin.MyCustom'])
 );
 ```
 

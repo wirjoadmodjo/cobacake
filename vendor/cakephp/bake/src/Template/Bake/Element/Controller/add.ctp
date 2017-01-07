@@ -18,7 +18,7 @@ $compact = ["'" . $singularName . "'"];
     /**
      * Add method
      *
-     * @return void Redirects on successful add, renders view otherwise.
+     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
@@ -27,6 +27,7 @@ $compact = ["'" . $singularName . "'"];
             $<%= $singularName %> = $this-><%= $currentModelName %>->patchEntity($<%= $singularName %>, $this->request->data);
             if ($this-><%= $currentModelName; %>->save($<%= $singularName %>)) {
                 $this->Flash->success(__('The <%= strtolower($singularHumanName) %> has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The <%= strtolower($singularHumanName) %> could not be saved. Please, try again.'));

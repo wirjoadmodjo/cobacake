@@ -15,7 +15,6 @@
 namespace Cake\Error;
 
 use Cake\Core\Configure;
-use Cake\Error\PHP7ErrorException;
 use Cake\Log\Log;
 use Cake\Routing\Router;
 use Error;
@@ -71,6 +70,13 @@ abstract class BaseErrorHandler
         register_shutdown_function(function () {
             if ((PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg')) {
                 return;
+            }
+            $megabytes = Configure::read('Error.extraFatalErrorMemory');
+            if ($megabytes === null) {
+                $megabytes = 4;
+            }
+            if ($megabytes > 0) {
+                $this->increaseMemoryLimit($megabytes * 1024);
             }
             $error = error_get_last();
             if (!is_array($error)) {
@@ -138,6 +144,7 @@ abstract class BaseErrorHandler
         }
         $this->_displayError($data, $debug);
         $this->_logError($log, $data);
+
         return true;
     }
 
@@ -146,7 +153,7 @@ abstract class BaseErrorHandler
      * then, it wraps the passed object inside another Exception object
      * for backwards compatibility purposes.
      *
-     * @param Exception|Error $exception The exception to handle
+     * @param \Exception|\Error $exception The exception to handle
      * @return void
      */
     public function wrapAndHandleException($exception)
@@ -209,7 +216,38 @@ abstract class BaseErrorHandler
         $this->_logError(LOG_ERR, $data);
 
         $this->handleException(new FatalErrorException($description, 500, $file, $line));
+
         return true;
+    }
+
+    /**
+     * Increases the PHP "memory_limit" ini setting by the specified amount
+     * in kilobytes
+     *
+     * @param string $additionalKb Number in kilobytes
+     * @return void
+     */
+    public function increaseMemoryLimit($additionalKb)
+    {
+        $limit = ini_get('memory_limit');
+        if (!strlen($limit) || $limit === '-1') {
+            return;
+        }
+        $limit = trim($limit);
+        $units = strtoupper(substr($limit, -1));
+        $current = substr($limit, 0, strlen($limit) - 1);
+        if ($units === 'M') {
+            $current = $current * 1024;
+            $units = 'K';
+        }
+        if ($units === 'G') {
+            $current = $current * 1024 * 1024;
+            $units = 'K';
+        }
+
+        if ($units === 'K') {
+            ini_set('memory_limit', ceil($current + $additionalKb) . 'K');
+        }
     }
 
     /**
@@ -234,9 +272,15 @@ abstract class BaseErrorHandler
                 'start' => 1,
                 'format' => 'log'
             ]);
+
+            $request = Router::getRequest();
+            if ($request) {
+                $message .= $this->_requestContext($request);
+            }
             $message .= "\nTrace:\n" . $trace . "\n";
         }
         $message .= "\n\n";
+
         return Log::write($level, $message);
     }
 
@@ -264,7 +308,30 @@ abstract class BaseErrorHandler
                 }
             }
         }
+
         return Log::error($this->_getMessage($exception));
+    }
+
+    /**
+     * Get the request context for an error/exception trace.
+     *
+     * @param \Cake\Network\Request $request The request to read from.
+     * @return string
+     */
+    protected function _requestContext($request)
+    {
+        $message = "\nRequest URL: " . $request->here();
+
+        $referer = $request->env('HTTP_REFERER');
+        if ($referer) {
+            $message .= "\nReferer URL: " . $referer;
+        }
+        $clientIp = $request->clientIp();
+        if ($clientIp && $clientIp !== '::1') {
+            $message .= "\nClient IP: " . $clientIp;
+        }
+
+        return $message;
     }
 
     /**
@@ -295,17 +362,13 @@ abstract class BaseErrorHandler
 
         $request = Router::getRequest();
         if ($request) {
-            $message .= "\nRequest URL: " . $request->here();
-
-            $referer = $request->env('HTTP_REFERER');
-            if ($referer) {
-                $message .= "\nReferer URL: " . $referer;
-            }
+            $message .= $this->_requestContext($request);
         }
 
         if (!empty($config['trace'])) {
             $message .= "\nStack Trace:\n" . $exception->getTraceAsString() . "\n\n";
         }
+
         return $message;
     }
 
@@ -343,6 +406,7 @@ abstract class BaseErrorHandler
 
         $error = $levelMap[$code];
         $log = $logMap[$error];
+
         return [ucfirst($error), $log];
     }
 }

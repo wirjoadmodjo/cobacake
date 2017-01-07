@@ -20,13 +20,14 @@ use Cake\Event\EventManager;
 use Cake\ORM\Exception\MissingTableClassException;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
+use Cake\TestSuite\Constraint\EventFired;
+use Cake\TestSuite\Constraint\EventFiredWith;
 use Cake\Utility\Inflector;
 use Exception;
 use PHPUnit_Framework_TestCase;
 
 /**
  * Cake TestCase class
- *
  */
 abstract class TestCase extends PHPUnit_Framework_TestCase
 {
@@ -42,7 +43,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
      * By default, all fixtures attached to this class will be truncated and reloaded after each test.
      * Set this to false to handle manually
      *
-     * @var array
+     * @var bool
      */
     public $autoFixtures = true;
 
@@ -82,6 +83,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
         if ($shouldSkip) {
             $this->markTestSkipped($message);
         }
+
         return $shouldSkip;
     }
 
@@ -118,6 +120,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
             Configure::clear();
             Configure::write($this->_configure);
         }
+        TableRegistry::clear();
     }
 
     /**
@@ -138,6 +141,42 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
         foreach ($args as $class) {
             $this->fixtureManager->loadSingle($class, null, $this->dropTables);
         }
+    }
+
+    /**
+     * Asserts that a global event was fired. You must track events in your event manager for this assertion to work
+     *
+     * @param string $name Event name
+     * @param EventManager|null $eventManager Event manager to check, defaults to global event manager
+     * @param string $message Assertion failure message
+     * @return void
+     */
+    public function assertEventFired($name, $eventManager = null, $message = '')
+    {
+        if (!$eventManager) {
+            $eventManager = EventManager::instance();
+        }
+        $this->assertThat($name, new EventFired($eventManager), $message);
+    }
+
+    /**
+     * Asserts an event was fired with data
+     *
+     * If a third argument is passed, that value is used to compare with the value in $dataKey
+     *
+     * @param string $name Event name
+     * @param string $dataKey Data key
+     * @param string $dataValue Data value
+     * @param EventManager|null $eventManager Event manager to check, defaults to global event manager
+     * @param string $message Assertion failure message
+     * @return void
+     */
+    public function assertEventFiredWith($name, $dataKey, $dataValue, $eventManager = null, $message = '')
+    {
+        if (!$eventManager) {
+            $eventManager = EventManager::instance();
+        }
+        $this->assertThat($name, new EventFiredWith($eventManager, $dataKey, $dataValue), $message);
     }
 
     /**
@@ -398,27 +437,27 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
                         $attrs[] = $matches[1];
                         $explanations[] = sprintf('Regex "%s" matches', $matches[1]);
                         continue;
-                    } else {
-                        $quotes = '["\']';
-                        if (is_numeric($attr)) {
-                            $attr = $val;
-                            $val = '.+?';
-                            $explanations[] = sprintf('Attribute "%s" present', $attr);
-                        } elseif (!empty($val) && preg_match('/^preg\:\/(.+)\/$/i', $val, $matches)) {
-                            $val = str_replace(
-                                ['.*', '.+'],
-                                ['.*?', '.+?'],
-                                $matches[1]
-                            );
-                            $quotes = $val !== $matches[1] ? '["\']' : '["\']?';
-
-                            $explanations[] = sprintf('Attribute "%s" matches "%s"', $attr, $val);
-                        } else {
-                            $explanations[] = sprintf('Attribute "%s" == "%s"', $attr, $val);
-                            $val = preg_quote($val, '/');
-                        }
-                        $attrs[] = '[\s]+' . preg_quote($attr, '/') . '=' . $quotes . $val . $quotes;
                     }
+
+                    $quotes = '["\']';
+                    if (is_numeric($attr)) {
+                        $attr = $val;
+                        $val = '.+?';
+                        $explanations[] = sprintf('Attribute "%s" present', $attr);
+                    } elseif (!empty($val) && preg_match('/^preg\:\/(.+)\/$/i', $val, $matches)) {
+                        $val = str_replace(
+                            ['.*', '.+'],
+                            ['.*?', '.+?'],
+                            $matches[1]
+                        );
+                        $quotes = $val !== $matches[1] ? '["\']' : '["\']?';
+
+                        $explanations[] = sprintf('Attribute "%s" matches "%s"', $attr, $val);
+                    } else {
+                        $explanations[] = sprintf('Attribute "%s" == "%s"', $attr, $val);
+                        $val = preg_quote($val, '/');
+                    }
+                    $attrs[] = '[\s]+' . preg_quote($attr, '/') . '=' . $quotes . $val . $quotes;
                     $i++;
                 }
                 if ($attrs) {
@@ -460,11 +499,13 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
                     debug($regex);
                 }
                 $this->assertRegExp($expression, $string, sprintf('Item #%d / regex #%d failed: %s', $itemNum, $i, $description));
+
                 return false;
             }
         }
 
         $this->assertTrue(true, '%s');
+
         return true;
     }
 
@@ -474,14 +515,13 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
      * @param array $assertions Assertions to run.
      * @param string $string The HTML string to check.
      * @param bool $fullDebug Whether or not more verbose output should be used.
-     * @param array $regex Full regexp from `assertHtml`
+     * @param array|string $regex Full regexp from `assertHtml`
      * @return string
      */
     protected function _assertAttributes($assertions, $string, $fullDebug = false, $regex = '')
     {
         $asserts = $assertions['attrs'];
         $explains = $assertions['explains'];
-        $len = count($asserts);
         do {
             $matches = false;
             foreach ($asserts as $j => $assert) {
@@ -502,6 +542,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
             }
             $len = count($asserts);
         } while ($len > 0);
+
         return $string;
     }
 
@@ -509,11 +550,11 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
      * Normalize a path for comparison.
      *
      * @param string $path Path separated by "/" slash.
-     * @return string Normalized path separated by DS.
+     * @return string Normalized path separated by DIRECTORY_SEPARATOR.
      */
     protected function _normalizePath($path)
     {
-        return str_replace('/', DS, $path);
+        return str_replace('/', DIRECTORY_SEPARATOR, $path);
     }
 
 // @codingStandardsIgnoreStart
@@ -560,8 +601,8 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
      */
     protected static function assertPathEquals($expected, $result, $message = '')
     {
-        $expected = str_replace(DS, '/', $expected);
-        $result = str_replace(DS, '/', $result);
+        $expected = str_replace(DIRECTORY_SEPARATOR, '/', $expected);
+        $result = str_replace(DIRECTORY_SEPARATOR, '/', $result);
         static::assertEquals($expected, $result, $message);
     }
 
@@ -577,6 +618,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
         if (!$condition) {
             $this->markTestSkipped($message);
         }
+
         return $condition;
     }
 
@@ -609,7 +651,10 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
         $options += ['alias' => $baseClass, 'connection' => $connection];
         $options += TableRegistry::config($alias);
 
-        $mock = $this->getMock($options['className'], $methods, [$options]);
+        $mock = $this->getMockBuilder($options['className'])
+            ->setMethods($methods)
+            ->setConstructorArgs([$options])
+            ->getMock();
 
         if (empty($options['entityClass']) && $mock->entityClass() === '\Cake\ORM\Entity') {
             $parts = explode('\\', $options['className']);
@@ -620,7 +665,13 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
             }
         }
 
+        if (stripos($mock->table(), 'mock') === 0) {
+            $mock->table(Inflector::tableize($baseClass));
+        }
+
         TableRegistry::set($baseClass, $mock);
+        TableRegistry::set($alias, $mock);
+
         return $mock;
     }
 }
