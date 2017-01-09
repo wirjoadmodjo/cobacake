@@ -9,7 +9,7 @@
 			<li class="active"><a
 				href="<?=$this->Url->build ( [ "controller" => "Pages","action" => "home" ] );?>"><i
 					class="fa fa-circle-o"></i> Dashboard v1</a></li>
-			<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+			<li><a href="<?=$this->Url->build ( [ "controller" => "Pages","action" => "home2" ] );?>"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
 		</ul></li>
 	<li class="treeview"><a href="#"> <i class="fa fa-files-o"></i> <span>Layout
 				Options</span> <span class="pull-right-container"> <span

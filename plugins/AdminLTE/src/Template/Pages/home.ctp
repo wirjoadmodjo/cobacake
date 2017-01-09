@@ -504,16 +504,18 @@
 </section>
 <!-- /.content -->
 <?php
-	$this->Html->css ( [ 
+$this->Html->css ( [ 
 		'AdminLTE./lib/iCheck/flat/blue',
 		'AdminLTE./lib/morris/morris',
 		'AdminLTE./lib/jvectormap/jquery-jvectormap-1.2.2',
 		'AdminLTE./lib/datepicker/datepicker3',
 		'AdminLTE./lib/daterangepicker/daterangepicker-bs3',
 		'AdminLTE./lib/bootstrap-wysihtml5/bootstrap3-wysihtml5.min' 
-		], [ 'block' => 'css' ] );
-	
-	$this->Html->script([
+], [ 
+		'block' => 'css' 
+] );
+
+$this->Html->script ( [ 
 		'https://code.jquery.com/ui/1.11.4/jquery-ui.min.js',
 		'https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',
 		'AdminLTE./lib/morris/morris.min',
@@ -525,7 +527,10 @@
 		'AdminLTE./lib/datepicker/bootstrap-datepicker',
 		'AdminLTE./lib/daterangepicker/daterangepicker',
 		'AdminLTE./lib/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min',
-		'AdminLTE.pages/dashboard','AdminLTE.demo'
-		 ], ['block' => 'script']);
+		'AdminLTE.pages/dashboard',
+		'AdminLTE.demo' 
+], [ 
+		'block' => 'script' 
+] );
 ?>
 		

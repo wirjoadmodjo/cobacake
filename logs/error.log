@@ -10555,3 +10555,711 @@ Stack Trace:
 #10 {main}
 
 
+2017-01-09 04:41:26 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/lib/iCheck/flat/blue.css
+Referer URL: http://localhost:8765/pages/home
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Filter\ControllerFactoryFilter.php(63): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Filter\ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventManager.php(426): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventManager.php(391): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(80): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2017-01-09 04:41:27 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/lib/daterangepicker/daterangepicker-bs3.css
+Referer URL: http://localhost:8765/pages/home
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Filter\ControllerFactoryFilter.php(63): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Filter\ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventManager.php(426): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventManager.php(391): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(80): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2017-01-09 05:24:13 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/lib/iCheck/flat/blue.css
+Referer URL: http://localhost:8765/
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Filter\ControllerFactoryFilter.php(63): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Filter\ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventManager.php(426): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventManager.php(391): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(80): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2017-01-09 05:24:14 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/lib/daterangepicker/daterangepicker-bs3.css
+Referer URL: http://localhost:8765/
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Filter\ControllerFactoryFilter.php(63): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Filter\ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventManager.php(426): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventManager.php(391): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(80): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2017-01-09 05:24:20 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user1-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user1-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user1-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user1-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user1-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user1-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user1-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:24:21 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user7-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user7-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user7-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user7-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user7-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user7-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user7-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:24:21 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user3-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user3-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user3-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user3-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user3-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user3-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user3-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:24:21 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user5-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user5-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user5-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user5-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user5-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user5-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user5-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:24:21 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user6-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user6-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user6-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user6-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user6-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user6-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user6-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:24:22 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user8-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user8-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user8-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user8-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user8-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user8-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user8-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:24:22 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user2-160x160.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user2-160x160.jpg.ctp',
+)
+Request URL: /pages/dist/img/user2-160x160.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user2-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user2-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user2-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user2-160x160.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:24:22 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user4-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user4-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user4-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user4-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user4-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user4-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user4-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:24:23 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\default-50x50.gif.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\default-50x50.gif.ctp',
+)
+Request URL: /pages/dist/img/default-50x50.gif
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/defaul...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/defaul...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/defaul...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'default-50x50.g...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:24:59 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user3-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user3-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user3-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user3-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user3-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user3-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user3-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:24:59 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user1-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user1-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user1-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user1-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user1-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user1-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user1-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:24:59 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user7-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user7-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user7-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user7-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user7-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user7-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user7-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:24:59 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user5-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user5-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user5-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user5-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user5-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user5-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user5-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:25:00 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user6-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user6-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user6-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user6-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user6-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user6-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user6-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:25:00 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user8-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user8-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user8-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user8-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user8-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user8-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user8-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:25:01 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user2-160x160.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user2-160x160.jpg.ctp',
+)
+Request URL: /pages/dist/img/user2-160x160.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user2-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user2-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user2-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user2-160x160.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:25:01 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user4-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user4-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user4-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user4-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user4-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user4-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user4-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:25:01 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\default-50x50.gif.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\default-50x50.gif.ctp',
+)
+Request URL: /pages/dist/img/default-50x50.gif
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/defaul...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/defaul...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/defaul...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'default-50x50.g...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:33:09 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user1-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user1-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user1-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user1-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user1-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user1-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user1-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:33:09 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user8-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user8-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user8-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user8-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user8-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user8-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user8-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:33:09 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user7-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user7-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user7-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user7-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user7-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user7-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user7-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:33:10 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user6-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user6-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user6-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user6-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user6-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user6-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user6-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:33:10 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user2-160x160.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user2-160x160.jpg.ctp',
+)
+Request URL: /pages/dist/img/user2-160x160.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user2-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user2-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user2-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user2-160x160.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:33:10 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user5-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user5-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user5-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user5-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user5-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user5-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user5-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:33:10 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user4-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user4-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user4-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user4-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user4-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user4-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user4-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:33:11 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\user3-128x128.jpg.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\user3-128x128.jpg.ctp',
+)
+Request URL: /pages/dist/img/user3-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/user3-...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/user3-...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/user3-...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'user3-128x128.j...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 05:33:11 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\default-50x50.gif.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\default-50x50.gif.ctp',
+)
+Request URL: /pages/dist/img/default-50x50.gif
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/defaul...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/defaul...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/defaul...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'default-50x50.g...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 06:22:51 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/img/user2-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Filter\ControllerFactoryFilter.php(63): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Filter\ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventManager.php(426): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventManager.php(391): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(80): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2017-01-09 06:22:51 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\default-50x50.gif.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\default-50x50.gif.ctp',
+)
+Request URL: /pages/dist/img/default-50x50.gif
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/defaul...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/defaul...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/defaul...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'default-50x50.g...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 06:24:08 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/img/user2-128x128.jpg
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Filter\ControllerFactoryFilter.php(63): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Filter\ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventManager.php(426): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventManager.php(391): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Event\EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(80): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2017-01-09 06:24:08 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\default-50x50.gif.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\default-50x50.gif.ctp',
+)
+Request URL: /pages/dist/img/default-50x50.gif
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/defaul...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/defaul...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/defaul...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'default-50x50.g...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2017-01-09 06:24:58 Error: [Cake\View\Exception\MissingTemplateException] Template file "Pages\dist\img\default-50x50.gif.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Pages\\dist\\img\\default-50x50.gif.ctp',
+)
+Request URL: /pages/dist/img/default-50x50.gif
+Referer URL: http://localhost:8765/pages/home2
+Stack Trace:
+#0 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\View\View.php(593): Cake\View\View->_getViewFileName('dist/img/defaul...')
+#1 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render('dist/img/defaul...', NULL)
+#2 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\src\Controller\PagesController.php(57): Cake\Controller\Controller->render('dist/img/defaul...')
+#3 [internal function]: App\Controller\PagesController->display('dist', 'img', 'default-50x50.g...')
+#4 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#5 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(121): Cake\Controller\Controller->invokeAction()
+#6 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(95): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#7 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(60): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
