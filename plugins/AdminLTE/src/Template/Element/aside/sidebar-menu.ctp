@@ -6,10 +6,10 @@
 		</span>
 	</a>
 		<ul class="treeview-menu">
-			<li class="active"><a
-				href="<?=$this->Url->build ( [ "controller" => "Pages","action" => "home" ] );?>"><i
+			<li class="active"><a href="<?php echo $this->Url->build('/'); ?>"><i
 					class="fa fa-circle-o"></i> Dashboard v1</a></li>
-			<li><a href="<?=$this->Url->build ( [ "controller" => "Pages","action" => "home2" ] );?>"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+			<li><a href="<?php echo $this->Url->build('/pages/home2'); ?>"><i
+					class="fa fa-circle-o"></i> Dashboard v2</a></li>
 		</ul></li>
 	<li class="treeview"><a href="#"> <i class="fa fa-files-o"></i> <span>Layout
 				Options</span> <span class="pull-right-container"> <span
@@ -17,7 +17,7 @@
 		</span>
 	</a>
 		<ul class="treeview-menu">
-			<li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i>
+			<li><a href="<?php echo $this->Url->build('/pages/layout/top-nav'); ?>"><i class="fa fa-circle-o"></i>
 					Top Navigation</a></li>
 			<li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>
 					Boxed</a></li>
