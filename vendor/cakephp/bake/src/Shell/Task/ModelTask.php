@@ -90,7 +90,8 @@ class ModelTask extends BakeTask
             foreach ($this->listUnskipped() as $table) {
                 $this->out('- ' . $this->_camelize($table));
             }
-            return true;
+
+            return;
         }
 
         $this->bake($this->_camelize($name));
@@ -105,21 +106,38 @@ class ModelTask extends BakeTask
     public function bake($name)
     {
         $table = $this->getTable($name);
-        $model = $this->getTableObject($name, $table);
+        $tableObject = $this->getTableObject($name, $table);
+        $data = $this->getTableContext($tableObject, $table, $name);
+        $this->bakeTable($tableObject, $data);
+        $this->bakeEntity($tableObject, $data);
+        $this->bakeFixture($tableObject->alias(), $tableObject->table());
+        $this->bakeTest($tableObject->alias());
+    }
 
-        $associations = $this->getAssociations($model);
-        $this->applyAssociations($model, $associations);
+    /**
+     * Get table context for baking a given table.
+     *
+     * @param \Cake\ORM\Table $tableObject The model name to generate.
+     * @param string $table The table name for the model being baked.
+     * @param string $name The model name to generate.
+     * @return array
+     */
+    public function getTableContext($tableObject, $table, $name)
+    {
+        $associations = $this->getAssociations($tableObject);
+        $this->applyAssociations($tableObject, $associations);
 
-        $primaryKey = $this->getPrimaryKey($model);
-        $displayField = $this->getDisplayField($model);
-        $propertySchema = $this->getEntityPropertySchema($model);
+        $primaryKey = $this->getPrimaryKey($tableObject);
+        $displayField = $this->getDisplayField($tableObject);
+        $propertySchema = $this->getEntityPropertySchema($tableObject);
         $fields = $this->getFields();
-        $validation = $this->getValidation($model, $associations);
-        $rulesChecker = $this->getRules($model, $associations);
-        $behaviors = $this->getBehaviors($model);
+        $validation = $this->getValidation($tableObject, $associations);
+        $rulesChecker = $this->getRules($tableObject, $associations);
+        $behaviors = $this->getBehaviors($tableObject);
         $connection = $this->connection;
+        $hidden = $this->getHiddenFields($tableObject);
 
-        $data = compact(
+        return compact(
             'associations',
             'primaryKey',
             'displayField',
@@ -129,12 +147,9 @@ class ModelTask extends BakeTask
             'validation',
             'rulesChecker',
             'behaviors',
-            'connection'
+            'connection',
+            'hidden'
         );
-        $this->bakeTable($model, $data);
-        $this->bakeEntity($model, $data);
-        $this->bakeFixture($model->alias(), $model->table());
-        $this->bakeTest($model->alias());
     }
 
     /**
@@ -163,6 +178,7 @@ class ModelTask extends BakeTask
         if (TableRegistry::exists($className)) {
             return TableRegistry::get($className);
         }
+
         return TableRegistry::get($className, [
             'name' => $className,
             'table' => $table,
@@ -198,11 +214,13 @@ class ModelTask extends BakeTask
             $this->err(
                 '<warning>Bake cannot generate associations for composite primary keys at this time</warning>.'
             );
+
             return $associations;
         }
 
         $associations = $this->findHasMany($table, $associations);
         $associations = $this->findBelongsToMany($table, $associations);
+
         return $associations;
     }
 
@@ -242,7 +260,7 @@ class ModelTask extends BakeTask
     {
         $schema = $model->schema();
         foreach ($schema->columns() as $fieldName) {
-            if (!preg_match('/^.*_id$/', $fieldName)) {
+            if (!preg_match('/^.+_id$/', $fieldName)) {
                 continue;
             }
 
@@ -268,7 +286,6 @@ class ModelTask extends BakeTask
                 if ($schema->column($fieldName)['null'] === false) {
                     $assoc['joinType'] = 'INNER';
                 }
-
             }
 
             if ($this->plugin && empty($assoc['className'])) {
@@ -276,6 +293,7 @@ class ModelTask extends BakeTask
             }
             $associations['belongsTo'][] = $assoc;
         }
+
         return $associations;
     }
 
@@ -299,9 +317,11 @@ class ModelTask extends BakeTask
                 if (!isset($constraintInfo['references'])) {
                     continue;
                 }
+
                 return $constraintInfo['references'][0];
             }
         }
+
         return null;
     }
 
@@ -319,15 +339,18 @@ class ModelTask extends BakeTask
         $tableName = $schema->name();
         $foreignKey = $this->_modelKey($tableName);
 
-        foreach ($this->listAll() as $otherTable) {
-            $otherModel = $this->getTableObject($this->_camelize($otherTable), $otherTable);
+        $tables = $this->listAll();
+        foreach ($tables as $otherTableName) {
+            $otherModel = $this->getTableObject($this->_camelize($otherTableName), $otherTableName);
             $otherSchema = $otherModel->schema();
 
-            // Exclude habtm join tables.
-            $pattern = '/_' . preg_quote($tableName, '/') . '|' . preg_quote($tableName, '/') . '_/';
-            $possibleJoinTable = preg_match($pattern, $otherTable);
-            if ($possibleJoinTable) {
-                continue;
+            $pregTableName = preg_quote($tableName, '/');
+            $pregPattern = "/^{$pregTableName}_|_{$pregTableName}$/";
+            if (preg_match($pregPattern, $otherTableName) === 1) {
+                $possibleHABTMTargetTable = preg_replace($pregPattern, '', $otherTableName);
+                if (in_array($possibleHABTMTargetTable, $tables)) {
+                    continue;
+                }
             }
 
             foreach ($otherSchema->columns() as $fieldName) {
@@ -337,7 +360,7 @@ class ModelTask extends BakeTask
                         'alias' => $otherModel->alias(),
                         'foreignKey' => $fieldName
                     ];
-                } elseif ($otherTable === $tableName && $fieldName === 'parent_id') {
+                } elseif ($otherTableName === $tableName && $fieldName === 'parent_id') {
                     $className = ($this->plugin) ? $this->plugin . '.' . $model->alias() : $model->alias();
                     $assoc = [
                         'alias' => 'Child' . $model->alias(),
@@ -353,6 +376,7 @@ class ModelTask extends BakeTask
                 }
             }
         }
+
         return $associations;
     }
 
@@ -370,15 +394,15 @@ class ModelTask extends BakeTask
         $foreignKey = $this->_modelKey($tableName);
 
         $tables = $this->listAll();
-        foreach ($tables as $otherTable) {
+        foreach ($tables as $otherTableName) {
             $assocTable = null;
-            $offset = strpos($otherTable, $tableName . '_');
-            $otherOffset = strpos($otherTable, '_' . $tableName);
+            $offset = strpos($otherTableName, $tableName . '_');
+            $otherOffset = strpos($otherTableName, '_' . $tableName);
 
             if ($offset !== false) {
-                $assocTable = substr($otherTable, strlen($tableName . '_'));
+                $assocTable = substr($otherTableName, strlen($tableName . '_'));
             } elseif ($otherOffset !== false) {
-                $assocTable = substr($otherTable, 0, $otherOffset);
+                $assocTable = substr($otherTableName, 0, $otherOffset);
             }
             if ($assocTable && in_array($assocTable, $tables)) {
                 $habtmName = $this->_camelize($assocTable);
@@ -386,7 +410,7 @@ class ModelTask extends BakeTask
                     'alias' => $habtmName,
                     'foreignKey' => $foreignKey,
                     'targetForeignKey' => $this->_modelKey($habtmName),
-                    'joinTable' => $otherTable
+                    'joinTable' => $otherTableName
                 ];
                 if ($assoc && $this->plugin) {
                     $assoc['className'] = $this->plugin . '.' . $assoc['alias'];
@@ -394,6 +418,7 @@ class ModelTask extends BakeTask
                 $associations['belongsToMany'][] = $assoc;
             }
         }
+
         return $associations;
     }
 
@@ -408,6 +433,7 @@ class ModelTask extends BakeTask
         if (!empty($this->params['display-field'])) {
             return $this->params['display-field'];
         }
+
         return $model->displayField();
     }
 
@@ -421,8 +447,10 @@ class ModelTask extends BakeTask
     {
         if (!empty($this->params['primary-key'])) {
             $fields = explode(',', $this->params['primary-key']);
+
             return array_values(array_filter(array_map('trim', $fields)));
         }
+
         return (array)$model->primaryKey();
     }
 
@@ -504,8 +532,10 @@ class ModelTask extends BakeTask
         }
         if (!empty($this->params['fields'])) {
             $fields = explode(',', $this->params['fields']);
+
             return array_values(array_filter(array_map('trim', $fields)));
         }
+
         return null;
     }
 
@@ -524,11 +554,13 @@ class ModelTask extends BakeTask
         }
         if (!empty($this->params['hidden'])) {
             $fields = explode(',', $this->params['hidden']);
+
             return array_values(array_filter(array_map('trim', $fields)));
         }
         $schema = $model->schema();
         $columns = $schema->columns();
         $whitelist = ['token', 'password', 'passwd'];
+
         return array_values(array_intersect($columns, $whitelist));
     }
 
@@ -568,6 +600,7 @@ class ModelTask extends BakeTask
                 $validate[$fieldName] = $validation;
             }
         }
+
         return $validate;
     }
 
@@ -582,7 +615,7 @@ class ModelTask extends BakeTask
      */
     public function fieldValidation($schema, $fieldName, array $metaData, $primaryKey)
     {
-        $ignoreFields = ['created', 'modified', 'updated'];
+        $ignoreFields = ['lft', 'rght', 'created', 'modified', 'updated'];
         if (in_array($fieldName, $ignoreFields)) {
             return false;
         }
@@ -593,7 +626,7 @@ class ModelTask extends BakeTask
         } elseif ($metaData['type'] === 'uuid') {
             $rule = 'uuid';
         } elseif ($metaData['type'] === 'integer') {
-            $rule = 'numeric';
+            $rule = 'integer';
         } elseif ($metaData['type'] === 'float') {
             $rule = 'numeric';
         } elseif ($metaData['type'] === 'decimal') {
@@ -605,7 +638,9 @@ class ModelTask extends BakeTask
         } elseif ($metaData['type'] === 'time') {
             $rule = 'time';
         } elseif ($metaData['type'] === 'datetime') {
-            $rule = 'datetime';
+            $rule = 'dateTime';
+        } elseif ($metaData['type'] === 'timestamp') {
+            $rule = 'dateTime';
         } elseif ($metaData['type'] === 'inet') {
             $rule = 'ip';
         }
@@ -713,6 +748,7 @@ class ModelTask extends BakeTask
         if (!empty($counterCache)) {
             $behaviors['CounterCache'] = $counterCache;
         }
+
         return $behaviors;
     }
 
@@ -743,6 +779,7 @@ class ModelTask extends BakeTask
                 $counterCache[] = "'{$otherAlias}' => ['{$field}']";
             }
         }
+
         return $counterCache;
     }
 
@@ -751,12 +788,12 @@ class ModelTask extends BakeTask
      *
      * @param \Cake\ORM\Table $model Model name or object
      * @param array $data An array to use to generate the Table
-     * @return string
+     * @return string|null
      */
     public function bakeEntity($model, array $data = [])
     {
         if (!empty($this->params['no-entity'])) {
-            return;
+            return null;
         }
         $name = $this->_entityName($model->alias());
 
@@ -772,7 +809,7 @@ class ModelTask extends BakeTask
             'namespace' => $namespace,
             'plugin' => $this->plugin,
             'pluginPath' => $pluginPath,
-            'primaryKey' => [],
+            'primaryKey' => []
         ];
 
         $this->BakeTemplate->set($data);
@@ -784,6 +821,7 @@ class ModelTask extends BakeTask
         $this->createFile($filename, $out);
         $emptyFile = $path . 'Entity' . DS . 'empty';
         $this->_deleteEmptyFile($emptyFile);
+
         return $out;
     }
 
@@ -792,12 +830,12 @@ class ModelTask extends BakeTask
      *
      * @param \Cake\ORM\Table $model Model name or object
      * @param array $data An array to use to generate the Table
-     * @return string
+     * @return string|null
      */
     public function bakeTable($model, array $data = [])
     {
         if (!empty($this->params['no-table'])) {
-            return;
+            return null;
         }
 
         $namespace = Configure::read('App.namespace');
@@ -841,6 +879,7 @@ class ModelTask extends BakeTask
 
         $emptyFile = $path . 'Table' . DS . 'empty';
         $this->_deleteEmptyFile($emptyFile);
+
         return $out;
     }
 
@@ -860,6 +899,7 @@ class ModelTask extends BakeTask
         foreach ($this->_tables as $table) {
             $this->_modelNames[] = $this->_camelize($table);
         }
+
         return $this->_tables;
     }
 
@@ -871,7 +911,18 @@ class ModelTask extends BakeTask
     public function listUnskipped()
     {
         $this->listAll();
+
         return array_diff($this->_tables, $this->skipTables);
+    }
+
+    /**
+     * Models never have routing prefixes applied.
+     *
+     * @return string
+     */
+    protected function _getPrefix()
+    {
+        return '';
     }
 
     /**
@@ -889,15 +940,18 @@ class ModelTask extends BakeTask
             $this->err(
                 'Connections need to implement schemaCollection() to be used with bake.'
             );
+
             return $this->_stop();
         }
         $schema = $db->schemaCollection();
         $tables = $schema->listTables();
         if (empty($tables)) {
             $this->err('Your database does not have any tables.');
+
             return $this->_stop();
         }
         sort($tables);
+
         return $tables;
     }
 
@@ -914,6 +968,7 @@ class ModelTask extends BakeTask
         if (isset($this->params['table'])) {
             return $this->params['table'];
         }
+
         return Inflector::underscore($name);
     }
 
@@ -929,7 +984,8 @@ class ModelTask extends BakeTask
         $parser->description(
             'Bake table and entity classes.'
         )->addArgument('name', [
-            'help' => 'Name of the model to bake. Can use Plugin.name to bake plugin models.'
+            'help' => 'Name of the model to bake (without the Table suffix). ' .
+                'You can use Plugin.name to bake plugin models.'
         ])->addSubcommand('all', [
             'help' => 'Bake all model files with associations and validation.'
         ])->addOption('table', [
@@ -999,15 +1055,16 @@ class ModelTask extends BakeTask
      * Assembles and writes a unit test file
      *
      * @param string $className Model class name
-     * @return string
+     * @return string|null
      */
     public function bakeTest($className)
     {
         if (!empty($this->params['no-test'])) {
-            return;
+            return null;
         }
         $this->Test->plugin = $this->plugin;
         $this->Test->connection = $this->connection;
+
         return $this->Test->bake('Table', $className);
     }
 }

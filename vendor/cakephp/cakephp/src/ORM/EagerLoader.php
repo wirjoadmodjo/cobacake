@@ -139,6 +139,7 @@ class EagerLoader
         $this->_normalized = null;
         $this->_loadExternal = [];
         $this->_aliasList = [];
+
         return $this->_containments = $associations;
     }
 
@@ -161,7 +162,7 @@ class EagerLoader
     /**
      * Set whether or not contained associations will load fields automatically.
      *
-     * @param bool $value The value to set.
+     * @param bool|null $value The value to set.
      * @return bool The current value.
      */
     public function autoFields($value = null)
@@ -169,6 +170,7 @@ class EagerLoader
         if ($value !== null) {
             $this->_autoFields = (bool)$value;
         }
+
         return $this->_autoFields;
     }
 
@@ -198,12 +200,14 @@ class EagerLoader
         if ($assoc === null) {
             return $this->_matching->contain();
         }
+        if (!isset($options['joinType'])) {
+            $options['joinType'] = 'INNER';
+        }
 
         $assocs = explode('.', $assoc);
         $last = array_pop($assocs);
         $containments = [];
         $pointer =& $containments;
-        $options += ['joinType' => 'INNER'];
         $opts = ['matching' => true] + $options;
         unset($opts['negateMatch']);
 
@@ -213,6 +217,7 @@ class EagerLoader
         }
 
         $pointer[$last] = ['queryBuilder' => $builder, 'matching' => true] + $options;
+
         return $this->_matching->contain($containments);
     }
 
@@ -311,6 +316,15 @@ class EagerLoader
             }
 
             $pointer += [$table => []];
+
+            if (isset($options['queryBuilder']) && isset($pointer[$table]['queryBuilder'])) {
+                $first = $pointer[$table]['queryBuilder'];
+                $second = $options['queryBuilder'];
+                $options['queryBuilder'] = function ($query) use ($first, $second) {
+                    return $second($first($query));
+                };
+            }
+
             $pointer[$table] = $options + $pointer[$table];
         }
 
@@ -369,6 +383,7 @@ class EagerLoader
         $matching = $this->_matching ? $this->_matching->normalized($repository) : [];
         $this->_fixStrategies();
         $this->_loadExternal = [];
+
         return $this->_resolveJoins($contain, $matching);
     }
 
@@ -387,6 +402,7 @@ class EagerLoader
         }
 
         $this->attachableAssociations($repository);
+
         return $this->_loadExternal;
     }
 
@@ -433,7 +449,8 @@ class EagerLoader
             'instance' => $instance,
             'config' => array_diff_key($options, $extra),
             'aliasPath' => trim($paths['aliasPath'], '.'),
-            'propertyPath' => trim($paths['propertyPath'], '.')
+            'propertyPath' => trim($paths['propertyPath'], '.'),
+            'targetProperty' => $instance->property()
         ];
         $config['canBeJoined'] = $instance->canBeJoined($config['config']);
         $eagerLoadable = new EagerLoadable($alias, $config);
@@ -532,6 +549,7 @@ class EagerLoader
             $loadable->canBeJoined(false);
             $this->_loadExternal[] = $loadable;
         }
+
         return $result;
     }
 
@@ -542,7 +560,7 @@ class EagerLoader
      * @param \Cake\ORM\Query $query The query for which to eager load external
      * associations
      * @param \Cake\Database\StatementInterface $statement The statement created after executing the $query
-     * @return CallbackStatement statement modified statement with extra loaders
+     * @return \Cake\Database\Statement\CallbackStatement statement modified statement with extra loaders
      */
     public function loadExternal($query, $statement)
     {
@@ -577,6 +595,7 @@ class EagerLoader
             );
             $statement = new CallbackStatement($statement, $driver, $f);
         }
+
         return $statement;
     }
 
@@ -615,7 +634,8 @@ class EagerLoader
                     'canBeJoined' => $canBeJoined,
                     'entityClass' => $instance->target()->entityClass(),
                     'nestKey' => $canBeJoined ? $assoc : $meta->aliasPath(),
-                    'matching' => $forMatching !== null ? $forMatching : $matching
+                    'matching' => $forMatching !== null ? $forMatching : $matching,
+                    'targetProperty' => $meta->targetProperty()
                 ];
                 if ($canBeJoined && $associations) {
                     $visitor($associations, $matching);
@@ -625,6 +645,7 @@ class EagerLoader
         $visitor($this->_matching->normalized($table), true);
         $visitor($this->normalized($table));
         $visitor($this->_joinsMap);
+
         return $map;
     }
 
@@ -638,15 +659,18 @@ class EagerLoader
      * will be normalized
      * @param bool $asMatching Whether or not this join results should be treated as a
      * 'matching' association.
+     * @param string $targetProperty The property name where the results of the join should be nested at.
+     * If not passed, the default property for the association will be used.
      * @return void
      */
-    public function addToJoinsMap($alias, Association $assoc, $asMatching = false)
+    public function addToJoinsMap($alias, Association $assoc, $asMatching = false, $targetProperty = null)
     {
         $this->_joinsMap[$alias] = new EagerLoadable($alias, [
             'aliasPath' => $alias,
             'instance' => $assoc,
             'canBeJoined' => true,
             'forMatching' => $asMatching,
+            'targetProperty' => $targetProperty ?: $assoc->property()
         ]);
     }
 
@@ -725,6 +749,7 @@ class EagerLoader
         }
 
         $statement->rewind();
+
         return $keys;
     }
 }

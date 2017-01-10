@@ -61,6 +61,8 @@ trait EntityTrait
      * Holds the name of the class for the instance object
      *
      * @var string
+     *
+     * @deprecated 3.2 This field is no longer being used
      */
     protected $_className;
 
@@ -73,7 +75,7 @@ trait EntityTrait
     protected $_dirty = [];
 
     /**
-     * Holds a cached list of methods that exist in the instanced class
+     * Holds a cached list of getters/setters per class
      *
      * @var array
      */
@@ -94,6 +96,13 @@ trait EntityTrait
      * @var array
      */
     protected $_errors = [];
+
+    /**
+     * List of invalid fields and their data for errors upon validation/patching
+     *
+     * @var array
+     */
+    protected $_invalid = [];
 
     /**
      * Map of properties in this entity that can be safely assigned, each
@@ -251,8 +260,8 @@ trait EntityTrait
                 continue;
             }
 
-            $setter = '_set' . Inflector::camelize($p);
-            if ($this->_methodExists($setter)) {
+            $setter = $this->_accessor($p, 'set');
+            if ($setter) {
                 $value = $this->{$setter}($value);
             }
             $this->_properties[$p] = $value;
@@ -275,16 +284,18 @@ trait EntityTrait
         }
 
         $value = null;
-        $method = '_get' . Inflector::camelize($property);
+        $method = $this->_accessor($property, 'get');
 
         if (isset($this->_properties[$property])) {
             $value =& $this->_properties[$property];
         }
 
-        if ($this->_methodExists($method)) {
+        if ($method) {
             $result = $this->{$method}($value);
+
             return $result;
         }
+
         return $value;
     }
 
@@ -303,12 +314,31 @@ trait EntityTrait
         if (array_key_exists($property, $this->_original)) {
             return $this->_original[$property];
         }
+
         return $this->get($property);
     }
 
     /**
+     * Gets all original values of the entity.
+     *
+     * @return array
+     */
+    public function getOriginalValues()
+    {
+        $originals = $this->_original;
+        $originalKeys = array_keys($originals);
+        foreach ($this->_properties as $key => $value) {
+            if (!in_array($key, $originalKeys)) {
+                $originals[$key] = $value;
+            }
+        }
+
+        return $originals;
+    }
+
+    /**
      * Returns whether this entity contains a property named $property
-     * regardless of if it is empty.
+     * that contains a non-null value.
      *
      * ### Example:
      *
@@ -318,6 +348,14 @@ trait EntityTrait
      * $entity->has('name'); // false
      * $entity->has('last_name'); // false
      * ```
+     *
+     * You can check multiple properties by passing an array:
+     *
+     * ```
+     * $entity->has(['name', 'last_name']);
+     * ```
+     *
+     * All properties must not be null to get a truthy result.
      *
      * When checking multiple properties. All properties must not be null
      * in order for true to be returned.
@@ -332,6 +370,7 @@ trait EntityTrait
                 return false;
             }
         }
+
         return true;
     }
 
@@ -374,6 +413,7 @@ trait EntityTrait
             return $this->_hidden;
         }
         $this->_hidden = $properties;
+
         return $this;
     }
 
@@ -392,6 +432,7 @@ trait EntityTrait
             return $this->_virtual;
         }
         $this->_virtual = $properties;
+
         return $this;
     }
 
@@ -408,6 +449,7 @@ trait EntityTrait
     {
         $properties = array_keys($this->_properties);
         $properties = array_merge($properties, $this->_virtual);
+
         return array_diff($properties, $this->_hidden);
     }
 
@@ -440,6 +482,7 @@ trait EntityTrait
                 $result[$property] = $value;
             }
         }
+
         return $result;
     }
 
@@ -450,7 +493,7 @@ trait EntityTrait
      */
     public function jsonSerialize()
     {
-        return $this->toArray();
+        return $this->extract($this->visibleProperties());
     }
 
     /**
@@ -488,7 +531,7 @@ trait EntityTrait
     }
 
     /**
-     * Implements unset($result[$offset);
+     * Implements unset($result[$offset]);
      *
      * @param mixed $offset The offset to remove.
      * @return void
@@ -499,17 +542,47 @@ trait EntityTrait
     }
 
     /**
-     * Determines whether a method exists in this class
+     * Fetch accessor method name
+     * Accessor methods (available or not) are cached in $_accessors
      *
-     * @param string $method the method to check for existence
-     * @return bool true if method exists
+     * @param string $property the field name to derive getter name from
+     * @param string $type the accessor type ('get' or 'set')
+     * @return string method name or empty string (no method available)
      */
-    protected function _methodExists($method)
+    protected static function _accessor($property, $type)
     {
-        if (empty(static::$_accessors[$this->_className])) {
-            static::$_accessors[$this->_className] = array_flip(get_class_methods($this));
+        $class = static::class;
+
+        if (isset(static::$_accessors[$class][$type][$property])) {
+            return static::$_accessors[$class][$type][$property];
         }
-        return isset(static::$_accessors[$this->_className][$method]);
+
+        if (!empty(static::$_accessors[$class])) {
+            return static::$_accessors[$class][$type][$property] = '';
+        }
+
+        if ($class === 'Cake\ORM\Entity') {
+            return '';
+        }
+
+        foreach (get_class_methods($class) as $method) {
+            $prefix = substr($method, 1, 3);
+            if ($method[0] !== '_' || ($prefix !== 'get' && $prefix !== 'set')) {
+                continue;
+            }
+            $field = lcfirst(substr($method, 4));
+            $snakeField = Inflector::underscore($field);
+            $titleField = ucfirst($field);
+            static::$_accessors[$class][$prefix][$snakeField] = $method;
+            static::$_accessors[$class][$prefix][$field] = $method;
+            static::$_accessors[$class][$prefix][$titleField] = $method;
+        }
+
+        if (!isset(static::$_accessors[$class][$type][$property])) {
+            static::$_accessors[$class][$type][$property] = '';
+        }
+
+        return static::$_accessors[$class][$type][$property];
     }
 
     /**
@@ -528,6 +601,7 @@ trait EntityTrait
                 $result[$property] = $this->get($property);
             }
         }
+
         return $result;
     }
 
@@ -547,6 +621,7 @@ trait EntityTrait
         foreach ($properties as $property) {
             $result[$property] = $this->getOriginal($property);
         }
+
         return $result;
     }
 
@@ -569,6 +644,7 @@ trait EntityTrait
                 $result[$property] = $original;
             }
         }
+
         return $result;
     }
 
@@ -580,7 +656,7 @@ trait EntityTrait
      * When called with no arguments it will return whether or not there are any
      * dirty property in the entity
      *
-     * @param string $property the field to set or check status for
+     * @param string|null $property the field to set or check status for
      * @param null|bool $isDirty true means the property was changed, false means
      * it was not changed and null will make the function return current state
      * for that property
@@ -598,11 +674,13 @@ trait EntityTrait
 
         if ($isDirty === false) {
             unset($this->_dirty[$property]);
+
             return false;
         }
 
         $this->_dirty[$property] = true;
-        unset($this->_errors[$property]);
+        unset($this->_errors[$property], $this->_invalid[$property]);
+
         return true;
     }
 
@@ -617,6 +695,8 @@ trait EntityTrait
     {
         $this->_dirty = [];
         $this->_errors = [];
+        $this->_invalid = [];
+        $this->_original = [];
     }
 
     /**
@@ -683,6 +763,7 @@ trait EntityTrait
     {
         if ($field === null) {
             $diff = array_diff_key($this->_properties, $this->_errors);
+
             return $this->_errors + (new Collection($diff))
                 ->filter(function ($value) {
                     return is_array($value) || $value instanceof EntityInterface;
@@ -699,6 +780,7 @@ trait EntityTrait
             if ($errors) {
                 return $errors;
             }
+
             return $this->_nestedErrors($field);
         }
 
@@ -755,6 +837,7 @@ trait EntityTrait
         if (count($path) <= 1) {
             return $this->_readError($entity, array_pop($path));
         }
+
         return [];
     }
 
@@ -762,7 +845,7 @@ trait EntityTrait
      * Read the error(s) from one or many objects.
      *
      * @param array|\Cake\Datasource\EntityTrait $object The object to read errors from.
-     * @param string $path The field name for errors.
+     * @param string|null $path The field name for errors.
      * @return array
      */
     protected function _readError($object, $path = null)
@@ -776,9 +859,50 @@ trait EntityTrait
                     return $val->errors();
                 }
             }, $object);
+
             return array_filter($array);
         }
+
         return [];
+    }
+
+    /**
+     * Sets a field as invalid and not patchable into the entity.
+     *
+     * This is useful for batch operations when one needs to get the original value for an error message after patching.
+     * This value could not be patched into the entity and is simply copied into the _invalid property for debugging purposes
+     * or to be able to log it away.
+     *
+     * @param string|array|null $field The field to get invalid value for, or the value to set.
+     * @param mixed|null $value The invalid value to be set for $field.
+     * @param bool $overwrite Whether or not to overwrite pre-existing values for $field.
+     * @return $this|mixed
+     */
+    public function invalid($field = null, $value = null, $overwrite = false)
+    {
+        if ($field === null) {
+            return $this->_invalid;
+        }
+
+        if (is_string($field) && $value === null) {
+            $value = isset($this->_invalid[$field]) ? $this->_invalid[$field] : null;
+
+            return $value;
+        }
+
+        if (!is_array($field)) {
+            $field = [$field => $value];
+        }
+
+        foreach ($field as $f => $value) {
+            if ($overwrite) {
+                $this->_invalid[$f] = $value;
+                continue;
+            }
+            $this->_invalid += [$f => $value];
+        }
+
+        return $this;
     }
 
     /**
@@ -810,7 +934,7 @@ trait EntityTrait
      * ```
      *
      * @param string|array $property single or list of properties to change its accessibility
-     * @param bool $set true marks the property as accessible, false will
+     * @param bool|null $set true marks the property as accessible, false will
      * mark it as protected.
      * @return $this|bool
      */
@@ -829,6 +953,7 @@ trait EntityTrait
                 return (bool)$set;
             }, $this->_accessible);
             $this->_accessible['*'] = (bool)$set;
+
             return $this;
         }
 
@@ -845,7 +970,7 @@ trait EntityTrait
      * If called with no arguments, it returns the alias of the repository
      * this entity came from if it is known.
      *
-     * @param string $alias the alias of the repository
+     * @param string|null $alias the alias of the repository
      * @return string|$this
      */
     public function source($alias = null)
@@ -883,6 +1008,7 @@ trait EntityTrait
             '[original]' => $this->_original,
             '[virtual]' => $this->_virtual,
             '[errors]' => $this->_errors,
+            '[invalid]' => $this->_invalid,
             '[repository]' => $this->_registryAlias
         ];
     }

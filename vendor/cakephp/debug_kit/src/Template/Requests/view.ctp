@@ -1,4 +1,9 @@
 <?php
+/**
+ * @type \DebugKit\View\AjaxView $this
+ * @type \DebugKit\Model\Entity\Request $toolbar
+ */
+
 use Cake\Routing\Router;
 use Cake\Core\Configure;
 
@@ -31,8 +36,8 @@ use Cake\Core\Configure;
 </ul>
 <?php $this->Html->script('DebugKit.debug_kit', [
     'block' => true,
-    'id' => '__debug_kit',
+    'id' => '__debug_kit_app',
     'data-id' => $toolbar->id,
-    'data-url' => json_encode($this->Url->build('/')),
-    'data-full-url' => Router::url('/', true)
+    'data-url' => Router::url('/', true),
+    'data-webroot' => $this->request->webroot,
 ]) ?>
