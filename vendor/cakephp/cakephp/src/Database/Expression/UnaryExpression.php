@@ -100,7 +100,6 @@ class UnaryExpression implements ExpressionInterface
     {
         if ($this->_value instanceof ExpressionInterface) {
             $callable($this->_value);
-            $this->_value->traverse($callable);
         }
     }
 

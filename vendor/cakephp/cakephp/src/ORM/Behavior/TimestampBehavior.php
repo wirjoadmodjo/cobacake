@@ -18,6 +18,7 @@ use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\I18n\Time;
 use Cake\ORM\Behavior;
+use Cake\ORM\Entity;
 use DateTime;
 use UnexpectedValueException;
 
@@ -130,7 +131,7 @@ class TimestampBehavior extends Behavior
      * If an explicit date time is passed, the config option `refreshTimestamp` is
      * automatically set to false.
      *
-     * @param \DateTime|null $ts Timestamp
+     * @param \DateTime $ts Timestamp
      * @param bool $refreshTimestamp If true timestamp is refreshed.
      * @return \Cake\I18n\Time
      */

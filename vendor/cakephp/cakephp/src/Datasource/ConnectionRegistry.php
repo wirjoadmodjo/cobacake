@@ -27,7 +27,7 @@ class ConnectionRegistry extends ObjectRegistry
 {
 
     /**
-     * Resolve a datasource classname.
+     * Resolve a driver classname.
      *
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
@@ -39,17 +39,16 @@ class ConnectionRegistry extends ObjectRegistry
         if (is_object($class)) {
             return $class;
         }
-
         return App::className($class, 'Datasource');
     }
 
     /**
-     * Throws an exception when a datasource is missing
+     * Throws an exception when a driver is missing
      *
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
      * @param string $class The classname that is missing.
-     * @param string $plugin The plugin the datasource is missing in.
+     * @param string $plugin The plugin the driver is missing in.
      * @return void
      * @throws \Cake\Datasource\Exception\MissingDatasourceException
      */
@@ -71,7 +70,7 @@ class ConnectionRegistry extends ObjectRegistry
      *
      * @param string|object|callable $class The classname or object to make.
      * @param string $alias The alias of the object.
-     * @param array $settings An array of settings to use for the datasource.
+     * @param array $settings An array of settings to use for the driver.
      * @return object A connection with the correct settings.
      */
     protected function _create($class, $alias, $settings)
@@ -85,7 +84,6 @@ class ConnectionRegistry extends ObjectRegistry
         }
 
         unset($settings['className']);
-
         return new $class($settings);
     }
 

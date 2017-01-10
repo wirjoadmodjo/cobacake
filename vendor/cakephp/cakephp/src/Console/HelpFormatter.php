@@ -129,7 +129,6 @@ class HelpFormatter
             $out[] = Text::wrap($epilog, $width);
             $out[] = '';
         }
-
         return implode("\n", $out);
     }
 
@@ -163,7 +162,6 @@ class HelpFormatter
             $args = ['[arguments]'];
         }
         $usage = array_merge($usage, $args);
-
         return implode(' ', $usage);
     }
 
@@ -179,7 +177,6 @@ class HelpFormatter
         foreach ($collection as $item) {
             $max = (strlen($item->name()) > $max) ? strlen($item->name()) : $max;
         }
-
         return $max;
     }
 
@@ -209,7 +206,6 @@ class HelpFormatter
         foreach ($parser->arguments() as $argument) {
             $argument->xml($arguments);
         }
-
         return $string ? $xml->asXml() : $xml;
     }
 }

@@ -15,6 +15,9 @@
 namespace Cake\View;
 
 use Cake\Core\Configure;
+use Cake\Event\EventManager;
+use Cake\Network\Request;
+use Cake\Network\Response;
 use Cake\Utility\Hash;
 use Cake\Utility\Xml;
 
@@ -141,7 +144,6 @@ class XmlView extends SerializedView
         if (isset($options['return']) && strtolower($options['return']) === 'domdocument') {
             return Xml::fromArray($data, $options)->saveXML();
         }
-
         return Xml::fromArray($data, $options)->asXML();
     }
 }

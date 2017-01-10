@@ -51,23 +51,29 @@ class HasOne extends Association
             if ($this->_foreignKey === null) {
                 $this->_foreignKey = $this->_modelKey($this->source()->alias());
             }
-
             return $this->_foreignKey;
         }
-
         return parent::foreignKey($key);
     }
 
     /**
-     * Returns default property name based on association name.
+     * Sets the property name that should be filled with data from the target table
+     * in the source table record.
+     * If no arguments are passed, currently configured type is returned.
      *
+     * @param string|null $name The name of the property. Pass null to read the current value.
      * @return string
      */
-    protected function _propertyName()
+    public function property($name = null)
     {
-        list(, $name) = pluginSplit($this->_name);
-
-        return Inflector::underscore(Inflector::singularize($name));
+        if ($name !== null) {
+            return parent::property($name);
+        }
+        if ($name === null && !$this->_propertyName) {
+            list(, $name) = pluginSplit($this->_name);
+            $this->_propertyName = Inflector::underscore(Inflector::singularize($name));
+        }
+        return $this->_propertyName;
     }
 
     /**
@@ -104,7 +110,7 @@ class HasOne extends Association
      * the target table
      * @return bool|\Cake\Datasource\EntityInterface false if $entity could not be saved, otherwise it returns
      * the saved entity
-     * @see \Cake\ORM\Table::save()
+     * @see Table::save()
      */
     public function saveAssociated(EntityInterface $entity, array $options = [])
     {
@@ -121,7 +127,6 @@ class HasOne extends Association
 
         if (!$this->target()->save($targetEntity, $options)) {
             $targetEntity->unsetProperty(array_keys($properties));
-
             return false;
         }
 
@@ -162,7 +167,6 @@ class HasOne extends Association
             }
             $resultMap[implode(';', $values)] = $result;
         }
-
         return $resultMap;
     }
 }

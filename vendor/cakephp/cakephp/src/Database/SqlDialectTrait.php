@@ -49,7 +49,6 @@ trait SqlDialectTrait
         if (preg_match('/^[\w-]+\.[^ \*]*$/', $identifier)) {
 // string.string
             $items = explode('.', $identifier);
-
             return $this->_startQuote . implode($this->_endQuote . '.' . $this->_startQuote, $items) . $this->_endQuote;
         }
 
@@ -104,7 +103,6 @@ trait SqlDialectTrait
                     }
                 }
             });
-
             return $query;
         };
     }
@@ -145,7 +143,6 @@ trait SqlDialectTrait
             $query->group($query->clause('distinct'), true);
             $query->distinct(false);
         }
-
         return $query;
     }
 
@@ -192,7 +189,6 @@ trait SqlDialectTrait
 
                 list(, $field) = explode('.', $field);
                 $condition->setField($field);
-
                 return $condition;
             });
         }

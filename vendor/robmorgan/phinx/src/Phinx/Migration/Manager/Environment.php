@@ -32,7 +32,6 @@ use Phinx\Db\Adapter\AdapterFactory;
 use Phinx\Db\Adapter\AdapterInterface;
 use Phinx\Migration\MigrationInterface;
 use Phinx\Seed\SeedInterface;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class Environment
@@ -46,11 +45,6 @@ class Environment
      * @var array
      */
     protected $options;
-
-    /**
-     * @var InputInterface
-     */
-    protected $input;
 
     /**
      * @var OutputInterface
@@ -135,11 +129,13 @@ class Environment
     /**
      * Executes the specified seeder on this environment.
      *
-     * @param SeedInterface $seed
+     * @param MigrationInterface $migration Migration
+     * @param string $direction Direction
      * @return void
      */
     public function executeSeed(SeedInterface $seed)
     {
+        $startTime = time();
         $seed->setAdapter($this->getAdapter());
 
         // begin the transaction if the adapter supports it
@@ -203,28 +199,6 @@ class Environment
     }
 
     /**
-     * Sets the console input.
-     *
-     * @param InputInterface $input
-     * @return Environment
-     */
-    public function setInput(InputInterface $input)
-    {
-        $this->input = $input;
-        return $this;
-    }
-
-    /**
-     * Gets the console input.
-     *
-     * @return InputInterface
-     */
-    public function getInput()
-    {
-        return $this->input;
-    }
-
-    /**
      * Sets the console output.
      *
      * @param OutputInterface $output Output
@@ -254,16 +228,6 @@ class Environment
     public function getVersions()
     {
         return $this->getAdapter()->getVersions();
-    }
-
-    /**
-     * Get all migration log entries, indexed by version number.
-     *
-     * @return array
-     */
-    public function getVersionLog()
-    {
-        return $this->getAdapter()->getVersionLog();
     }
 
     /**
@@ -340,10 +304,6 @@ class Environment
                 ->getWrapper($this->options['wrapper'], $adapter);
         }
 
-        if ($this->getInput()) {
-            $adapter->setInput($this->getInput());
-        }
-        
         if ($this->getOutput()) {
             $adapter->setOutput($this->getOutput());
         }

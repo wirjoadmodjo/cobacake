@@ -89,7 +89,6 @@ class BakeTemplateTask extends Shell
             return $this->View->render($template);
         } catch (MissingTemplateException $e) {
             $this->_io->verbose(sprintf('No bake template found for "%s"', $template));
-
             return '';
         }
     }

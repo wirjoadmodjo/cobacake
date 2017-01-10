@@ -83,7 +83,6 @@ class SessionStorage implements StorageInterface
         }
 
         $this->_user = $this->_session->read($this->_config['key']) ?: false;
-
         return $this->_user;
     }
 
@@ -92,10 +91,10 @@ class SessionStorage implements StorageInterface
      *
      * The session id is also renewed to help mitigate issues with session replays.
      *
-     * @param array|\ArrayAccess $user User record.
+     * @param array $user User record.
      * @return void
      */
-    public function write($user)
+    public function write(array $user)
     {
         $this->_user = $user;
 
@@ -129,7 +128,6 @@ class SessionStorage implements StorageInterface
 
         if ($url === false) {
             $this->_session->delete($this->_config['redirect']);
-
             return null;
         }
 

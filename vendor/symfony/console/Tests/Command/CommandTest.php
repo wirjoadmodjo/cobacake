@@ -173,16 +173,6 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($formatterHelper->getName(), $command->getHelper('formatter')->getName(), '->getHelper() returns the correct helper');
     }
 
-    /**
-     * @expectedException        \LogicException
-     * @expectedExceptionMessage Cannot retrieve helper "formatter" because there is no HelperSet defined.
-     */
-    public function testGetHelperWithoutHelperSet()
-    {
-        $command = new \TestCommand();
-        $command->getHelper('formatter');
-    }
-
     public function testMergeApplicationDefinition()
     {
         $application1 = new Application();
@@ -257,7 +247,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        \Symfony\Component\Console\Exception\InvalidOptionException
+     * @expectedException        Symfony\Component\Console\Exception\InvalidOptionException
      * @expectedExceptionMessage The "--bar" option does not exist.
      */
     public function testRunWithInvalidOption()

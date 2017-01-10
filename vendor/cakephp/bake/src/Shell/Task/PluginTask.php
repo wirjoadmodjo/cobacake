@@ -59,14 +59,13 @@ class PluginTask extends BakeTask
      * Execution method always used for tasks
      *
      * @param string|null $name The name of the plugin to bake.
-     * @return null|bool
+     * @return void
      */
     public function main($name = null)
     {
         if (empty($name)) {
             $this->err('<error>You must provide a plugin name in CamelCase format.</error>');
-            $this->err('To make an "MyExample" plugin, run <info>`cake bake plugin MyExample`</info>.');
-
+            $this->err('To make an "Example" plugin, run <info>`cake bake plugin Example`</info>.');
             return false;
         }
         $plugin = $this->_camelize($name);
@@ -74,7 +73,6 @@ class PluginTask extends BakeTask
         if (is_dir($pluginPath)) {
             $this->out(sprintf('Plugin: %s already exists, no action taken', $plugin));
             $this->out(sprintf('Path: %s', $pluginPath));
-
             return false;
         }
         if (!$this->bake($plugin)) {
@@ -88,7 +86,7 @@ class PluginTask extends BakeTask
      * Also update the autoloader and the root composer.json file if it can be found
      *
      * @param string $plugin Name of the plugin in CamelCased format
-     * @return bool|void
+     * @return bool
      */
     public function bake($plugin)
     {
@@ -113,9 +111,6 @@ class PluginTask extends BakeTask
 
         $this->hr();
         $this->out(sprintf('<success>Created:</success> %s in %s', $plugin, $this->path . $plugin), 2);
-
-        $emptyFile = $this->path . 'empty';
-        $this->_deleteEmptyFile($emptyFile);
 
         return true;
     }
@@ -227,7 +222,6 @@ class PluginTask extends BakeTask
 
         if (!file_exists($file)) {
             $this->out(sprintf('<info>Main composer file %s not found</info>', $file));
-
             return false;
         }
 
@@ -248,7 +242,6 @@ class PluginTask extends BakeTask
 
         if (!$composer) {
             $this->error('Could not locate composer. Add composer to your PATH, or use the --composer option.');
-
             return false;
         }
 
@@ -264,7 +257,6 @@ class PluginTask extends BakeTask
         } catch (\RuntimeException $e) {
             $error = $e->getMessage();
             $this->error(sprintf('Could not run `composer dump-autoload`: %s', $error));
-
             return false;
         }
 
@@ -307,7 +299,6 @@ class PluginTask extends BakeTask
 
         if ($max === 1) {
             $this->path = $pathOptions[0];
-
             return;
         }
 
@@ -364,7 +355,6 @@ class PluginTask extends BakeTask
             $paths = explode(PATH_SEPARATOR, $path);
             $composer = $this->_searchPath($paths);
         }
-
         return $composer;
     }
 
@@ -381,12 +371,10 @@ class PluginTask extends BakeTask
             foreach ($composer as $cmd) {
                 if (is_file($dir . DS . $cmd)) {
                     $this->_io->verbose('Found composer executable in ' . $dir);
-
                     return $dir . DS . $cmd;
                 }
             }
         }
-
         return false;
     }
 }

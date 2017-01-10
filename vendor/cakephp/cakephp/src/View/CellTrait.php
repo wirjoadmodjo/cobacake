@@ -14,12 +14,15 @@
  */
 namespace Cake\View;
 
+use BadMethodCallException;
 use Cake\Core\App;
 use Cake\Utility\Inflector;
-use Cake\View\Exception\MissingCellException;
+use ReflectionException;
+use ReflectionMethod;
 
 /**
  * Provides cell() method for usage in Controller and View classes.
+ *
  */
 trait CellTrait
 {
@@ -69,16 +72,25 @@ trait CellTrait
         $className = App::className($pluginAndCell, 'View/Cell', 'Cell');
 
         if (!$className) {
-            throw new MissingCellException(['className' => $pluginAndCell . 'Cell']);
+            throw new Exception\MissingCellException(['className' => $pluginAndCell . 'Cell']);
         }
 
+        $cell = $this->_createCell($className, $action, $plugin, $options);
         if (!empty($data)) {
             $data = array_values($data);
         }
-        $options = ['action' => $action, 'args' => $data] + $options;
-        $cell = $this->_createCell($className, $action, $plugin, $options);
 
-        return $cell;
+        try {
+            $reflect = new ReflectionMethod($cell, $action);
+            $reflect->invokeArgs($cell, $data);
+            return $cell;
+        } catch (ReflectionException $e) {
+            throw new BadMethodCallException(sprintf(
+                'Class %s does not have a "%s" method.',
+                $className,
+                $action
+            ));
+        }
     }
 
     /**
@@ -112,7 +124,6 @@ trait CellTrait
             $class = get_class($this);
             $builder->className($class);
             $instance->viewClass = $class;
-
             return $instance;
         }
 
@@ -124,7 +135,6 @@ trait CellTrait
             $builder->className($this->viewClass);
             $instance->viewClass = $this->viewClass;
         }
-
         return $instance;
     }
 }

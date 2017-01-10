@@ -16,14 +16,14 @@ namespace Cake\ORM;
 
 use Cake\Datasource\EntityInterface;
 use Cake\Datasource\EntityTrait;
-use Cake\Datasource\InvalidPropertyInterface;
 
 /**
  * An entity represents a single result row from a repository. It exposes the
  * methods for retrieving and storing properties associated in this row.
  */
-class Entity implements EntityInterface, InvalidPropertyInterface
+class Entity implements EntityInterface
 {
+
     use EntityTrait;
 
     /**
@@ -54,6 +54,7 @@ class Entity implements EntityInterface, InvalidPropertyInterface
             'guard' => false,
             'source' => null
         ];
+        $this->_className = get_class($this);
 
         if (!empty($options['source'])) {
             $this->source($options['source']);
@@ -65,7 +66,6 @@ class Entity implements EntityInterface, InvalidPropertyInterface
 
         if (!empty($properties) && $options['markClean'] && !$options['useSetters']) {
             $this->_properties = $properties;
-
             return;
         }
 

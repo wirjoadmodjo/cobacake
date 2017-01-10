@@ -123,7 +123,6 @@ class TemplateTask extends BakeTask
             foreach ($this->Model->listUnskipped() as $table) {
                 $this->out('- ' . $this->_camelize($table));
             }
-
             return true;
         }
         $name = $this->_getName($name);
@@ -207,7 +206,6 @@ class TemplateTask extends BakeTask
     {
         $path = parent::getPath();
         $path .= $this->controllerName . DS;
-
         return $path;
     }
 
@@ -241,7 +239,6 @@ class TemplateTask extends BakeTask
                 unset($methods[$i]);
             }
         }
-
         return $methods;
     }
 
@@ -280,13 +277,7 @@ class TemplateTask extends BakeTask
      */
     protected function _loadController()
     {
-        if (TableRegistry::exists($this->modelName)) {
-            $modelObject = TableRegistry::get($this->modelName);
-        } else {
-            $modelObject = TableRegistry::get($this->modelName, [
-                'connectionName' => $this->connection
-            ]);
-        }
+        $modelObject = TableRegistry::get($this->modelName);
 
         $primaryKey = (array)$modelObject->primaryKey();
         $displayField = $modelObject->displayField();
@@ -340,7 +331,7 @@ class TemplateTask extends BakeTask
     /**
      * handle creation of baking a custom action view file
      *
-     * @return void|null
+     * @return void
      */
     public function customAction()
     {
@@ -365,7 +356,6 @@ class TemplateTask extends BakeTask
         $looksGood = $this->in('Look okay?', ['y', 'n'], 'y');
         if (strtolower($looksGood) === 'y') {
             $this->bake($action, ' ');
-
             return $this->_stop();
         }
         $this->out('Bake Aborted.');
@@ -385,14 +375,12 @@ class TemplateTask extends BakeTask
         }
         if (empty($content)) {
             $this->err("<warning>No generated content for '{$action}.ctp', not generating template.</warning>");
-
             return false;
         }
         $this->out("\n" . sprintf('Baking `%s` view template file...', $action), 1, Shell::QUIET);
         $path = $this->getPath();
         $filename = $path . Inflector::underscore($action) . '.ctp';
         $this->createFile($filename, $content);
-
         return $content;
     }
 
@@ -411,18 +399,12 @@ class TemplateTask extends BakeTask
 
         if (empty($vars['primaryKey'])) {
             $this->error('Cannot generate views for models with no primary key');
-
             return false;
-        }
-
-        if ($action === "index" && !empty($this->params['index-columns'])) {
-            $this->BakeTemplate->set('indexColumns', $this->params['index-columns']);
         }
 
         $this->BakeTemplate->set('action', $action);
         $this->BakeTemplate->set('plugin', $this->plugin);
         $this->BakeTemplate->set($vars);
-
         return $this->BakeTemplate->generate("Template/$action");
     }
 
@@ -438,7 +420,7 @@ class TemplateTask extends BakeTask
         $parser->description(
             'Bake views for a controller, using built-in or custom templates. '
         )->addArgument('controller', [
-            'help' => 'Name of the controller views to bake. You can use Plugin.name as a shortcut for plugin baking.'
+            'help' => 'Name of the controller views to bake. Can be Plugin.name as a shortcut for plugin baking.'
         ])->addArgument('action', [
             'help' => "Will bake a single action's file. core templates are (index, add, edit, view)"
         ])->addArgument('alias', [
@@ -447,9 +429,6 @@ class TemplateTask extends BakeTask
             'help' => 'The controller name if you have a controller that does not follow conventions.'
         ])->addOption('prefix', [
             'help' => 'The routing prefix to generate views for.',
-        ])->addOption('index-columns', [
-            'help' => 'Limit for the number of index columns',
-            'default' => 0
         ])->addSubcommand('all', [
             'help' => '[optional] Bake all CRUD action views for all controllers. Requires models and controllers to exist.'
         ]);
@@ -469,7 +448,6 @@ class TemplateTask extends BakeTask
         if (is_null($this->_associationFilter)) {
             $this->_associationFilter = new AssociationFilter();
         }
-
         return $this->_associationFilter->filterAssociations($model);
     }
 }

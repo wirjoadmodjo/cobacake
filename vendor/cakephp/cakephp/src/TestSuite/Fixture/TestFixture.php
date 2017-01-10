@@ -14,11 +14,11 @@
 namespace Cake\TestSuite\Fixture;
 
 use Cake\Core\Exception\Exception as CakeException;
+use Cake\Database\Driver\Sqlite;
 use Cake\Database\Schema\Table;
 use Cake\Datasource\ConnectionInterface;
 use Cake\Datasource\ConnectionManager;
 use Cake\Datasource\FixtureInterface;
-use Cake\Datasource\TableSchemaInterface;
 use Cake\Log\Log;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Inflector;
@@ -28,7 +28,7 @@ use Exception;
  * Cake TestFixture is responsible for building and destroying tables to be used
  * during testing.
  */
-class TestFixture implements FixtureInterface, TableSchemaInterface
+class TestFixture implements FixtureInterface
 {
 
     /**
@@ -134,7 +134,13 @@ class TestFixture implements FixtureInterface, TableSchemaInterface
     public function init()
     {
         if ($this->table === null) {
-            $this->table = $this->_tableFromClass();
+            list(, $class) = namespaceSplit(get_class($this));
+            preg_match('/^(.*)Fixture$/', $class, $matches);
+            $table = $class;
+            if (isset($matches[1])) {
+                $table = $matches[1];
+            }
+            $this->table = Inflector::tableize($table);
         }
 
         if (empty($this->import) && !empty($this->fields)) {
@@ -144,28 +150,6 @@ class TestFixture implements FixtureInterface, TableSchemaInterface
         if (!empty($this->import)) {
             $this->_schemaFromImport();
         }
-
-        if (empty($this->import) && empty($this->fields)) {
-            $this->_schemaFromReflection();
-        }
-    }
-
-    /**
-     * Returns the table name using the fixture class
-     *
-     * @return string
-     */
-    protected function _tableFromClass()
-    {
-        list(, $class) = namespaceSplit(get_class($this));
-        preg_match('/^(.*)Fixture$/', $class, $matches);
-        $table = $class;
-
-        if (isset($matches[1])) {
-            $table = $matches[1];
-        }
-
-        return Inflector::tableize($table);
     }
 
     /**
@@ -235,44 +219,17 @@ class TestFixture implements FixtureInterface, TableSchemaInterface
     }
 
     /**
-     * Build fixture schema directly from the datasource
-     *
-     * @return void
-     * @throws \Cake\Core\Exception\Exception when trying to reflect a table that does not exist
-     */
-    protected function _schemaFromReflection()
-    {
-        $db = ConnectionManager::get($this->connection());
-        $schemaCollection = $db->schemaCollection();
-        $tables = $schemaCollection->listTables();
-
-        if (!in_array($this->table, $tables)) {
-            throw new CakeException(
-                sprintf(
-                    'Cannot describe schema for table `%s` for fixture `%s` : the table does not exist.',
-                    $this->table,
-                    get_class($this)
-                )
-            );
-        }
-
-        $this->_schema = $schemaCollection->describe($this->table);
-    }
-
-    /**
      * Get/Set the Cake\Database\Schema\Table instance used by this fixture.
      *
-     * @param \Cake\Database\Schema\Table|null $schema The table to set.
+     * @param \Cake\Database\Schema\Table $schema The table to set.
      * @return \Cake\Database\Schema\Table|null
      */
     public function schema(Table $schema = null)
     {
         if ($schema) {
             $this->_schema = $schema;
-
             return null;
         }
-
         return $this->_schema;
     }
 
@@ -283,10 +240,6 @@ class TestFixture implements FixtureInterface, TableSchemaInterface
     {
         if (empty($this->_schema)) {
             return false;
-        }
-
-        if (empty($this->import) && empty($this->fields)) {
-            return true;
         }
 
         try {
@@ -304,10 +257,8 @@ class TestFixture implements FixtureInterface, TableSchemaInterface
             );
             Log::error($msg);
             trigger_error($msg, E_USER_WARNING);
-
             return false;
         }
-
         return true;
     }
 
@@ -319,11 +270,6 @@ class TestFixture implements FixtureInterface, TableSchemaInterface
         if (empty($this->_schema)) {
             return false;
         }
-
-        if (empty($this->import) && empty($this->fields)) {
-            return true;
-        }
-
         try {
             $sql = $this->_schema->dropSql($db);
             foreach ($sql as $stmt) {
@@ -332,7 +278,6 @@ class TestFixture implements FixtureInterface, TableSchemaInterface
         } catch (Exception $e) {
             return false;
         }
-
         return true;
     }
 
@@ -352,7 +297,6 @@ class TestFixture implements FixtureInterface, TableSchemaInterface
             }
             $statement = $query->execute();
             $statement->closeCursor();
-
             return $statement;
         }
 
@@ -407,7 +351,6 @@ class TestFixture implements FixtureInterface, TableSchemaInterface
         foreach ($this->_constraints as $name => $data) {
             $this->_schema->dropConstraint($name);
         }
-
         return true;
     }
 
@@ -431,7 +374,6 @@ class TestFixture implements FixtureInterface, TableSchemaInterface
         foreach ($this->records as $record) {
             $values[] = array_merge($default, $record);
         }
-
         return [$fields, $values, $types];
     }
 
@@ -444,7 +386,6 @@ class TestFixture implements FixtureInterface, TableSchemaInterface
         foreach ($sql as $stmt) {
             $db->execute($stmt)->closeCursor();
         }
-
         return true;
     }
 }

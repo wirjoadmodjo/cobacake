@@ -56,7 +56,6 @@ class Postgres extends Driver
         $config = $this->_config;
         $config['flags'] += [
             PDO::ATTR_PERSISTENT => $config['persistent'],
-            PDO::ATTR_EMULATE_PREPARES => false,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ];
         if (empty($config['unix_socket'])) {
@@ -82,7 +81,6 @@ class Postgres extends Driver
         foreach ($config['init'] as $command) {
             $connection->exec($command);
         }
-
         return true;
     }
 

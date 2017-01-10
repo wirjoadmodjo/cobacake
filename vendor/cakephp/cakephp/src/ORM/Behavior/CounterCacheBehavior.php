@@ -18,6 +18,7 @@ use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\ORM\Association;
 use Cake\ORM\Behavior;
+use Cake\ORM\Entity;
 
 /**
  * CounterCache behavior
@@ -74,6 +75,7 @@ use Cake\ORM\Behavior;
  *     ]
  * ]
  * ```
+ *
  */
 class CounterCacheBehavior extends Behavior
 {

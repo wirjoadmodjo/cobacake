@@ -54,7 +54,7 @@ use Cake\Log\LogTrait;
  * is the subject of each event and can be fetched using Event::subject().
  *
  * @link http://book.cakephp.org/3.0/en/controllers/components.html
- * @see \Cake\Controller\Controller::$components
+ * @see Controller::$components
  */
 class Component implements EventListenerInterface
 {
@@ -151,14 +151,12 @@ class Component implements EventListenerInterface
     public function __get($name)
     {
         if (isset($this->_componentMap[$name]) && !isset($this->{$name})) {
-            $config = (array)$this->_componentMap[$name]['config'] + ['enabled' => false];
+            $config = ['enabled' => false] + (array)$this->_componentMap[$name]['config'];
             $this->{$name} = $this->_registry->load($this->_componentMap[$name]['class'], $config);
         }
-        if (!isset($this->{$name})) {
-            return null;
+        if (isset($this->{$name})) {
+            return $this->{$name};
         }
-
-        return $this->{$name};
     }
 
     /**
@@ -188,7 +186,6 @@ class Component implements EventListenerInterface
                 $events[$event] = $method;
             }
         }
-
         return $events;
     }
 

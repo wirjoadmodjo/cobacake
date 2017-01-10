@@ -66,7 +66,7 @@ class TypeMap
      *
      * This method will replace all the existing type maps with the ones provided.
      *
-     * @param array|null $defaults associative array where keys are field names and values
+     * @param array $defaults associative array where keys are field names and values
      * are the correspondent type.
      * @return $this|array
      */
@@ -76,7 +76,6 @@ class TypeMap
             return $this->_defaults;
         }
         $this->_defaults = $defaults;
-
         return $this;
     }
 
@@ -106,7 +105,7 @@ class TypeMap
      *
      * This method will replace all the existing type maps with the ones provided.
      *
-     * @param array|null $types associative array where keys are field names and values
+     * @param array $types associative array where keys are field names and values
      * are the correspondent type.
      * @return $this|array
      */
@@ -116,7 +115,6 @@ class TypeMap
             return $this->_types;
         }
         $this->_types = $types;
-
         return $this;
     }
 
@@ -136,17 +134,6 @@ class TypeMap
         if (isset($this->_defaults[$column])) {
             return $this->_defaults[$column];
         }
-
         return null;
-    }
-
-    /**
-     * Returns an array of all types mapped types
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->_types + $this->_defaults;
     }
 }

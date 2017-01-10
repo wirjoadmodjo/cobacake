@@ -22,7 +22,7 @@ use Cake\Collection\Collection;
  * results.
  *
  * @internal
- * @see \Cake\Collection\Collection::stopWhen()
+ * @see Collection::stopWhen()
  */
 class StoppableIterator extends Collection
 {
@@ -75,7 +75,6 @@ class StoppableIterator extends Collection
         $current = $this->current();
         $key = $this->key();
         $condition = $this->_condition;
-
         return !$condition($current, $key, $this->_innerIterator);
     }
 }

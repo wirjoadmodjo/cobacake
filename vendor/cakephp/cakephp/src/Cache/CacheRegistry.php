@@ -40,7 +40,6 @@ class CacheRegistry extends ObjectRegistry
         if (is_object($class)) {
             return $class;
         }
-
         return App::className($class, 'Cache/Engine', 'Engine');
     }
 
@@ -64,10 +63,10 @@ class CacheRegistry extends ObjectRegistry
      *
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
-     * @param string|\Cake\Cache\CacheEngine $class The classname or object to make.
+     * @param string|CacheEngine $class The classname or object to make.
      * @param string $alias The alias of the object.
      * @param array $config An array of settings to use for the cache engine.
-     * @return \Cake\Cache\CacheEngine The constructed CacheEngine class.
+     * @return CacheEngine The constructed CacheEngine class.
      * @throws \RuntimeException when an object doesn't implement the correct interface.
      */
     protected function _create($class, $alias, $config)
@@ -97,7 +96,6 @@ class CacheRegistry extends ObjectRegistry
         if ($config['probability'] && time() % $config['probability'] === 0) {
             $instance->gc();
         }
-
         return $instance;
     }
 

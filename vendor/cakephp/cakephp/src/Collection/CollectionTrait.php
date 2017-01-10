@@ -30,7 +30,6 @@ use Cake\Collection\Iterator\UnfoldIterator;
 use Cake\Collection\Iterator\ZipIterator;
 use Countable;
 use LimitIterator;
-use LogicException;
 use RecursiveIteratorIterator;
 use Traversable;
 
@@ -51,7 +50,6 @@ trait CollectionTrait
         foreach ($this->unwrap() as $k => $v) {
             $c($v, $k);
         }
-
         return $this;
     }
 
@@ -67,7 +65,6 @@ trait CollectionTrait
                 return (bool)$v;
             };
         }
-
         return new FilterIterator($this->unwrap(), $c);
     }
 
@@ -89,15 +86,12 @@ trait CollectionTrait
      */
     public function every(callable $c)
     {
-        $return = false;
         foreach ($this->unwrap() as $key => $value) {
-            $return = true;
             if (!$c($value, $key)) {
                 return false;
             }
         }
-
-        return $return;
+        return true;
     }
 
     /**
@@ -111,7 +105,6 @@ trait CollectionTrait
                 return true;
             }
         }
-
         return false;
     }
 
@@ -126,7 +119,6 @@ trait CollectionTrait
                 return true;
             }
         }
-
         return false;
     }
 
@@ -160,7 +152,6 @@ trait CollectionTrait
             }
             $result = $c($result, $value, $k);
         }
-
         return $result;
     }
 
@@ -220,7 +211,6 @@ trait CollectionTrait
         foreach ($this as $value) {
             $group[$callback($value)][] = $value;
         }
-
         return new Collection($group);
     }
 
@@ -235,7 +225,6 @@ trait CollectionTrait
         foreach ($this as $value) {
             $group[$callback($value)] = $value;
         }
-
         return new Collection($group);
     }
 
@@ -254,7 +243,6 @@ trait CollectionTrait
         $reducer = function ($values, $key, $mr) {
             $mr->emit(count($values), $key);
         };
-
         return new Collection(new MapReduce($this->unwrap(), $mapper, $reducer));
     }
 
@@ -285,7 +273,6 @@ trait CollectionTrait
     {
         $elements = $this->toArray();
         shuffle($elements);
-
         return new Collection($elements);
     }
 
@@ -371,10 +358,9 @@ trait CollectionTrait
      */
     public function append($items)
     {
-        $list = new AppendIterator();
+        $list = new AppendIterator;
         $list->append($this->unwrap());
         $list->append((new Collection($items))->unwrap());
-
         return new Collection($list);
     }
 
@@ -396,7 +382,6 @@ trait CollectionTrait
 
             if (!($options['groupPath'])) {
                 $mapReduce->emit($rowVal($value, $key), $rowKey($value, $key));
-
                 return null;
             }
 
@@ -422,22 +407,22 @@ trait CollectionTrait
      * {@inheritDoc}
      *
      */
-    public function nest($idPath, $parentPath, $nestingKey = 'children')
+    public function nest($idPath, $parentPath)
     {
         $parents = [];
         $idPath = $this->_propertyExtractor($idPath);
         $parentPath = $this->_propertyExtractor($parentPath);
         $isObject = true;
 
-        $mapper = function ($row, $key, $mapReduce) use (&$parents, $idPath, $parentPath, $nestingKey) {
-            $row[$nestingKey] = [];
+        $mapper = function ($row, $key, $mapReduce) use (&$parents, $idPath, $parentPath) {
+            $row['children'] = [];
             $id = $idPath($row, $key);
             $parentId = $parentPath($row, $key);
             $parents[$id] =& $row;
             $mapReduce->emitIntermediate($id, $parentId);
         };
 
-        $reducer = function ($values, $key, $mapReduce) use (&$parents, &$isObject, $nestingKey) {
+        $reducer = function ($values, $key, $mapReduce) use (&$parents, &$isObject) {
             static $foundOutType = false;
             if (!$foundOutType) {
                 $isObject = is_object(current($parents));
@@ -448,7 +433,6 @@ trait CollectionTrait
                     $parents[$id] = $isObject ? $parents[$id] : new ArrayIterator($parents[$id], 1);
                     $mapReduce->emit($parents[$id]);
                 }
-
                 return null;
             }
 
@@ -456,7 +440,7 @@ trait CollectionTrait
             foreach ($values as $id) {
                 $children[] =& $parents[$id];
             }
-            $parents[$key][$nestingKey] = $children;
+            $parents[$key]['children'] = $children;
         };
 
         return (new Collection(new MapReduce($this->unwrap(), $mapper, $reducer)))
@@ -484,7 +468,6 @@ trait CollectionTrait
         $iterator = $this->unwrap();
         if ($iterator instanceof ArrayIterator) {
             $items = $iterator->getArrayCopy();
-
             return $preserveKeys ? $items : array_values($items);
         }
         // RecursiveIteratorIterator can return duplicate key values causing
@@ -492,7 +475,6 @@ trait CollectionTrait
         if ($preserveKeys && get_class($iterator) === 'RecursiveIteratorIterator') {
             $preserveKeys = false;
         }
-
         return iterator_to_array($this, $preserveKeys);
     }
 
@@ -546,7 +528,6 @@ trait CollectionTrait
             'asc' => TreeIterator::CHILD_FIRST,
             'leaves' => TreeIterator::LEAVES_ONLY
         ];
-
         return new TreeIterator(
             new NestIterator($this, $nestingKey),
             isset($modes[$dir]) ? $modes[$dir] : $dir
@@ -563,7 +544,6 @@ trait CollectionTrait
         if (!is_callable($condition)) {
             $condition = $this->_createMatcherFilter($condition);
         }
-
         return new StoppableIterator($this, $condition);
     }
 
@@ -594,8 +574,7 @@ trait CollectionTrait
     public function through(callable $handler)
     {
         $result = $handler($this);
-
-        return $result instanceof CollectionInterface ? $result : new Collection($result);
+        return $result instanceof CollectionInterface ? $result: new Collection($result);
     }
 
     /**
@@ -619,7 +598,6 @@ trait CollectionTrait
         } else {
             $items = [$items];
         }
-
         return new ZipIterator(array_merge([$this], $items), $callable);
     }
 
@@ -652,7 +630,6 @@ trait CollectionTrait
         foreach ($this->unwrap() as $el) {
             return false;
         }
-
         return true;
     }
 
@@ -666,7 +643,6 @@ trait CollectionTrait
         while (get_class($iterator) === 'Cake\Collection\Collection') {
             $iterator = $iterator->getInnerIterator();
         }
-
         return $iterator;
     }
 
@@ -679,78 +655,5 @@ trait CollectionTrait
     public function _unwrap()
     {
         return $this->unwrap();
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return \Cake\Collection\CollectionInterface
-     */
-    public function cartesianProduct(callable $operation = null, callable $filter = null)
-    {
-        if ($this->isEmpty()) {
-            return new Collection([]);
-        }
-
-        $collectionArrays = [];
-        $collectionArraysKeys = [];
-        $collectionArraysCounts = [];
-
-        foreach ($this->toList() as $value) {
-            $valueCount = count($value);
-            if ($valueCount !== count($value, COUNT_RECURSIVE)) {
-                throw new LogicException('Cannot find the cartesian product of a multidimensional array');
-            }
-
-            $collectionArraysKeys[] = array_keys($value);
-            $collectionArraysCounts[] = $valueCount;
-            $collectionArrays[] = $value;
-        }
-
-        $result = [];
-        $lastIndex = count($collectionArrays) - 1;
-        // holds the indexes of the arrays that generate the current combination
-        $currentIndexes = array_fill(0, $lastIndex + 1, 0);
-
-        $changeIndex = $lastIndex;
-
-        while (!($changeIndex === 0 && $currentIndexes[0] === $collectionArraysCounts[0])) {
-            $currentCombination = array_map(function ($value, $keys, $index) {
-                return $value[$keys[$index]];
-            }, $collectionArrays, $collectionArraysKeys, $currentIndexes);
-
-            if ($filter === null || $filter($currentCombination)) {
-                $result[] = ($operation === null) ? $currentCombination : $operation($currentCombination);
-            }
-
-            $currentIndexes[$lastIndex]++;
-
-            for ($changeIndex = $lastIndex; $currentIndexes[$changeIndex] === $collectionArraysCounts[$changeIndex] && $changeIndex > 0; $changeIndex--) {
-                $currentIndexes[$changeIndex] = 0;
-                $currentIndexes[$changeIndex - 1]++;
-            }
-        }
-
-        return new Collection($result);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return \Cake\Collection\CollectionInterface
-     */
-    public function transpose()
-    {
-        $arrayValue = $this->toList();
-        $length = count(current($arrayValue));
-        $result = [];
-        foreach ($arrayValue as $column => $row) {
-            if (count($row) != $length) {
-                throw new LogicException('Child arrays do not have even length');
-            }
-            $result[] = array_column($arrayValue, $column);
-        }
-
-        return new Collection($result);
     }
 }

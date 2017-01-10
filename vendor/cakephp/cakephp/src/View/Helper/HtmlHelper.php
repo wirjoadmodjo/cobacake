@@ -89,7 +89,6 @@ class HtmlHelper extends Helper
      * Breadcrumbs.
      *
      * @var array
-     * @deprecated 3.3.6 Use the BreadcrumbsHelper instead
      */
     protected $_crumbs = [];
 
@@ -149,17 +148,15 @@ class HtmlHelper extends Helper
      * Adds a link to the breadcrumbs array.
      *
      * @param string $name Text for link
-     * @param string|array|null $link URL for link (if empty it won't be a link)
+     * @param string|null $link URL for link (if empty it won't be a link)
      * @param string|array $options Link attributes e.g. ['id' => 'selected']
      * @return $this
-     * @see \Cake\View\Helper\HtmlHelper::link() for details on $options that can be used.
+     * @see HtmlHelper::link() for details on $options that can be used.
      * @link http://book.cakephp.org/3.0/en/views/helpers/html.html#creating-breadcrumb-trails-with-htmlhelper
-     * @deprecated 3.3.6 Use the BreadcrumbsHelper instead
      */
     public function addCrumb($name, $link = null, array $options = [])
     {
         $this->_crumbs[] = [$name, $link, $options];
-
         return $this;
     }
 
@@ -186,7 +183,6 @@ class HtmlHelper extends Helper
         if (isset($this->_docTypes[$type])) {
             return $this->_docTypes[$type];
         }
-
         return null;
     }
 
@@ -240,11 +236,6 @@ class HtmlHelper extends Helper
                 'description' => ['name' => 'description', 'content' => $content],
                 'robots' => ['name' => 'robots', 'content' => $content],
                 'viewport' => ['name' => 'viewport', 'content' => $content],
-                'canonical' => ['rel' => 'canonical', 'link' => $content],
-                'next' => ['rel' => 'next', 'link' => $content],
-                'prev' => ['rel' => 'prev', 'link' => $content],
-                'first' => ['rel' => 'first', 'link' => $content],
-                'last' => ['rel' => 'last', 'link' => $content]
             ];
 
             if ($type === 'icon' && $content === null) {
@@ -311,7 +302,6 @@ class HtmlHelper extends Helper
         if (empty($charset)) {
             $charset = strtolower(Configure::read('App.encoding'));
         }
-
         return $this->formatTemplate('charset', [
             'charset' => (!empty($charset) ? $charset : 'utf-8')
         ]);
@@ -333,7 +323,7 @@ class HtmlHelper extends Helper
      *   over value of `escape`)
      * - `confirm` JavaScript confirmation message.
      *
-     * @param string $title The content to be wrapped by `<a>` tags.
+     * @param string $title The content to be wrapped by <a> tags.
      * @param string|array|null $url Cake-relative URL or array of URL parameters, or
      *   external URL (starts with http://)
      * @param array $options Array of options and HTML attributes.
@@ -375,7 +365,6 @@ class HtmlHelper extends Helper
         }
 
         $templater = $this->templater();
-
         return $templater->format('link', [
             'url' => $url,
             'attrs' => $templater->formatAttributes($options),
@@ -427,7 +416,7 @@ class HtmlHelper extends Helper
      *   CSS stylesheets. If `$path` is prefixed with '/', the path will be relative to the webroot
      *   of your application. Otherwise, the path will be relative to your CSS path, usually webroot/css.
      * @param array $options Array of options and HTML arguments.
-     * @return string|null CSS `<link />` or `<style />` tag, depending on the type of link.
+     * @return string|null CSS <link /> or <style /> tag, depending on the type of link.
      * @link http://book.cakephp.org/3.0/en/views/helpers/html.html#linking-to-css-files
      */
     public function css($path, array $options = [])
@@ -442,14 +431,13 @@ class HtmlHelper extends Helper
             if (empty($options['block'])) {
                 return $out . "\n";
             }
-
             return null;
         }
 
         if (strpos($path, '//') !== false) {
             $url = $path;
         } else {
-            $url = $this->Url->css($path, $options);
+            $url = $this->Url->assetUrl($path, $options + ['pathPrefix' => Configure::read('App.cssBaseUrl'), 'ext' => '.css']);
             $options = array_diff_key($options, ['fullBase' => null, 'pathPrefix' => null]);
         }
 
@@ -536,12 +524,11 @@ class HtmlHelper extends Helper
             if (empty($options['block'])) {
                 return $out . "\n";
             }
-
             return null;
         }
 
         if (strpos($url, '//') === false) {
-            $url = $this->Url->script($url, $options);
+            $url = $this->Url->assetUrl($url, $options + ['pathPrefix' => Configure::read('App.jsBaseUrl'), 'ext' => '.js']);
             $options = array_diff_key($options, ['fullBase' => null, 'pathPrefix' => null]);
         }
         if ($options['once'] && isset($this->_includedAssets[__METHOD__][$url])) {
@@ -568,7 +555,7 @@ class HtmlHelper extends Helper
      *
      * ### Options
      *
-     * - `safe` (boolean) Whether or not the $script should be wrapped in `<![CDATA[ ]]>`
+     * - `safe` (boolean) Whether or not the $script should be wrapped in <![CDATA[ ]]>
      * - `block` Set to true to append output to view block "script" or provide
      *   custom block name.
      *
@@ -635,7 +622,6 @@ class HtmlHelper extends Helper
         $buffer = ob_get_clean();
         $options = $this->_scriptBlockOptions;
         $this->_scriptBlockOptions = [];
-
         return $this->scriptBlock($buffer, $options);
     }
 
@@ -665,7 +651,6 @@ class HtmlHelper extends Helper
         if ($oneLine) {
             return implode(' ', $out);
         }
-
         return implode("\n", $out);
     }
 
@@ -684,7 +669,6 @@ class HtmlHelper extends Helper
      *   also be an array, see above for details.
      * @return string|null Composed bread crumbs
      * @link http://book.cakephp.org/3.0/en/views/helpers/html.html#creating-breadcrumb-trails-with-htmlhelper
-     * @deprecated 3.3.6 Use the BreadcrumbsHelper instead
      */
     public function getCrumbs($separator = '&raquo;', $startText = false)
     {
@@ -698,10 +682,8 @@ class HtmlHelper extends Helper
                     $out[] = $crumb[0];
                 }
             }
-
             return implode($separator, $out);
         }
-
         return null;
     }
 
@@ -723,7 +705,6 @@ class HtmlHelper extends Helper
      *   also be an array, see `HtmlHelper::getCrumbs` for details.
      * @return string|null Breadcrumbs HTML list.
      * @link http://book.cakephp.org/3.0/en/views/helpers/html.html#creating-breadcrumb-trails-with-htmlhelper
-     * @deprecated 3.3.6 Use the BreadcrumbsHelper instead
      */
     public function getCrumbList(array $options = [], $startText = false)
     {
@@ -763,7 +744,6 @@ class HtmlHelper extends Helper
                 'attrs' => $this->templater()->formatAttributes($options)
             ]);
         }
-
         return $this->formatTemplate('ul', [
             'content' => $result,
             'attrs' => $this->templater()->formatAttributes($ulOptions)
@@ -776,7 +756,6 @@ class HtmlHelper extends Helper
      * @param string|array|bool $startText Text to prepend
      * @param bool $escape If the output should be escaped or not
      * @return array Crumb list including startText (if provided)
-     * @deprecated 3.3.6 Use the BreadcrumbsHelper instead
      */
     protected function _prepareCrumbs($startText, $escape = true)
     {
@@ -793,7 +772,6 @@ class HtmlHelper extends Helper
             unset($startText['url'], $startText['text']);
             array_unshift($crumbs, [$text, $url, $startText + ['escape' => $escape]]);
         }
-
         return $crumbs;
     }
 
@@ -830,7 +808,7 @@ class HtmlHelper extends Helper
      */
     public function image($path, array $options = [])
     {
-        $path = $this->Url->image($path, $options);
+        $path = $this->Url->assetUrl($path, $options + ['pathPrefix' => Configure::read('App.imageBaseUrl')]);
         $options = array_diff_key($options, ['fullBase' => null, 'pathPrefix' => null]);
 
         if (!isset($options['alt'])) {
@@ -856,7 +834,6 @@ class HtmlHelper extends Helper
                 'content' => $image
             ]);
         }
-
         return $image;
     }
 
@@ -886,8 +863,10 @@ class HtmlHelper extends Helper
                 ]);
             }
         }
-
-        return $this->tableRow(implode(' ', $out), (array)$trOptions);
+        return $this->formatTemplate('tablerow', [
+            'attrs' => $this->templater()->formatAttributes($trOptions),
+            'content' => implode(' ', $out)
+        ]);
     }
 
     /**
@@ -926,78 +905,36 @@ class HtmlHelper extends Helper
 
         foreach ($data as $line) {
             $count++;
-            $cellsOut = $this->_renderCells($line, $useCount);
-            $opts = $count % 2 ? $oddTrOptions : $evenTrOptions;
-            $out[] = $this->tableRow(implode(' ', $cellsOut), (array)$opts);
-        }
+            $cellsOut = [];
+            $i = 0;
+            foreach ($line as $cell) {
+                $cellOptions = [];
 
-        return implode("\n", $out);
-    }
-
-    /**
-     * Renders cells for a row of a table.
-     *
-     * This is a helper method for tableCells(). Overload this method as you
-     * need to change the behavior of the cell rendering.
-     *
-     * @param array $line Line data to render.
-     * @param bool $useCount Renders the count into the row. Default is false.
-     * @return string
-     */
-    protected function _renderCells($line, $useCount = false)
-    {
-        $i = 0;
-        $cellsOut = [];
-        foreach ($line as $cell) {
-            $cellOptions = [];
-
-            if (is_array($cell)) {
-                $cellOptions = $cell[1];
-                $cell = $cell[0];
-            }
-
-            if ($useCount) {
-                if (isset($cellOptions['class'])) {
-                    $cellOptions['class'] .= ' column-' . ++$i;
-                } else {
-                    $cellOptions['class'] = 'column-' . ++$i;
+                if (is_array($cell)) {
+                    $cellOptions = $cell[1];
+                    $cell = $cell[0];
                 }
+
+                if ($useCount) {
+                    if (isset($cellOptions['class'])) {
+                        $cellOptions['class'] .= ' column-' . ++$i;
+                    } else {
+                        $cellOptions['class'] = 'column-' . ++$i;
+                    }
+                }
+
+                $cellsOut[] = $this->formatTemplate('tablecell', [
+                    'attrs' => $this->templater()->formatAttributes($cellOptions),
+                    'content' => $cell
+                ]);
             }
-
-            $cellsOut[] = $this->tableCell($cell, $cellOptions);
+            $opts = $count % 2 ? $oddTrOptions : $evenTrOptions;
+            $out[] = $this->formatTemplate('tablerow', [
+                'attrs' => $this->templater()->formatAttributes($opts),
+                'content' => implode(' ', $cellsOut),
+            ]);
         }
-
-        return $cellsOut;
-    }
-
-    /**
-     * Renders a single table row (A TR with attributes).
-     *
-     * @param string $content The content of the row.
-     * @param array $options HTML attributes.
-     * @return string
-     */
-    public function tableRow($content, array $options = [])
-    {
-        return $this->formatTemplate('tablerow', [
-            'attrs' => $this->templater()->formatAttributes($options),
-            'content' => $content
-        ]);
-    }
-
-    /**
-     * Renders a single table cell (A TD with attributes).
-     *
-     * @param string $content The content of the cell.
-     * @param array $options HTML attributes.
-     * @return string
-     */
-    public function tableCell($content, array $options = [])
-    {
-        return $this->formatTemplate('tablecell', [
-            'attrs' => $this->templater()->formatAttributes($options),
-            'content' => $content
-        ]);
+        return implode("\n", $out);
     }
 
     /**
@@ -1008,7 +945,7 @@ class HtmlHelper extends Helper
      * - `escape` Whether or not the contents should be html_entity escaped.
      *
      * @param string $name Tag name.
-     * @param string|null $text String content that will appear inside the div element.
+     * @param string $text String content that will appear inside the div element.
      *   If null, only a start tag will be printed
      * @param array $options Additional HTML attributes of the DIV tag, see above.
      * @return string The formatted tag element
@@ -1027,7 +964,6 @@ class HtmlHelper extends Helper
         } else {
             $tag = 'tag';
         }
-
         return $this->formatTemplate($tag, [
             'attrs' => $this->templater()->formatAttributes($options),
             'tag' => $name,
@@ -1042,8 +978,8 @@ class HtmlHelper extends Helper
      *
      * - `escape` Whether or not the contents should be html_entity escaped.
      *
-     * @param string|null $class CSS class name of the div element.
-     * @param string|null $text String content that will appear inside the div element.
+     * @param string $class CSS class name of the div element.
+     * @param string $text String content that will appear inside the div element.
      *   If null, only a start tag will be printed
      * @param array $options Additional HTML attributes of the DIV tag
      * @return string The formatted DIV element
@@ -1053,7 +989,6 @@ class HtmlHelper extends Helper
         if (!empty($class)) {
             $options['class'] = $class;
         }
-
         return $this->tag('div', $text, $options);
     }
 
@@ -1081,7 +1016,6 @@ class HtmlHelper extends Helper
         if ($text === null) {
             $tag = 'parastart';
         }
-
         return $this->formatTemplate($tag, [
             'attrs' => $this->templater()->formatAttributes($options),
             'content' => $text,
@@ -1210,7 +1144,6 @@ class HtmlHelper extends Helper
             'pathPrefix' => null,
             'text' => null
         ]);
-
         return $this->tag($tag, $text, $options);
     }
 
@@ -1236,7 +1169,6 @@ class HtmlHelper extends Helper
     {
         $options += ['tag' => 'ul'];
         $items = $this->_nestedListItem($list, $options, $itemOptions);
-
         return $this->formatTemplate($options['tag'], [
             'attrs' => $this->templater()->formatAttributes($options, ['tag']),
             'content' => $items
@@ -1250,7 +1182,7 @@ class HtmlHelper extends Helper
      * @param array $options Additional HTML attributes of the list (ol/ul) tag.
      * @param array $itemOptions Options and additional HTML attributes of the list item (LI) tag.
      * @return string The nested list element
-     * @see \Cake\View\Helper\HtmlHelper::nestedList()
+     * @see HtmlHelper::nestedList()
      */
     protected function _nestedListItem($items, $options, $itemOptions)
     {
@@ -1272,7 +1204,6 @@ class HtmlHelper extends Helper
             ]);
             $index++;
         }
-
         return $out;
     }
 

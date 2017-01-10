@@ -56,7 +56,6 @@ class CompletionShell extends Shell
     public function commands()
     {
         $options = $this->Command->commands();
-
         return $this->_output($options);
     }
 
@@ -91,7 +90,6 @@ class CompletionShell extends Shell
         }
 
         $options = $this->Command->subCommands($this->args[0]);
-
         return $this->_output($options);
     }
 

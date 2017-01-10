@@ -15,6 +15,7 @@
 namespace Cake\Datasource;
 
 use Cake\Datasource\Exception\MissingModelException;
+use InvalidArgumentException;
 use UnexpectedValueException;
 
 /**
@@ -40,7 +41,7 @@ trait ModelAwareTrait
     public $modelClass;
 
     /**
-     * A list of overridden model factory functions.
+     * A list of model factory functions.
      *
      * @var array
      */
@@ -79,7 +80,7 @@ trait ModelAwareTrait
      *
      * @param string|null $modelClass Name of model class to load. Defaults to $this->modelClass
      * @param string|null $modelType The type of repository to load. Defaults to the modelType() value.
-     * @return \Cake\Datasource\RepositoryInterface The model instance created.
+     * @return object The model instance created.
      * @throws \Cake\Datasource\Exception\MissingModelException If the model class cannot be found.
      * @throws \InvalidArgumentException When using a type that has not been registered.
      * @throws \UnexpectedValueException If no model type has been defined
@@ -103,22 +104,22 @@ trait ModelAwareTrait
             return $this->{$alias};
         }
 
-        if (isset($this->_modelFactories[$modelType])) {
-            $factory = $this->_modelFactories[$modelType];
+        if (!isset($this->_modelFactories[$modelType])) {
+            throw new InvalidArgumentException(sprintf(
+                'Unknown repository type "%s". Make sure you register a type before trying to use it.',
+                $modelType
+            ));
         }
-        if (!isset($factory)) {
-            $factory = FactoryLocator::get($modelType);
-        }
+        $factory = $this->_modelFactories[$modelType];
         $this->{$alias} = $factory($modelClass);
         if (!$this->{$alias}) {
             throw new MissingModelException([$modelClass, $modelType]);
         }
-
         return $this->{$alias};
     }
 
     /**
-     * Override a existing callable to generate repositories of a given type.
+     * Register a callable to generate repositories of a given type.
      *
      * @param string $type The name of the repository type the factory function is for.
      * @param callable $factory The factory function used to create instances.

@@ -301,7 +301,6 @@ class SmtpTransport extends AbstractTransport
         if (empty($from)) {
             $from = $email->from();
         }
-
         return $from;
     }
 
@@ -316,7 +315,6 @@ class SmtpTransport extends AbstractTransport
         $to = $email->to();
         $cc = $email->cc();
         $bcc = $email->bcc();
-
         return array_merge(array_keys($to), array_keys($cc), array_keys($bcc));
     }
 
@@ -348,7 +346,6 @@ class SmtpTransport extends AbstractTransport
                 $messages[] = $line;
             }
         }
-
         return implode("\r\n", $messages);
     }
 
@@ -447,7 +444,6 @@ class SmtpTransport extends AbstractTransport
                 if ($code[2] === '-') {
                     continue;
                 }
-
                 return $code[1];
             }
             throw new SocketException(sprintf('SMTP Error: %s', $response));

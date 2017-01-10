@@ -129,7 +129,7 @@ class Log
     /**
      * LogEngineRegistry class
      *
-     * @var \Cake\Log\LogEngineRegistry
+     * @var LogEngineRegistry
      */
     protected static $_registry;
 

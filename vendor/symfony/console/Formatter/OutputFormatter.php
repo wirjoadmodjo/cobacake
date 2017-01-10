@@ -33,15 +33,7 @@ class OutputFormatter implements OutputFormatterInterface
      */
     public static function escape($text)
     {
-        $text = preg_replace('/([^\\\\]?)</', '$1\\<', $text);
-
-        if ('\\' === substr($text, -1)) {
-            $len = strlen($text);
-            $text = rtrim($text, '\\');
-            $text .= str_repeat('<<', $len - strlen($text));
-        }
-
-        return $text;
+        return preg_replace('/([^\\\\]?)</', '$1\\<', $text);
     }
 
     /**
@@ -139,7 +131,7 @@ class OutputFormatter implements OutputFormatterInterface
         $message = (string) $message;
         $offset = 0;
         $output = '';
-        $tagRegex = '[a-z][a-z0-9,_=;-]*+';
+        $tagRegex = '[a-z][a-z0-9_=;-]*';
         preg_match_all("#<(($tagRegex) | /($tagRegex)?)>#ix", $message, $matches, PREG_OFFSET_CAPTURE);
         foreach ($matches[0] as $i => $match) {
             $pos = $match[1];
@@ -174,10 +166,6 @@ class OutputFormatter implements OutputFormatterInterface
 
         $output .= $this->applyCurrentStyle(substr($message, $offset));
 
-        if (false !== strpos($output, '<<')) {
-            return strtr($output, array('\\<' => '<', '<<' => '\\'));
-        }
-
         return str_replace('\\<', '<', $output);
     }
 
@@ -202,7 +190,7 @@ class OutputFormatter implements OutputFormatterInterface
             return $this->styles[$string];
         }
 
-        if (!preg_match_all('/([^=]+)=([^;]+)(;|$)/', $string, $matches, PREG_SET_ORDER)) {
+        if (!preg_match_all('/([^=]+)=([^;]+)(;|$)/', strtolower($string), $matches, PREG_SET_ORDER)) {
             return false;
         }
 
@@ -214,20 +202,12 @@ class OutputFormatter implements OutputFormatterInterface
                 $style->setForeground($match[1]);
             } elseif ('bg' == $match[0]) {
                 $style->setBackground($match[1]);
-            } elseif ('options' === $match[0]) {
-                preg_match_all('([^,;]+)', $match[1], $options);
-                $options = array_shift($options);
-                foreach ($options as $option) {
-                    try {
-                        $style->setOption($option);
-                    } catch (\InvalidArgumentException $e) {
-                        @trigger_error(sprintf('Unknown style options are deprecated since version 3.2 and will be removed in 4.0. Exception "%s".', $e->getMessage()), E_USER_DEPRECATED);
-
-                        return false;
-                    }
-                }
             } else {
-                return false;
+                try {
+                    $style->setOption($match[1]);
+                } catch (\InvalidArgumentException $e) {
+                    return false;
+                }
             }
         }
 

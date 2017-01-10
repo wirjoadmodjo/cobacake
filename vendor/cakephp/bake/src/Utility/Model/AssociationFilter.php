@@ -36,7 +36,6 @@ class AssociationFilter
     public function filterHasManyAssociationsAliases(Table $table, array $aliases)
     {
         $belongsToManyJunctionsAliases = $this->belongsToManyJunctionAliases($table);
-
         return array_values(array_diff($aliases, $belongsToManyJunctionsAliases));
     }
 
@@ -51,7 +50,6 @@ class AssociationFilter
         $extractor = function ($val) {
             return $val->junction()->alias();
         };
-
         return array_map($extractor, $table->associations()->type('BelongsToMany'));
     }
 
@@ -108,7 +106,6 @@ class AssociationFilter
                 }
             }
         }
-
         return $associations;
     }
 }

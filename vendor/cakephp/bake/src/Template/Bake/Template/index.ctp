@@ -17,18 +17,14 @@ use Cake\Utility\Inflector;
 $fields = collection($fields)
     ->filter(function($field) use ($schema) {
         return !in_array($schema->columnType($field), ['binary', 'text']);
-    });
+    })
+    ->take(7);
 
 if (isset($modelObject) && $modelObject->behaviors()->has('Tree')) {
     $fields = $fields->reject(function ($field) {
         return $field === 'lft' || $field === 'rght';
     });
 }
-
-if (!empty($indexColumns)) {
-    $fields = $fields->take($indexColumns);
-}
-
 %>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
@@ -56,9 +52,9 @@ if (!empty($indexColumns)) {
         <thead>
             <tr>
 <% foreach ($fields as $field): %>
-                <th scope="col"><?= $this->Paginator->sort('<%= $field %>') ?></th>
+                <th><?= $this->Paginator->sort('<%= $field %>') ?></th>
 <% endforeach; %>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -103,12 +99,10 @@ if (!empty($indexColumns)) {
     </table>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
             <?= $this->Paginator->numbers() ?>
             <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+        <p><?= $this->Paginator->counter() ?></p>
     </div>
 </div>

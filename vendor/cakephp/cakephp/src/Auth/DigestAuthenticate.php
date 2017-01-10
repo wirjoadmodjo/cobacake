@@ -119,7 +119,6 @@ class DigestAuthenticate extends BasicAuthenticate
         if ($digest['response'] === $hash) {
             return $user;
         }
-
         return false;
     }
 
@@ -141,7 +140,6 @@ class DigestAuthenticate extends BasicAuthenticate
         if (empty($digest)) {
             return false;
         }
-
         return $this->parseAuthData($digest);
     }
 
@@ -168,7 +166,6 @@ class DigestAuthenticate extends BasicAuthenticate
         if (empty($req)) {
             return $keys;
         }
-
         return null;
     }
 
@@ -223,7 +220,6 @@ class DigestAuthenticate extends BasicAuthenticate
         foreach ($options as $k => $v) {
             $opts[] = sprintf('%s="%s"', $k, $v);
         }
-
         return 'WWW-Authenticate: Digest ' . implode(',', $opts);
     }
 }

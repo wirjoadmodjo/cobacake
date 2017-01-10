@@ -40,7 +40,7 @@ class ComponentRegistry extends ObjectRegistry implements EventDispatcherInterfa
     /**
      * Constructor.
      *
-     * @param \Cake\Controller\Controller|null $controller Controller instance.
+     * @param \Cake\Controller\Controller $controller Controller instance.
      */
     public function __construct(Controller $controller = null)
     {
@@ -52,7 +52,7 @@ class ComponentRegistry extends ObjectRegistry implements EventDispatcherInterfa
     /**
      * Get the controller associated with the collection.
      *
-     * @return \Cake\Controller\Controller Controller instance
+     * @return Controller Controller instance
      */
     public function getController()
     {
@@ -120,7 +120,6 @@ class ComponentRegistry extends ObjectRegistry implements EventDispatcherInterfa
         if ($enable) {
             $this->eventManager()->on($instance);
         }
-
         return $instance;
     }
 }

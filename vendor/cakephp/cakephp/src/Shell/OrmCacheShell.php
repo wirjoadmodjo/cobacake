@@ -51,7 +51,6 @@ class OrmCacheShell extends Shell
             $schema->describe($table, ['forceRefresh' => true]);
         }
         $this->out('<success>Cache build complete</success>');
-
         return true;
     }
 
@@ -83,7 +82,6 @@ class OrmCacheShell extends Shell
             Cache::delete($key, $configName);
         }
         $this->out('<success>Cache clear complete</success>');
-
         return true;
     }
 
@@ -102,7 +100,6 @@ class OrmCacheShell extends Shell
                 $this->params['connection']
             );
             $this->error($msg);
-
             return false;
         }
         $config = $source->config();
@@ -110,7 +107,6 @@ class OrmCacheShell extends Shell
             $this->_io->verbose('Metadata cache was disabled in config. Enabling to clear cache.');
             $source->cacheMetadata(true);
         }
-
         return $source->schemaCollection();
     }
 

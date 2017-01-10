@@ -57,10 +57,8 @@ trait ExternalAssociationTrait
             if ($this->_foreignKey === null) {
                 $this->_foreignKey = $this->_modelKey($this->source()->table());
             }
-
             return $this->_foreignKey;
         }
-
         return parent::foreignKey($key);
     }
 
@@ -76,7 +74,6 @@ trait ExternalAssociationTrait
         if ($sort !== null) {
             $this->_sort = $sort;
         }
-
         return $this->_sort;
     }
 
@@ -89,7 +86,6 @@ trait ExternalAssociationTrait
         if (isset($row[$sourceAlias])) {
             $row[$sourceAlias][$this->property()] = $joined ? null : [];
         }
-
         return $row;
     }
 
@@ -120,7 +116,6 @@ trait ExternalAssociationTrait
             }
             $resultMap[implode(';', $values)][] = $result;
         }
-
         return $resultMap;
     }
 

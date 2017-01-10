@@ -79,7 +79,6 @@ class BasicAuthenticate extends BaseAuthenticate
         if (!is_string($username) || $username === '' || !is_string($pass) || $pass === '') {
             return false;
         }
-
         return $this->_findUser($username, $pass);
     }
 
@@ -107,7 +106,6 @@ class BasicAuthenticate extends BaseAuthenticate
     public function loginHeaders(Request $request)
     {
         $realm = $this->config('realm') ?: $request->env('SERVER_NAME');
-
         return sprintf('WWW-Authenticate: Basic realm="%s"', $realm);
     }
 }

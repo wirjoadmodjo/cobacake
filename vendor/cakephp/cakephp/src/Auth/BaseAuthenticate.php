@@ -22,6 +22,7 @@ use Cake\ORM\TableRegistry;
 
 /**
  * Base Authentication class with common methods and properties.
+ *
  */
 abstract class BaseAuthenticate implements EventListenerInterface
 {
@@ -34,9 +35,6 @@ abstract class BaseAuthenticate implements EventListenerInterface
      * - `fields` The fields to use to identify a user by.
      * - `userModel` The alias for users table, defaults to Users.
      * - `finder` The finder method to use to fetch user record. Defaults to 'all'.
-     *   You can set finder name as string or an array where key is finder name and value
-     *   is an array passed to `Table::find()` options.
-     *   E.g. ['finderName' => ['some_finder_option' => 'some_value']]
      * - `passwordHasher` Password hasher class. Can be a string specifying class name
      *    or an array containing `className` key, any other keys will be passed as
      *    config to the class. Defaults to 'Default'.
@@ -60,14 +58,14 @@ abstract class BaseAuthenticate implements EventListenerInterface
     /**
      * A Component registry, used to get more components.
      *
-     * @var \Cake\Controller\ComponentRegistry
+     * @var ComponentRegistry
      */
     protected $_registry;
 
     /**
      * Password hasher instance.
      *
-     * @var \Cake\Auth\AbstractPasswordHasher
+     * @var AbstractPasswordHasher
      */
     protected $_passwordHasher;
 
@@ -146,17 +144,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
             $options['contain'] = $config['contain'];
         }
 
-        $finder = $config['finder'];
-        if (is_array($finder)) {
-            $options += current($finder);
-            $finder = key($finder);
-        }
-
-        if (!isset($options['username'])) {
-            $options['username'] = $username;
-        }
-
-        $query = $table->find($finder, $options);
+        $query = $table->find($config['finder'], $options);
 
         return $query;
     }
@@ -164,7 +152,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
     /**
      * Return password hasher object
      *
-     * @return \Cake\Auth\AbstractPasswordHasher Password hasher instance
+     * @return AbstractPasswordHasher Password hasher instance
      * @throws \RuntimeException If password hasher class not found or
      *   it does not extend AbstractPasswordHasher
      */
@@ -175,7 +163,6 @@ abstract class BaseAuthenticate implements EventListenerInterface
         }
 
         $passwordHasher = $this->_config['passwordHasher'];
-
         return $this->_passwordHasher = PasswordHasherFactory::build($passwordHasher);
     }
 

@@ -20,7 +20,7 @@ use Cake\Error\Debugger;
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        Error: <?= h($this->fetch('title')) ?>
+        Error: <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
     <style>
@@ -137,7 +137,6 @@ use Cake\Error\Debugger;
     }
     .stack-file {
         font-size: 0.9em;
-        word-wrap: break-word;
     }
 
     .stack-details {
@@ -202,12 +201,12 @@ use Cake\Error\Debugger;
 <body>
     <header>
         <h1 class="header-title">
-            <?= h($this->fetch('title')) ?>
+            <?= $this->fetch('title') ?>
             <span class="header-type"><?= get_class($error) ?></span>
         </h1>
         <div class="header-help">
             <a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a>
-            <a target="_blank" href="http://api.cakephp.org/">API</a>
+            <a target="_blank" href="http://api.cakephp.org/3.0/">API</a>
         </div>
     </header>
 
@@ -227,7 +226,7 @@ use Cake\Error\Debugger;
         <?php if ($this->fetch('templateName')): ?>
         <p class="customize">
             If you want to customize this error message, create
-            <em><?= APP_DIR . DIRECTORY_SEPARATOR . 'Template' . DIRECTORY_SEPARATOR . 'Error' . DIRECTORY_SEPARATOR . $this->fetch('templateName') ?></em>
+            <em><?= APP_DIR . DS . 'Template' . DS . 'Error' . DS . $this->fetch('templateName') ?></em>
         </p>
         <?php endif; ?>
     </div>

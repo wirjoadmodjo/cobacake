@@ -21,6 +21,7 @@ use DirectoryIterator;
 
 /**
  * Shell for I18N management.
+ *
  */
 class I18nShell extends Shell
 {
@@ -59,7 +60,6 @@ class I18nShell extends Shell
                 break;
             case 'q':
                 $this->_stop();
-
                 return;
             default:
                 $this->out('You have made an invalid selection. Please choose a command to execute by entering E, I, H, or Q.');
@@ -89,9 +89,9 @@ class I18nShell extends Shell
             $this->_paths = [Plugin::classPath($plugin)];
         }
 
-        $response = $this->in('What folder?', null, rtrim($this->_paths[0], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'Locale');
-        $sourceFolder = rtrim($response, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-        $targetFolder = $sourceFolder . $language . DIRECTORY_SEPARATOR;
+        $response = $this->in('What folder?', null, rtrim($this->_paths[0], DS) . DS . 'Locale');
+        $sourceFolder = rtrim($response, DS) . DS;
+        $targetFolder = $sourceFolder . $language . DS;
         if (!is_dir($targetFolder)) {
             mkdir($targetFolder, 0775, true);
         }

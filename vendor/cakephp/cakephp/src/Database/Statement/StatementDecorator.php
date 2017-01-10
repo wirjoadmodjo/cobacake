@@ -168,7 +168,6 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
     public function execute($params = null)
     {
         $this->_hasExecuted = true;
-
         return $this->_statement->execute($params);
     }
 
@@ -251,7 +250,6 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
         if (!$this->_hasExecuted) {
             $this->execute();
         }
-
         return $this->_statement;
     }
 
@@ -309,7 +307,6 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
         if (isset($row[$column])) {
             return $row[$column];
         }
-
         return $this->_driver->lastInsertId($table, $column);
     }
 

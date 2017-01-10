@@ -14,11 +14,12 @@
  */
 namespace Cake\Cache\Engine;
 
-use APCUIterator;
+use APCIterator;
 use Cake\Cache\CacheEngine;
 
 /**
  * APC storage engine for cache
+ *
  */
 class ApcEngine extends CacheEngine
 {
@@ -41,12 +42,11 @@ class ApcEngine extends CacheEngine
      */
     public function init(array $config = [])
     {
-        if (!extension_loaded('apcu')) {
+        if (!extension_loaded('apc')) {
             return false;
         }
 
         parent::init($config);
-
         return true;
     }
 
@@ -66,9 +66,8 @@ class ApcEngine extends CacheEngine
         if ($duration) {
             $expires = time() + $duration;
         }
-        apcu_store($key . '_expires', $expires, $duration);
-
-        return apcu_store($key, $value, $duration);
+        apc_store($key . '_expires', $expires, $duration);
+        return apc_store($key, $value, $duration);
     }
 
     /**
@@ -83,12 +82,11 @@ class ApcEngine extends CacheEngine
         $key = $this->_key($key);
 
         $time = time();
-        $cachetime = (int)apcu_fetch($key . '_expires');
+        $cachetime = (int)apc_fetch($key . '_expires');
         if ($cachetime !== 0 && ($cachetime < $time || ($time + $this->_config['duration']) < $cachetime)) {
             return false;
         }
-
-        return apcu_fetch($key);
+        return apc_fetch($key);
     }
 
     /**
@@ -102,7 +100,7 @@ class ApcEngine extends CacheEngine
     {
         $key = $this->_key($key);
 
-        return apcu_inc($key, $offset);
+        return apc_inc($key, $offset);
     }
 
     /**
@@ -116,7 +114,7 @@ class ApcEngine extends CacheEngine
     {
         $key = $this->_key($key);
 
-        return apcu_dec($key, $offset);
+        return apc_dec($key, $offset);
     }
 
     /**
@@ -129,7 +127,7 @@ class ApcEngine extends CacheEngine
     {
         $key = $this->_key($key);
 
-        return apcu_delete($key);
+        return apc_delete($key);
     }
 
     /**
@@ -144,22 +142,21 @@ class ApcEngine extends CacheEngine
         if ($check) {
             return true;
         }
-        if (class_exists('APCUIterator', false)) {
-            $iterator = new APCUIterator(
+        if (class_exists('APCIterator', false)) {
+            $iterator = new APCIterator(
+                'user',
                 '/^' . preg_quote($this->_config['prefix'], '/') . '/',
                 APC_ITER_NONE
             );
-            apcu_delete($iterator);
-
+            apc_delete($iterator);
             return true;
         }
-        $cache = apcu_cache_info();
+        $cache = apc_cache_info('user');
         foreach ($cache['cache_list'] as $key) {
             if (strpos($key['info'], $this->_config['prefix']) === 0) {
-                apcu_delete($key['info']);
+                apc_delete($key['info']);
             }
         }
-
         return true;
     }
 
@@ -181,9 +178,8 @@ class ApcEngine extends CacheEngine
         if ($duration) {
             $expires = time() + $duration;
         }
-        apcu_add($key . '_expires', $expires, $duration);
-
-        return apcu_add($key, $value, $duration);
+        apc_add($key . '_expires', $expires, $duration);
+        return apc_add($key, $value, $duration);
     }
 
     /**
@@ -201,11 +197,11 @@ class ApcEngine extends CacheEngine
             }
         }
 
-        $groups = apcu_fetch($this->_compiledGroupNames);
+        $groups = apc_fetch($this->_compiledGroupNames);
         if (count($groups) !== count($this->_config['groups'])) {
             foreach ($this->_compiledGroupNames as $group) {
                 if (!isset($groups[$group])) {
-                    apcu_store($group, 1);
+                    apc_store($group, 1);
                     $groups[$group] = 1;
                 }
             }
@@ -217,7 +213,6 @@ class ApcEngine extends CacheEngine
         foreach ($this->_config['groups'] as $i => $group) {
             $result[] = $group . $groups[$i];
         }
-
         return $result;
     }
 
@@ -230,8 +225,7 @@ class ApcEngine extends CacheEngine
      */
     public function clearGroup($group)
     {
-        apcu_inc($this->_config['prefix'] . $group, 1, $success);
-
+        apc_inc($this->_config['prefix'] . $group, 1, $success);
         return $success;
     }
 }

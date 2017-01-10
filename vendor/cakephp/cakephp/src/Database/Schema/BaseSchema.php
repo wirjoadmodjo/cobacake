@@ -85,7 +85,6 @@ abstract class BaseSchema
         if ($clause === 'NO ACTION') {
             return Table::ACTION_NO_ACTION;
         }
-
         return Table::ACTION_SET_NULL;
     }
 
@@ -120,7 +119,6 @@ abstract class BaseSchema
             'DROP TABLE %s',
             $this->_driver->quoteIdentifier($table->name())
         );
-
         return [$sql];
     }
 

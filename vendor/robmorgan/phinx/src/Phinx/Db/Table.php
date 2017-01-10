@@ -258,7 +258,7 @@ class Table
     }
 
     /**
-     * Sets an array of foreign keys waiting to be commited.
+     * Gets an array of foreign keys waiting to be commited.
      *
      * @param ForeignKey[] $foreignKeys foreign keys
      * @return Table
@@ -280,9 +280,7 @@ class Table
     }
 
     /**
-     * Sets an array of data to be inserted.
-     *
-     * @param array $data Data
+     * @param $data array of data to be inserted
      * @return Table
      */
     public function setData($data)
@@ -292,8 +290,7 @@ class Table
     }
 
     /**
-     * Gets the data waiting to be inserted.
-     *
+     * Gets the data waiting to be inserted
      * @return array
      */
     public function getData()
@@ -555,20 +552,15 @@ class Table
     /**
      * Add timestamp columns created_at and updated_at to the table.
      *
-     * @param string $createdAtColumnName
-     * @param string $updatedAtColumnName
-     *
      * @return Table
      */
-    public function addTimestamps($createdAtColumnName = 'created_at', $updatedAtColumnName = 'updated_at')
+    public function addTimestamps()
     {
-        $createdAtColumnName = is_null($createdAtColumnName) ? 'created_at' : $createdAtColumnName;
-        $updatedAtColumnName = is_null($updatedAtColumnName) ? 'updated_at' : $updatedAtColumnName;
-        $this->addColumn($createdAtColumnName, 'timestamp', array(
+        $this->addColumn('created_at', 'timestamp', array(
                 'default' => 'CURRENT_TIMESTAMP',
                 'update' => ''
             ))
-             ->addColumn($updatedAtColumnName, 'timestamp', array(
+             ->addColumn('updated_at', 'timestamp', array(
                 'null'    => true,
                 'default' => null
              ));

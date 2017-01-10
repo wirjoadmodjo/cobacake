@@ -166,14 +166,12 @@ class CookieComponent extends Component
         if ($option === null) {
             $default = $this->_config;
             $local = isset($this->_keyConfig[$keyname]) ? $this->_keyConfig[$keyname] : [];
-
             return $local + $default;
         }
         if (!is_array($option)) {
             $option = [$option => $value];
         }
         $this->_keyConfig[$keyname] = $option;
-
         return null;
     }
 
@@ -229,7 +227,6 @@ class CookieComponent extends Component
     public function read($key = null)
     {
         $this->_load($key);
-
         return Hash::get($this->_values, $key);
     }
 
@@ -255,7 +252,7 @@ class CookieComponent extends Component
         $cookie = $this->request->cookies[$first];
         $config = $this->configKey($first);
         $this->_loaded[$first] = true;
-        $this->_values[$first] = $this->_decrypt($cookie, $config['encryption'], $config['key']);
+        $this->_values[$first] = $this->_decrypt($cookie, $config['encryption']);
     }
 
     /**
@@ -269,7 +266,6 @@ class CookieComponent extends Component
         if (empty($key)) {
             return false;
         }
-
         return $this->read($key) !== null;
     }
 
@@ -314,7 +310,7 @@ class CookieComponent extends Component
 
         $this->_response->cookie([
             'name' => $name,
-            'value' => $this->_encrypt($value, $config['encryption'], $config['key']),
+            'value' => $this->_encrypt($value, $config['encryption']),
             'expire' => $expires->format('U'),
             'path' => $config['path'],
             'domain' => $config['domain'],

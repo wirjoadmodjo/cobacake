@@ -19,8 +19,6 @@ use Cake\Network\Exception\NotFoundException;
 
 /**
  * Provides access to panel data.
- *
- * @property \DebugKit\Model\Table\RequestsTable $Requests
  */
 class RequestsController extends Controller
 {
@@ -50,9 +48,7 @@ class RequestsController extends Controller
      */
     public function beforeRender(Event $event)
     {
-        $this->viewBuilder()
-            ->layout('DebugKit.toolbar')
-            ->className('DebugKit.Ajax');
+        $this->viewBuilder()->layout('DebugKit.toolbar');
     }
 
     /**

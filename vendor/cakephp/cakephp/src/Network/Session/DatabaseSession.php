@@ -23,6 +23,7 @@ use SessionHandlerInterface;
 
 /**
  * DatabaseSession provides methods to be used with Session.
+ *
  */
 class DatabaseSession implements SessionHandlerInterface
 {
@@ -107,13 +108,7 @@ class DatabaseSession implements SessionHandlerInterface
             return $result['data'];
         }
 
-        $session = stream_get_contents($result['data']);
-
-        if ($session === false) {
-            return '';
-        }
-
-        return $session;
+        return stream_get_contents($result['data']);
     }
 
     /**
@@ -132,7 +127,6 @@ class DatabaseSession implements SessionHandlerInterface
         $record = compact('data', 'expires');
         $record[$this->_table->primaryKey()] = $id;
         $result = $this->_table->save(new Entity($record));
-
         return (bool)$result;
     }
 
@@ -144,12 +138,10 @@ class DatabaseSession implements SessionHandlerInterface
      */
     public function destroy($id)
     {
-        $this->_table->delete(new Entity(
+        return (bool)$this->_table->delete(new Entity(
             [$this->_table->primaryKey() => $id],
             ['markNew' => false]
         ));
-
-        return true;
     }
 
     /**
@@ -160,8 +152,7 @@ class DatabaseSession implements SessionHandlerInterface
      */
     public function gc($maxlifetime)
     {
-        $this->_table->deleteAll(['expires <' => time()]);
-
+        $this->_table->deleteAll(['expires <' => time() - $maxlifetime]);
         return true;
     }
 }

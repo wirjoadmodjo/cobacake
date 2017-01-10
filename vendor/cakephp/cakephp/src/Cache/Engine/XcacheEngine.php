@@ -58,12 +58,11 @@ class XcacheEngine extends CacheEngine
      */
     public function init(array $config = [])
     {
-        if (!extension_loaded('xcache')) {
+        if ((PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') || !extension_loaded('xcache')) {
             return false;
         }
 
         parent::init($config);
-
         return true;
     }
 
@@ -78,14 +77,9 @@ class XcacheEngine extends CacheEngine
     {
         $key = $this->_key($key);
 
-        if (!is_numeric($value)) {
-            $value = serialize($value);
-        }
-
         $duration = $this->_config['duration'];
         $expires = time() + $duration;
         xcache_set($key . '_expires', $expires, $duration);
-
         return xcache_set($key, $value, $duration);
     }
 
@@ -106,15 +100,8 @@ class XcacheEngine extends CacheEngine
             if ($cachetime < $time || ($time + $this->_config['duration']) < $cachetime) {
                 return false;
             }
-
-            $value = xcache_get($key);
-            if (is_string($value) && !is_numeric($value)) {
-                $value = unserialize($value);
-            }
-
-            return $value;
+            return xcache_get($key);
         }
-
         return false;
     }
 
@@ -177,7 +164,6 @@ class XcacheEngine extends CacheEngine
             xcache_clear_cache(XC_TYPE_VAR, $i);
         }
         $this->_auth(true);
-
         return true;
     }
 
@@ -199,7 +185,6 @@ class XcacheEngine extends CacheEngine
             }
             $result[] = $group . $value;
         }
-
         return $result;
     }
 

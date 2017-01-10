@@ -93,7 +93,6 @@ trait InstanceConfigTrait
 
         if (is_array($key) || func_num_args() >= 2) {
             $this->_configWrite($key, $value, $merge);
-
             return $this;
         }
 
@@ -134,7 +133,6 @@ trait InstanceConfigTrait
         }
 
         $this->_configWrite($key, $value, 'shallow');
-
         return $this;
     }
 
@@ -182,7 +180,6 @@ trait InstanceConfigTrait
     {
         if (is_string($key) && $value === null) {
             $this->_configDelete($key);
-
             return;
         }
 
@@ -193,7 +190,6 @@ trait InstanceConfigTrait
             } else {
                 $this->_config = Hash::merge($this->_config, Hash::expand($update));
             }
-
             return;
         }
 
@@ -201,13 +197,11 @@ trait InstanceConfigTrait
             foreach ($key as $k => $val) {
                 $this->_configWrite($k, $val);
             }
-
             return;
         }
 
         if (strpos($key, '.') === false) {
             $this->_config[$key] = $value;
-
             return;
         }
 
@@ -240,7 +234,6 @@ trait InstanceConfigTrait
     {
         if (strpos($key, '.') === false) {
             unset($this->_config[$key]);
-
             return;
         }
 

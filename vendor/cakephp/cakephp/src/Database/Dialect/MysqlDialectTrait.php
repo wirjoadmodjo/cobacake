@@ -62,7 +62,6 @@ trait MysqlDialectTrait
         if (!$this->_schemaDialect) {
             $this->_schemaDialect = new MysqlSchema($this);
         }
-
         return $this->_schemaDialect;
     }
 

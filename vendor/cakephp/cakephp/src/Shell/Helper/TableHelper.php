@@ -21,7 +21,6 @@ use Cake\Console\Helper;
  */
 class TableHelper extends Helper
 {
-
     /**
      * Default config for this helper.
      *
@@ -32,7 +31,6 @@ class TableHelper extends Helper
         'rowSeparator' => false,
         'headerStyle' => 'info',
     ];
-
     /**
      * Calculate the column widths
      *
@@ -43,14 +41,13 @@ class TableHelper extends Helper
     {
         $widths = [];
         foreach ($rows as $line) {
-            foreach ($line as $k => $v) {
-                $columnLength = mb_strwidth($line[$k]);
-                if ($columnLength > (isset($widths[$k]) ? $widths[$k] : 0)) {
-                    $widths[$k] = $columnLength;
+            for ($i = 0, $len = count($line); $i < $len; $i++) {
+                $columnLength = mb_strlen($line[$i]);
+                if ($columnLength > (isset($widths[$i]) ? $widths[$i] : 0)) {
+                    $widths[$i] = $columnLength;
                 }
             }
         }
-
         return $widths;
     }
 
@@ -78,15 +75,11 @@ class TableHelper extends Helper
      * @param array $options Options to be passed.
      * @return void
      */
-    protected function _render(array $row, $widths, $options = [])
+    protected function _render($row, $widths, $options = [])
     {
-        if (count($row) === 0) {
-            return;
-        }
-
         $out = '';
         foreach ($row as $i => $column) {
-            $pad = $widths[$i] - mb_strwidth($column);
+            $pad = $widths[$i] - mb_strlen($column);
             if (!empty($options['style'])) {
                 $column = $this->_addStyle($column, $options['style']);
             }
@@ -104,10 +97,6 @@ class TableHelper extends Helper
      */
     public function output($rows)
     {
-        if (!is_array($rows) || count($rows) === 0) {
-            return;
-        }
-
         $config = $this->config();
         $widths = $this->_calculateWidths($rows);
 
@@ -115,10 +104,6 @@ class TableHelper extends Helper
         if ($config['headers'] === true) {
             $this->_render(array_shift($rows), $widths, ['style' => $config['headerStyle']]);
             $this->_rowSeparator($widths);
-        }
-
-        if (!$rows) {
-            return;
         }
 
         foreach ($rows as $line) {

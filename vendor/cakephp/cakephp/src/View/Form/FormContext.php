@@ -75,19 +75,9 @@ class FormContext implements ContextInterface
     /**
      * {@inheritDoc}
      */
-    public function val($field, $options = [])
+    public function val($field)
     {
-        $options += [
-            'default' => null,
-            'schemaDefault' => true
-        ];
-
-        $val = $this->_request->data($field);
-        if ($val !== null) {
-            return $val;
-        }
-
-        return $options['default'];
+        return $this->_request->data($field);
     }
 
     /**
@@ -102,7 +92,6 @@ class FormContext implements ContextInterface
         if ($this->type($field) !== 'boolean') {
             return $validator->isEmptyAllowed($field, $this->isCreate()) === false;
         }
-
         return false;
     }
 
@@ -129,7 +118,6 @@ class FormContext implements ContextInterface
     {
         $column = (array)$this->_form->schema()->field($field);
         $whitelist = ['length' => null, 'precision' => null];
-
         return array_intersect_key($column, $whitelist);
     }
 
@@ -139,7 +127,6 @@ class FormContext implements ContextInterface
     public function hasError($field)
     {
         $errors = $this->error($field);
-
         return count($errors) > 0;
     }
 

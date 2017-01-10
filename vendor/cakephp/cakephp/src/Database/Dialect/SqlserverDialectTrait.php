@@ -82,8 +82,6 @@ trait SqlserverDialectTrait
      */
     public function _version()
     {
-        $this->connect();
-
         return $this->_connection->getAttribute(PDO::ATTR_SERVER_VERSION);
     }
 
@@ -128,7 +126,6 @@ trait SqlserverDialectTrait
             if (isset($row['_cake_page_rownum_'])) {
                 unset($row['_cake_page_rownum_']);
             }
-
             return $row;
         });
 
@@ -139,8 +136,8 @@ trait SqlserverDialectTrait
      * Returns the passed query after rewriting the DISTINCT clause, so that drivers
      * that do not support the "ON" part can provide the actual way it should be done
      *
-     * @param \Cake\Database\Query $original The query to be transformed
-     * @return \Cake\Database\Query
+     * @param Query $original The query to be transformed
+     * @return Query
      */
     protected function _transformDistinct($original)
     {
@@ -157,11 +154,10 @@ trait SqlserverDialectTrait
             ->select(function ($q) use ($distinct, $order) {
                 $over = $q->newExpr('ROW_NUMBER() OVER')
                     ->add('(PARTITION BY')
-                    ->add($q->newExpr()->add($distinct)->tieWith(','))
+                    ->add($q->newExpr()->add($distinct)->type(','))
                     ->add($order)
                     ->add(')')
-                    ->tieWith(' ');
-
+                    ->type(' ');
                 return [
                     '_cake_distinct_pivot_' => $over
                 ];
@@ -181,7 +177,6 @@ trait SqlserverDialectTrait
             if (isset($row['_cake_distinct_pivot_'])) {
                 unset($row['_cake_distinct_pivot_']);
             }
-
             return $row;
         });
 
@@ -197,7 +192,6 @@ trait SqlserverDialectTrait
     protected function _expressionTranslators()
     {
         $namespace = 'Cake\Database\Expression';
-
         return [
             $namespace . '\FunctionExpression' => '_transformFunctionExpression',
             $namespace . '\TupleComparison' => '_transformTupleComparison'
@@ -216,7 +210,7 @@ trait SqlserverDialectTrait
         switch ($expression->name()) {
             case 'CONCAT':
                 // CONCAT function is expressed as exp1 + exp2
-                $expression->name('')->tieWith(' +');
+                $expression->name('')->type(' +');
                 break;
             case 'DATEDIFF':
                 $hasDay = false;
@@ -224,7 +218,6 @@ trait SqlserverDialectTrait
                     if ($value === 'day') {
                         $hasDay = true;
                     }
-
                     return $value;
                 };
                 $expression->iterateParts($visitor);
@@ -245,7 +238,7 @@ trait SqlserverDialectTrait
                 $expression->name('GETUTCDATE');
                 break;
             case 'EXTRACT':
-                $expression->name('DATEPART')->tieWith(' ,');
+                $expression->name('DATEPART')->type(' ,');
                 break;
             case 'DATE_ADD':
                 $params = [];
@@ -257,7 +250,6 @@ trait SqlserverDialectTrait
                         $params[0] = rtrim($valueUnit[1], 's');
                         $params[1] = $valueUnit[0];
                     }
-
                     return $p;
                 };
                 $manipulator = function ($p, $key) use (&$params) {
@@ -266,7 +258,7 @@ trait SqlserverDialectTrait
 
                 $expression
                     ->name('DATEADD')
-                    ->tieWith(',')
+                    ->type(',')
                     ->iterateParts($visitor)
                     ->iterateParts($manipulator)
                     ->add([$params[2] => 'literal']);
@@ -274,20 +266,8 @@ trait SqlserverDialectTrait
             case 'DAYOFWEEK':
                 $expression
                     ->name('DATEPART')
-                    ->tieWith(' ')
+                    ->type(' ')
                     ->add(['weekday, ' => 'literal'], [], true);
-                break;
-            case 'SUBSTR':
-                $expression->name('SUBSTRING');
-                if (count($expression) < 4) {
-                    $params = [];
-                    $expression
-                        ->iterateParts(function ($p) use (&$params) {
-                            return $params[] = $p;
-                        })
-                        ->add([new FunctionExpression('LEN', [$params[0]]), ['string']]);
-                }
-
                 break;
         }
     }

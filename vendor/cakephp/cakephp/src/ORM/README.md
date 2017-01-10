@@ -1,13 +1,10 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/orm.svg?style=flat-square)](https://packagist.org/packages/cakephp/orm)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
-
 # CakePHP ORM
 
 The CakePHP ORM provides a powerful and flexible way to work with relational
 databases. Using a datamapper pattern the ORM allows you to manipulate data as
 entities allowing you to create expressive domain layers in your applications.
 
-## Database engines supported
+## Connecting to the Database
 
 The CakePHP ORM is compatible with:
 
@@ -15,9 +12,6 @@ The CakePHP ORM is compatible with:
 * Postgres 8+
 * SQLite3
 * SQLServer 2008+
-* Oracle (through a [community plugin](https://github.com/CakeDC/cakephp-oracle-driver))
-
-## Connecting to the Database
 
 The first thing you need to do when using this library is register a connection
 object.  Before performing any operations with the connection, you need to
@@ -31,8 +25,7 @@ ConnectionManager::config('default', [
 	'driver' => 'Cake\Database\Driver\Mysql',
 	'database' => 'test',
 	'username' => 'root',
-	'password' => 'secret',
-	'cacheMetadata' => false // If set to `true` you need to install the optional "cakephp/cache" package.
+	'password' => 'secret'
 ]);
 ```
 
@@ -41,7 +34,7 @@ mappers if no explicit connection is defined.
 
 ## Creating Associations
 
-In your table classes you can define the relations between your tables. CakePHP's ORM
+In your table classes you can define the relations between your tables. CakePHP's ORM 
 supports 4 association types out of the box:
 
 * belongsTo - E.g. Many articles belong to a user.

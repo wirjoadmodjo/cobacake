@@ -29,7 +29,6 @@ use Cake\Event\EventDispatcherInterface;
  */
 trait RulesAwareTrait
 {
-
     /**
      * The domain rules to be applied to entities saved by this table
      *
@@ -43,13 +42,13 @@ trait RulesAwareTrait
      *
      * @param \Cake\Datasource\EntityInterface $entity The entity to check for validity.
      * @param string $operation The operation being run. Either 'create', 'update' or 'delete'.
-     * @param \ArrayObject|array|null $options The options To be passed to the rules.
+     * @param \ArrayObject|array $options The options To be passed to the rules.
      * @return bool
      */
     public function checkRules(EntityInterface $entity, $operation = RulesChecker::CREATE, $options = null)
     {
         $rules = $this->rulesChecker();
-        $options = $options ?: new ArrayObject();
+        $options = $options ?: new ArrayObject;
         $options = is_array($options) ? new ArrayObject($options) : $options;
         $hasEvents = ($this instanceof EventDispatcherInterface);
 
@@ -75,7 +74,6 @@ trait RulesAwareTrait
                 return $event->result;
             }
         }
-
         return $result;
     }
 
@@ -97,7 +95,6 @@ trait RulesAwareTrait
         $class = defined('static::RULES_CLASS') ? static::RULES_CLASS : 'Cake\Datasource\RulesChecker';
         $this->_rulesChecker = $this->buildRules(new $class(['repository' => $this]));
         $this->dispatchEvent('Model.buildRules', ['rules' => $this->_rulesChecker]);
-
         return $this->_rulesChecker;
     }
 

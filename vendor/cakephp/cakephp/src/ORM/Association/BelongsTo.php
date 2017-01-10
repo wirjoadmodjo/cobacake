@@ -52,10 +52,8 @@ class BelongsTo extends Association
             if ($this->_foreignKey === null) {
                 $this->_foreignKey = $this->_modelKey($this->target()->alias());
             }
-
             return $this->_foreignKey;
         }
-
         return parent::foreignKey($key);
     }
 
@@ -74,15 +72,23 @@ class BelongsTo extends Association
     }
 
     /**
-     * Returns default property name based on association name.
+     * Sets the property name that should be filled with data from the target table
+     * in the source table record.
+     * If no arguments are passed, currently configured type is returned.
      *
+     * @param string|null $name The property name, use null to read the current property.
      * @return string
      */
-    protected function _propertyName()
+    public function property($name = null)
     {
-        list(, $name) = pluginSplit($this->_name);
-
-        return Inflector::underscore(Inflector::singularize($name));
+        if ($name !== null) {
+            return parent::property($name);
+        }
+        if ($name === null && !$this->_propertyName) {
+            list(, $name) = pluginSplit($this->_name);
+            $this->_propertyName = Inflector::underscore(Inflector::singularize($name));
+        }
+        return $this->_propertyName;
     }
 
     /**
@@ -119,7 +125,7 @@ class BelongsTo extends Association
      * the target table
      * @return bool|\Cake\Datasource\EntityInterface false if $entity could not be saved, otherwise it returns
      * the saved entity
-     * @see \Cake\ORM\Table::save()
+     * @see Table::save()
      */
     public function saveAssociated(EntityInterface $entity, array $options = [])
     {
@@ -139,7 +145,6 @@ class BelongsTo extends Association
             $targetEntity->extract((array)$this->bindingKey())
         );
         $entity->set($properties, ['guard' => false]);
-
         return $entity;
     }
 
@@ -161,11 +166,6 @@ class BelongsTo extends Association
         $bindingKey = (array)$this->bindingKey();
 
         if (count($foreignKey) !== count($bindingKey)) {
-            if (empty($bindingKey)) {
-                $msg = 'The "%s" table does not define a primary key. Please set one.';
-                throw new RuntimeException(sprintf($msg, $this->target()->table()));
-            }
-
             $msg = 'Cannot match provided foreignKey for "%s", got "(%s)" but expected foreign key for "(%s)"';
             throw new RuntimeException(sprintf(
                 $msg,
@@ -218,7 +218,6 @@ class BelongsTo extends Association
             }
             $resultMap[implode(';', $values)] = $result;
         }
-
         return $resultMap;
     }
 }

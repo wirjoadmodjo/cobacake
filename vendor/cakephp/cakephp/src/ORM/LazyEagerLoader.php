@@ -36,7 +36,7 @@ class LazyEagerLoader
      *
      * @param \Cake\Datasource\EntityInterface|array $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
-     * @see \Cake\ORM\Query\contain()
+     * @see Cake\ORM\Query\contain()
      * @param \Cake\ORM\Table $source The table to use for fetching the top level entities
      * @return \Cake\Datasource\EntityInterface|array
      */
@@ -54,7 +54,6 @@ class LazyEagerLoader
         $associations = array_keys($query->contain());
 
         $entities = $this->_injectResults($entities, $query, $associations, $source);
-
         return $returnSingle ? array_shift($entities) : $entities;
     }
 
@@ -62,7 +61,7 @@ class LazyEagerLoader
      * Builds a query for loading the passed list of entity objects along with the
      * associations specified in $contain.
      *
-     * @param \Cake\Collection\CollectionInterface $objects The original entities
+     * @param \Cake\Collection\CollectionInterface $objects The original entitites
      * @param array $contain The associations to be loaded
      * @param \Cake\ORM\Table $source The table to use for fetching the top level entities
      * @return \Cake\ORM\Query
@@ -90,10 +89,10 @@ class LazyEagerLoader
 
                 $types = array_intersect_key($q->defaultTypes(), array_flip($primaryKey));
                 $primaryKey = array_map([$source, 'aliasField'], $primaryKey);
-
                 return new TupleComparison($primaryKey, $keys->toList(), $types, 'IN');
             })
             ->contain($contain);
+
 
         foreach ($query->eagerLoader()->attachableAssociations($source) as $loadable) {
             $config = $loadable->config();
@@ -119,7 +118,6 @@ class LazyEagerLoader
         foreach ($associations as $assoc) {
             $map[$assoc] = $container->get($assoc)->property();
         }
-
         return $map;
     }
 

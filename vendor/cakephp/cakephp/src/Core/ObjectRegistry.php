@@ -92,7 +92,6 @@ abstract class ObjectRegistry
         }
         $instance = $this->_create($className, $name, $config);
         $this->_loaded[$name] = $instance;
-
         return $instance;
     }
 
@@ -208,7 +207,6 @@ abstract class ObjectRegistry
         if (isset($this->_loaded[$name])) {
             return $this->_loaded[$name];
         }
-
         return null;
     }
 
@@ -253,7 +251,6 @@ abstract class ObjectRegistry
             list(, $name) = pluginSplit($objectName);
             $normal[$name] = ['class' => $objectName, 'config' => $config];
         }
-
         return $normal;
     }
 
@@ -322,7 +319,6 @@ abstract class ObjectRegistry
         if (isset($properties['_loaded'])) {
             $properties['_loaded'] = array_keys($properties['_loaded']);
         }
-
         return $properties;
     }
 }

@@ -15,7 +15,7 @@
 use Cake\Utility\Inflector;
 
 $associations += ['BelongsTo' => [], 'HasOne' => [], 'HasMany' => [], 'BelongsToMany' => []];
-$immediateAssociations = $associations['BelongsTo'];
+$immediateAssociations = $associations['BelongsTo'] + $associations['HasOne'];
 $associationFields = collection($fields)
     ->map(function($field) use ($immediateAssociations) {
         foreach ($immediateAssociations as $alias => $details) {
@@ -83,29 +83,21 @@ $pk = "\$$singularVar->{$primaryKey[0]}";
             $details = $associationFields[$field];
 %>
         <tr>
-            <th scope="row"><?= __('<%= Inflector::humanize($details['property']) %>') ?></th>
+            <th><?= __('<%= Inflector::humanize($details['property']) %>') ?></th>
             <td><?= $<%= $singularVar %>->has('<%= $details['property'] %>') ? $this->Html->link($<%= $singularVar %>-><%= $details['property'] %>-><%= $details['displayField'] %>, ['controller' => '<%= $details['controller'] %>', 'action' => 'view', $<%= $singularVar %>-><%= $details['property'] %>-><%= $details['primaryKey'][0] %>]) : '' ?></td>
         </tr>
 <% else : %>
         <tr>
-            <th scope="row"><?= __('<%= Inflector::humanize($field) %>') ?></th>
+            <th><?= __('<%= Inflector::humanize($field) %>') ?></th>
             <td><?= h($<%= $singularVar %>-><%= $field %>) ?></td>
         </tr>
 <% endif; %>
 <% endforeach; %>
 <% endif; %>
-<% if ($associations['HasOne']) : %>
-    <%- foreach ($associations['HasOne'] as $alias => $details) : %>
-        <tr>
-            <th scope="row"><?= __('<%= Inflector::humanize(Inflector::singularize(Inflector::underscore($alias))) %>') ?></th>
-            <td><?= $<%= $singularVar %>->has('<%= $details['property'] %>') ? $this->Html->link($<%= $singularVar %>-><%= $details['property'] %>-><%= $details['displayField'] %>, ['controller' => '<%= $details['controller'] %>', 'action' => 'view', $<%= $singularVar %>-><%= $details['property'] %>-><%= $details['primaryKey'][0] %>]) : '' ?></td>
-        </tr>
-    <%- endforeach; %>
-<% endif; %>
 <% if ($groupedFields['number']) : %>
 <% foreach ($groupedFields['number'] as $field) : %>
         <tr>
-            <th scope="row"><?= __('<%= Inflector::humanize($field) %>') ?></th>
+            <th><?= __('<%= Inflector::humanize($field) %>') ?></th>
             <td><?= $this->Number->format($<%= $singularVar %>-><%= $field %>) ?></td>
         </tr>
 <% endforeach; %>
@@ -113,7 +105,7 @@ $pk = "\$$singularVar->{$primaryKey[0]}";
 <% if ($groupedFields['date']) : %>
 <% foreach ($groupedFields['date'] as $field) : %>
         <tr>
-            <th scope="row"><%= "<%= __('" . Inflector::humanize($field) . "') %>" %></th>
+            <th><%= "<%= __('" . Inflector::humanize($field) . "') %>" %></th>
             <td><?= h($<%= $singularVar %>-><%= $field %>) ?></td>
         </tr>
 <% endforeach; %>
@@ -121,9 +113,9 @@ $pk = "\$$singularVar->{$primaryKey[0]}";
 <% if ($groupedFields['boolean']) : %>
 <% foreach ($groupedFields['boolean'] as $field) : %>
         <tr>
-            <th scope="row"><?= __('<%= Inflector::humanize($field) %>') ?></th>
+            <th><?= __('<%= Inflector::humanize($field) %>') ?></th>
             <td><?= $<%= $singularVar %>-><%= $field %> ? __('Yes') : __('No'); ?></td>
-        </tr>
+         </tr>
 <% endforeach; %>
 <% endif; %>
     </table>
@@ -147,9 +139,9 @@ foreach ($relations as $alias => $details):
         <table cellpadding="0" cellspacing="0">
             <tr>
 <% foreach ($details['fields'] as $field): %>
-                <th scope="col"><?= __('<%= Inflector::humanize($field) %>') ?></th>
+                <th><?= __('<%= Inflector::humanize($field) %>') ?></th>
 <% endforeach; %>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($<%= $singularVar %>-><%= $details['property'] %> as $<%= $otherSingularVar %>): ?>
             <tr>
@@ -158,14 +150,14 @@ foreach ($relations as $alias => $details):
             <%- endforeach; %>
             <%- $otherPk = "\${$otherSingularVar}->{$details['primaryKey'][0]}"; %>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => '<%= $details['controller'] %>', 'action' => 'view', <%= $otherPk %>]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => '<%= $details['controller'] %>', 'action' => 'edit', <%= $otherPk %>]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => '<%= $details['controller'] %>', 'action' => 'delete', <%= $otherPk %>], ['confirm' => __('Are you sure you want to delete # {0}?', <%= $otherPk %>)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => '<%= $details['controller'] %>', 'action' => 'view', <%= $otherPk %>]) %>
+                    <?= $this->Html->link(__('Edit'), ['controller' => '<%= $details['controller'] %>', 'action' => 'edit', <%= $otherPk %>]) %>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => '<%= $details['controller'] %>', 'action' => 'delete', <%= $otherPk %>], ['confirm' => __('Are you sure you want to delete # {0}?', <%= $otherPk %>)]) %>
                 </td>
             </tr>
             <?php endforeach; ?>
         </table>
-        <?php endif; ?>
+    <?php endif; ?>
     </div>
 <% endforeach; %>
 </div>

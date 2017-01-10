@@ -14,7 +14,6 @@ namespace Symfony\Component\Console\Helper;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\StreamableInputInterface;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
@@ -53,10 +52,6 @@ class QuestionHelper extends Helper
             return $question->getDefault();
         }
 
-        if ($input instanceof StreamableInputInterface && $stream = $input->getStream()) {
-            $this->inputStream = $stream;
-        }
-
         if (!$question->getValidator()) {
             return $this->doAsk($output, $question);
         }
@@ -73,17 +68,12 @@ class QuestionHelper extends Helper
      *
      * This is mainly useful for testing purpose.
      *
-     * @deprecated since version 3.2, to be removed in 4.0. Use
-     *             StreamableInputInterface::setStream() instead.
-     *
      * @param resource $stream The input stream
      *
      * @throws InvalidArgumentException In case the stream is not a resource
      */
     public function setInputStream($stream)
     {
-        @trigger_error(sprintf('The %s() method is deprecated since version 3.2 and will be removed in 4.0. Use %s::setStream() instead.', __METHOD__, StreamableInputInterface::class), E_USER_DEPRECATED);
-
         if (!is_resource($stream)) {
             throw new InvalidArgumentException('Input stream must be a valid resource.');
         }
@@ -94,17 +84,10 @@ class QuestionHelper extends Helper
     /**
      * Returns the helper's input stream.
      *
-     * @deprecated since version 3.2, to be removed in 4.0. Use
-     *             StreamableInputInterface::getStream() instead.
-     *
      * @return resource
      */
     public function getInputStream()
     {
-        if (0 === func_num_args() || func_get_arg(0)) {
-            @trigger_error(sprintf('The %s() method is deprecated since version 3.2 and will be removed in 4.0. Use %s::getStream() instead.', __METHOD__, StreamableInputInterface::class), E_USER_DEPRECATED);
-        }
-
         return $this->inputStream;
     }
 
@@ -147,11 +130,7 @@ class QuestionHelper extends Helper
             }
 
             if (false === $ret) {
-                $ret = fgets($inputStream, 4096);
-                if (false === $ret) {
-                    throw new RuntimeException('Aborted');
-                }
-                $ret = trim($ret);
+                $ret = $this->readFromInput($inputStream);
             }
         } else {
             $ret = trim($this->autocomplete($output, $question, $inputStream));
@@ -177,12 +156,11 @@ class QuestionHelper extends Helper
         $message = $question->getQuestion();
 
         if ($question instanceof ChoiceQuestion) {
-            $maxWidth = max(array_map(array($this, 'strlen'), array_keys($question->getChoices())));
+            $width = max(array_map('strlen', array_keys($question->getChoices())));
 
             $messages = (array) $question->getQuestion();
             foreach ($question->getChoices() as $key => $value) {
-                $width = $maxWidth - $this->strlen($key);
-                $messages[] = '  [<info>'.$key.str_repeat(' ', $width).'</info>] '.$value;
+                $messages[] = sprintf("  [<info>%-${width}s</info>] %s", $key, $value);
             }
 
             $output->writeln($messages);
@@ -215,7 +193,6 @@ class QuestionHelper extends Helper
      *
      * @param OutputInterface $output
      * @param Question        $question
-     * @param resource        $inputStream
      *
      * @return string
      */
@@ -332,8 +309,7 @@ class QuestionHelper extends Helper
     /**
      * Gets a hidden response from user.
      *
-     * @param OutputInterface $output      An Output instance
-     * @param resource        $inputStream The handler resource
+     * @param OutputInterface $output An Output instance
      *
      * @return string The answer
      *
@@ -412,8 +388,6 @@ class QuestionHelper extends Helper
 
             try {
                 return call_user_func($question->getValidator(), $interviewer());
-            } catch (RuntimeException $e) {
-                throw $e;
             } catch (\Exception $error) {
             }
         }
@@ -446,6 +420,30 @@ class QuestionHelper extends Helper
         }
 
         return self::$shell;
+    }
+
+    /**
+     * Reads user input.
+     *
+     * @param resource $stream The input stream
+     *
+     * @return string User input
+     *
+     * @throws RuntimeException
+     */
+    private function readFromInput($stream)
+    {
+        if (STDIN === $stream && function_exists('readline')) {
+            $ret = readline();
+        } else {
+            $ret = fgets($stream, 4096);
+        }
+
+        if (false === $ret) {
+            throw new RuntimeException('Aborted');
+        }
+
+        return trim($ret);
     }
 
     /**

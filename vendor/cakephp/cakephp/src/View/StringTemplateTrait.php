@@ -42,7 +42,6 @@ trait StringTemplateTrait
         }
 
         $this->templater()->add($templates);
-
         return $this;
     }
 
@@ -79,7 +78,6 @@ trait StringTemplateTrait
                 }
             }
         }
-
         return $this->_templater;
     }
 }

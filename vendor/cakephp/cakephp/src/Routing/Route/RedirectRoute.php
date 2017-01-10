@@ -14,7 +14,7 @@
  */
 namespace Cake\Routing\Route;
 
-use Cake\Routing\Exception\RedirectException;
+use Cake\Network\Response;
 use Cake\Routing\Router;
 
 /**
@@ -22,8 +22,6 @@ use Cake\Routing\Router;
  * are useful when you want to have Routing layer redirects occur in your
  * application, for when URLs move.
  *
- * Redirection is signalled by an exception that halts route matching and
- * defines the redirect URL and status code.
  */
 class RedirectRoute extends Route
 {
@@ -32,7 +30,6 @@ class RedirectRoute extends Route
      * A Response object
      *
      * @var \Cake\Network\Response
-     * @deprecated 3.2.0 This property is unused.
      */
     public $response = null;
 
@@ -64,16 +61,16 @@ class RedirectRoute extends Route
      * redirection.
      *
      * @param string $url The URL to parse.
-     * @param string $method The HTTP method being used.
-     * @return false|null False on failure. An exception is raised on a successful match.
-     * @throws \Cake\Routing\Exception\RedirectException An exception is raised on successful match.
-     *   This is used to halt route matching and signal to the middleware that a redirect should happen.
+     * @return false|null False on failure, null otherwise.
      */
-    public function parse($url, $method = '')
+    public function parse($url)
     {
-        $params = parent::parse($url, $method);
+        $params = parent::parse($url);
         if (!$params) {
             return false;
+        }
+        if (!$this->response) {
+            $this->response = new Response();
         }
         $redirect = $this->redirect;
         if (count($this->redirect) === 1 && !isset($this->redirect['controller'])) {
@@ -94,7 +91,12 @@ class RedirectRoute extends Route
         if (isset($this->options['status']) && ($this->options['status'] >= 300 && $this->options['status'] < 400)) {
             $status = $this->options['status'];
         }
-        throw new RedirectException(Router::url($redirect, true), $status);
+        $this->response->header([
+            'Location' => Router::url($redirect, true)
+        ]);
+        $this->response->statusCode($status);
+        $this->response->send();
+        $this->response->stop();
     }
 
     /**

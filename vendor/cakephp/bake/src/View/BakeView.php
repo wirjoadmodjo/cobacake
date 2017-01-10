@@ -33,21 +33,17 @@ class BakeView extends View
      *
      * This config is read when evaluating a template file.
      *
-     * - `phpTagReplacements` are applied to the contents of a bake template, to allow php tags
-     *   to be treated as plain text
-     * - `replacements` are applied in order on the template contents before the template is evaluated.
+     * phpTagReplacements are applied to the contents of a bake template, to allow php tags
+     * to be treated as plain text
      *
-     * The default replacements are (in the following order):
-     *
-     * - swallow leading whitespace for <%- tags
-     * - swallow trailing whitespace for -%> tags
-     * - Add an extra newline to <%=, to counteract php automatically removing a newline
-     * - Replace remaining <=% with php short echo tags
-     * - Replace <% with php open tags
-     * - Replace %> with php close tags
-     *
-     * Replacements that start with `/` will be treated as regex replacements.
-     * All other values will be treated used with str_replace()
+     * replacements are applied in order on the template contents before the template is evaluated
+     * In order these:
+     *     swallow leading whitespace for <%- tags
+     *     swallow trailing whitespace for -%> tags
+     *     Add an extra newline to <%=, to counteract php automatically removing a newline
+     *     Replace remaining <=% with php short echo tags
+     *     Replace <% with php open tags
+     *     Replace %> with php close tags
      *
      * @var array
      */
@@ -57,8 +53,8 @@ class BakeView extends View
             '?>' => "CakePHPBakeCloseTag>"
         ],
         'replacements' => [
-            '/\n[ \t]+<%-( |$)/' => "\n<% ",
-            '/-%>/' => "?>",
+            '/\n[ \t]+<%- /' => "\n<% ",
+            '/-%>[ \t]+\n/' => "%>\n",
             '/<%=(.*)\%>\n(.)/' => "<%=$1%>\n\n$2",
             '<%=' => '<?=',
             '<%' => '<?php',
@@ -134,7 +130,7 @@ class BakeView extends View
             explode('Template' . DS . 'Bake' . DS, $viewFileName)[1]
         );
 
-        $this->_currentType = static::TYPE_TEMPLATE;
+        $this->_currentType = static::TYPE_VIEW;
         $this->dispatchEvent('View.beforeRender', [$viewFileName]);
         $this->dispatchEvent('View.beforeRender.' . $templateEventName, [$viewFileName]);
         $this->Blocks->set('content', $this->_render($viewFileName));
@@ -168,7 +164,6 @@ class BakeView extends View
     public function dispatchEvent($name, $data = null, $subject = null)
     {
         $name = preg_replace('/^View\./', 'Bake.', $name);
-
         return parent::dispatchEvent($name, $data, $subject);
     }
 
@@ -206,7 +201,6 @@ class BakeView extends View
         $content = ob_get_clean();
 
         $unPhp = $this->config('phpTagReplacements');
-
         return str_replace(array_values($unPhp), array_keys($unPhp), $content);
     }
 
@@ -234,7 +228,6 @@ class BakeView extends View
         foreach ($paths as &$path) {
             $path .= 'Bake' . DS;
         }
-
         return $paths;
     }
 
@@ -248,6 +241,10 @@ class BakeView extends View
      */
     protected function _isRegex($maybeRegex)
     {
-        return substr($maybeRegex, 0, 1) === '/';
+        // @codingStandardsIgnoreStart
+        $isRegex = @preg_match($maybeRegex, '');
+        // @codingStandardsIgnoreEnd
+
+        return $isRegex !== false;
     }
 }

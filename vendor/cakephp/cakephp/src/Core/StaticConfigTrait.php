@@ -73,7 +73,7 @@ trait StaticConfigTrait
      * ```
      *
      * @param string|array $key The name of the configuration, or an array of multiple configs.
-     * @param array|null $config An array of name => configuration data for adapter.
+     * @param array $config An array of name => configuration data for adapter.
      * @return array|null Null when adding configuration or an array of configuration data when reading.
      * @throws \BadMethodCallException When trying to modify an existing config.
      */
@@ -89,7 +89,6 @@ trait StaticConfigTrait
                 foreach ($key as $name => $settings) {
                     static::config($name, $settings);
                 }
-
                 return;
             }
         }
@@ -136,7 +135,6 @@ trait StaticConfigTrait
             static::$_registry->unload($config);
         }
         unset(static::$_config[$config]);
-
         return true;
     }
 
@@ -257,7 +255,6 @@ trait StaticConfigTrait
         if ($map !== null) {
             static::$_dsnClassMap = $map + static::$_dsnClassMap;
         }
-
         return static::$_dsnClassMap;
     }
 }

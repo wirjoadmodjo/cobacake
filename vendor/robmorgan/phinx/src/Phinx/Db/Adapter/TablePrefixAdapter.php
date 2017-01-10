@@ -32,6 +32,7 @@ use Phinx\Db\Table;
 use Phinx\Db\Table\Column;
 use Phinx\Db\Table\Index;
 use Phinx\Db\Table\ForeignKey;
+use Phinx\Migration\MigrationInterface;
 
 /**
  * Table prefix/suffix adapter.
@@ -228,17 +229,6 @@ class TablePrefixAdapter extends AdapterWrapper
         return parent::dropForeignKey($adapterTableName, $columns, $constraint);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function insert(Table $table, $row)
-    {
-        $adapterTable = clone $table;
-        $adapterTableName = $this->getAdapterTableName($table->getName());
-        $adapterTable->setName($adapterTableName);
-        return parent::insert($adapterTable, $row);
-    }
-    
     /**
      * Gets the table prefix.
      *

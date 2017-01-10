@@ -138,7 +138,6 @@ class MessagesFileLoader
 
         $messages = (new $class)->parse($file);
         $package->setMessages($messages);
-
         return $package;
     }
 
@@ -160,21 +159,21 @@ class MessagesFileLoader
         $searchPaths = [];
 
         $localePaths = App::path('Locale');
-        if (empty($localePaths) && defined('APP')) {
-            $localePaths[] = APP . 'Locale' . DIRECTORY_SEPARATOR;
+        if (empty($localePaths)) {
+            $localePaths[] = APP . 'Locale' . DS;
         }
         foreach ($localePaths as $path) {
             foreach ($folders as $folder) {
-                $searchPaths[] = $path . $folder . DIRECTORY_SEPARATOR;
+                $searchPaths[] = $path . $folder . DS;
             }
         }
 
         // If space is not added after slash, the character after it remains lowercased
         $pluginName = Inflector::camelize(str_replace('/', '/ ', $this->_name));
         if (Plugin::loaded($pluginName)) {
-            $basePath = Plugin::classPath($pluginName) . 'Locale' . DIRECTORY_SEPARATOR;
+            $basePath = Plugin::classPath($pluginName) . 'Locale' . DS;
             foreach ($folders as $folder) {
-                $searchPaths[] = $basePath . $folder . DIRECTORY_SEPARATOR;
+                $searchPaths[] = $basePath . $folder . DS;
             }
         }
 

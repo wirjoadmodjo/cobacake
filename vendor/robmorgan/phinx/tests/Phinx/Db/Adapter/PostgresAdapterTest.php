@@ -2,7 +2,6 @@
 
 namespace Test\Phinx\Db\Adapter;
 
-use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Phinx\Db\Adapter\PostgresAdapter;
 
@@ -47,7 +46,7 @@ class PostgresAdapterTest extends \PHPUnit_Framework_TestCase
             'port' => TESTS_PHINX_DB_ADAPTER_POSTGRES_PORT,
             'schema' => TESTS_PHINX_DB_ADAPTER_POSTGRES_DATABASE_SCHEMA
         );
-        $this->adapter = new PostgresAdapter($options, new ArrayInput([]), new NullOutput());
+        $this->adapter = new PostgresAdapter($options, new NullOutput());
 
         $this->adapter->dropAllSchemas();
         $this->adapter->createSchema($options['schema']);
@@ -88,7 +87,7 @@ class PostgresAdapterTest extends \PHPUnit_Framework_TestCase
         );
 
         try {
-            $adapter = new PostgresAdapter($options, new ArrayInput([]), new NullOutput());
+            $adapter = new PostgresAdapter($options, new NullOutput());
             $adapter->connect();
             $this->fail('Expected the adapter to throw an exception');
         } catch (\InvalidArgumentException $e) {
@@ -683,25 +682,6 @@ class PostgresAdapterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('uuid', $this->adapter->getPhinxType('uuid'));
 
-    }
-
-    public function testCreateTableWithComment()
-    {
-        $tableComment = 'Table comment';
-        $table = new \Phinx\Db\Table('ntable', ['comment' => $tableComment], $this->adapter);
-        $table->addColumn('realname', 'string')
-              ->save();
-        $this->assertTrue($this->adapter->hasTable('ntable'));
-        $this->assertTrue($this->adapter->hasColumn('ntable', 'id'));
-        $this->assertTrue($this->adapter->hasColumn('ntable', 'realname'));
-        $this->assertFalse($this->adapter->hasColumn('ntable', 'address'));
-
-        $rows = $this->adapter->fetchAll(sprintf(
-            "SELECT description FROM pg_description JOIN pg_class ON pg_description.objoid = pg_class.oid WHERE relname = '%s'",
-            'ntable'
-        ));
-
-        $this->assertEquals($tableComment, $rows[0]['description'], 'Dont set table comment correctly');
     }
 
     public function testCanAddColumnComment()
