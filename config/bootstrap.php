@@ -202,4 +202,5 @@ DispatcherFactory::add('ControllerFactory');
 Type::build('date')->useLocaleParser();
 Type::build('datetime')->useLocaleParser();
 
-Plugin::load('AdminLTE', ['bootstrap' => false, 'routes' => true]);
+Plugin::load('AdminLTE', ['bootstrap' => true, 'routes' => true]);
+
