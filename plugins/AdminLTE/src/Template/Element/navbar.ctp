@@ -15,7 +15,7 @@
 			<!-- User Account: style can be found in dropdown.less -->
 			<?= ($element['user']) ? $this->element('navbar/user') : ''; ?>
 			<!-- Control Sidebar Toggle Button -->
-			<li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
+			<?= ($element['control-sidebar']) ? '<li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>' : ''; ?>			
 		</ul>
 	</div>
 </nav>

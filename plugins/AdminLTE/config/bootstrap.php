@@ -15,7 +15,8 @@ Configure::write('Theme', [
         'message' => false,
         'notif' => false,
         'task' => false,
-        'user' => false
+        'user' => false,
+        'control-sidebar' => false
     ],
     'login' => [
         'show_remember' => true,
