@@ -58,5 +58,8 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+        
+        // aktivasi theme adminlte
+        $this->viewBuilder()->theme('AdminLTE');
     }
 }
