@@ -7,7 +7,7 @@ $theme = Configure::read('Theme');
 <head>
 <?= $this->Html->charset('utf-8'); ?>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title><?= isset($theme['title']) ? $theme['title'] : 'CakePHP - AdminLTE | Top Layout'; ?></title>
+<title>AdminLTE 2 | Boxed Layout</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -33,37 +33,43 @@ folder instead of downloading all of them to reduce the load. -->
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
-<body class="hold-transition skin-blue layout-top-nav">
+<!-- ADD THE CLASS layout-boxed TO GET A BOXED LAYOUT -->
+<body class="hold-transition skin-blue layout-boxed sidebar-mini">
+	<!-- Site wrapper -->
 	<div class="wrapper">
 
 		<header class="main-header">
-			<nav class="navbar navbar-static-top">
-				<div class="container">
-					<div class="navbar-header">
-						<a href="<?= $this->Url->build('/'); ?>" class="navbar-brand"><b>Admin</b>LTE</a>
-						<button type="button" class="navbar-toggle collapsed"
-							data-toggle="collapse" data-target="#navbar-collapse">
-							<i class="fa fa-bars"></i>
-						</button>
-					</div>
-
-					<?= $this->element('top-navbar', ['element' => $theme['eNavbar']]) ?>
-				</div>
-				<!-- /.container-fluid -->
-			</nav>
+			<!-- Logo -->
+			<a href="<?= $this->Url->build('/'); ?>" class="logo"> 
+			    <!-- mini logo for sidebar mini 50x50 pixels -->
+				<span class="logo-mini"><?= $theme['logo']['mini'] ?></span> 
+				<!-- logo for regular state and mobile devices -->
+				<span class="logo-lg"><?= $theme['logo']['large'] ?></span>
+			</a>
+			<!-- Header Navbar: style can be found in header.less -->
+			<?= $this->element('navbar', ['element' => $theme['eNavbar']]) ?>
 		</header>
-		<!-- Full Width Column -->
+		<!-- =============================================== -->
+
+		<!-- Left side column. contains the sidebar -->
+		<?= $this->element('sidebar', ['element' => $theme['eSidebar']]) ?>
+		<!-- =============================================== -->
+
+		<!-- =============================================== -->
+		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
-			<div class="container">
-				<?php echo $this->Flash->render(); ?>
-            	<?php echo $this->Flash->render('auth'); ?>
-            	<?php echo $this->fetch('content'); ?>
-			</div>
-			<!-- /.container -->
+			<?php echo $this->Flash->render(); ?>
+            <?php echo $this->Flash->render('auth'); ?>
+            <?php echo $this->fetch('content'); ?>
 		</div>
 		<!-- /.content-wrapper -->
 		<?= $this->element('footer') ?>
+		<!-- Control Sidebar -->
+		<?= $this->element('control-sidebar') ?>
+		<!-- /.control-sidebar -->
+		<!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+		<div class="control-sidebar-bg"></div>
 	</div>
 	<!-- ./wrapper -->
 

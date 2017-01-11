@@ -17,7 +17,7 @@ Configure::write('Theme', [
         'task' => true,
         'user' => true,
         'top-search' => true,
-        'control-sidebar' => false
+        'control-sidebar' => true
     ],
     'login' => [
         'show_remember' => true,
