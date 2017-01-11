@@ -12,10 +12,11 @@ Configure::write('Theme', [
         'user-panel' => false
     ],
     'eNavbar' => [
-        'message' => false,
-        'notif' => false,
-        'task' => false,
-        'user' => false,
+        'message' => true,
+        'notif' => true,
+        'task' => true,
+        'user' => true,
+        'top-search' => true,
         'control-sidebar' => false
     ],
     'login' => [

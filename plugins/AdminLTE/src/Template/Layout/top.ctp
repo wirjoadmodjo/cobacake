@@ -29,51 +29,46 @@ folder instead of downloading all of them to reduce the load. -->
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-	<!-- Site wrapper -->
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
 	<div class="wrapper">
+
 		<header class="main-header">
-			<!-- Logo -->
-			<a href="<?= $this->Url->build('/'); ?>" class="logo"> 
-			    <!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><?= $theme['logo']['mini'] ?></span> 
-				<!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><?= $theme['logo']['large'] ?></span>
-			</a>
-			<!-- Header Navbar: style can be found in header.less -->
-			<?= $this->element('navbar', ['element' => $theme['eNavbar']]) ?>
+			<nav class="navbar navbar-static-top">
+				<div class="container">
+					<div class="navbar-header">
+						<a href="<?= $this->Url->build('/'); ?>" class="navbar-brand"><b>Admin</b>LTE</a>
+						<button type="button" class="navbar-toggle collapsed"
+							data-toggle="collapse" data-target="#navbar-collapse">
+							<i class="fa fa-bars"></i>
+						</button>
+					</div>
+
+					<?= $this->element('top-navbar', ['element' => $theme['eNavbar']]) ?>
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
 		</header>
-		<!-- =============================================== -->
-
-		<!-- Left side column. contains the sidebar -->
-		<?= $this->element('sidebar', ['element' => $theme['eSidebar']]) ?>
-		<!-- =============================================== -->
-
-		<!-- Content Wrapper. Contains page content -->
+		<!-- Full Width Column -->
 		<div class="content-wrapper">
-			<?php echo $this->Flash->render(); ?>
-            <?php echo $this->Flash->render('auth'); ?>
-            <?php echo $this->fetch('content'); ?>
+			<div class="container">
+				<?php echo $this->Flash->render(); ?>
+            	<?php echo $this->Flash->render('auth'); ?>
+            	<?php echo $this->fetch('content'); ?>
+			</div>
+			<!-- /.container -->
 		</div>
 		<!-- /.content-wrapper -->
-
 		<?= $this->element('footer') ?>
-
-		<!-- Control Sidebar -->
-		<?= $this->element('control-sidebar') ?>
-		<!-- /.control-sidebar -->
-		<!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-		<div class="control-sidebar-bg"></div>
 	</div>
 	<!-- ./wrapper -->
 
-	<!-- jQuery 3.1.1 -->
-	<?= $this->Html->script('/lib/jQuery/jquery.min'); ?>
+	<!-- jQuery 2.2.4 -->
+	<?= $this->Html->script('/lib/jQuery/jquery-2.2.4.min'); ?>
 	<!-- Bootstrap 3.3.7 -->
 	<?= $this->Html->script('/lib/bootstrap/js/bootstrap.min'); ?>
 	<!-- SlimScroll -->
