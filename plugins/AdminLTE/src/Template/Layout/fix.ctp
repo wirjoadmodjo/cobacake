@@ -7,7 +7,7 @@ $theme = Configure::read('Theme');
 <head>
 <?= $this->Html->charset('utf-8'); ?>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title><?= isset($theme['title']) ? $theme['title'] : 'AdminLTE 2 | Boxed Layout'; ?></title>
+<title><?= isset($theme['title']) ? $theme['title'] : 'AdminLTE 2 | Fixed Layout'; ?></title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -33,8 +33,9 @@ folder instead of downloading all of them to reduce the load. -->
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<!-- ADD THE CLASS layout-boxed TO GET A BOXED LAYOUT -->
-<body class="hold-transition skin-blue layout-boxed sidebar-mini">
+<!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
+<!-- the fixed layout is not compatible with sidebar-mini -->
+<body class="hold-transition skin-blue fixed sidebar-mini">
 	<!-- Site wrapper -->
 	<div class="wrapper">
 
@@ -55,7 +56,6 @@ folder instead of downloading all of them to reduce the load. -->
 		<?= $this->element('sidebar', ['element' => $theme['eSidebar']]) ?>
 		<!-- =============================================== -->
 
-		<!-- =============================================== -->
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<?php echo $this->Flash->render(); ?>

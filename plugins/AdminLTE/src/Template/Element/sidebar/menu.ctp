@@ -21,7 +21,7 @@
 		<ul class="treeview-menu">
 			<li><a href="<?= $this->Url->build('pages/layout/top-nav'); ?>"><i class="fa fa-circle-o"></i>Top Navigation</a></li>
 			<li><a href="<?= $this->Url->build('pages/layout/boxed'); ?>"><i class="fa fa-circle-o"></i>Boxed</a></li>
-			<li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i>Fixed</a></li>
+			<li><a href="<?= $this->Url->build('pages/layout/fixed'); ?>"><i class="fa fa-circle-o"></i>Fixed</a></li>
 			<li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
 		</ul>
 	</li>
