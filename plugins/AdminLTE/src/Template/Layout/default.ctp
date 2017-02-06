@@ -1,13 +1,25 @@
 <?php
+/*************************************************************************
+ * @author		wirjoadmodjo@gmail.com
+ * @name 		AdminLTE Template Layout DEFAULT
+ * @version 	0.1
+ * @since		2017-02-04
+ * @category	CakePHP Template Layout ctp
+ * @desc			AdminLTE default layout dalam bentuk CakePHP ctp
+ * @copyright	MIT
+ * thanks to 	https://github.com/maiconpinto/cakephp-adminlte-theme
+ ************************************************************************/
+
 use Cake\Core\Configure;
 $theme = Configure::read('Theme');
+$pageTitle = $this->fetch('pageTitle');
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <?= $this->Html->charset('utf-8'); ?>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title><?= isset($theme['title']) ? $theme['title'] : 'CakePHP	| AdminLTE'; ?></title>
+<title><?= isset($pageTitle) ?  $pageTitle : $theme['title']; ?></title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -73,7 +85,7 @@ folder instead of downloading all of them to reduce the load. -->
 	<!-- ./wrapper -->
 
 	<!-- jQuery 3.1.1 -->
-	<?= $this->Html->script('/lib/jQuery/jquery.min'); ?>
+	<?= $this->Html->script('/lib/jQuery/jquery-2.2.4.min'); ?>
 	<!-- Bootstrap 3.3.7 -->
 	<?= $this->Html->script('/lib/bootstrap/js/bootstrap.min'); ?>
 	<!-- SlimScroll -->

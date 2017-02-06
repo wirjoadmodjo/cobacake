@@ -1,0 +1,48 @@
+2017-01-27 03:28:39 Warning: Warning (2): include(X:\Documents\DataServer\apache.htdocs\frameworks\cobacake/plugins/AdminLTE/config\bootstrap.php): failed to open stream: No such file or directory in [X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Core\Plugin.php, line 399]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+Cake\Core\Plugin::_includeFile() - CORE\src\Core\Plugin.php, line 399
+Cake\Core\Plugin::_includeFile() - CORE\src\Core\Plugin.php, line 399
+Cake\Core\Plugin::bootstrap() - CORE\src\Core\Plugin.php, line 321
+Cake\Core\Plugin::load() - CORE\src\Core\Plugin.php, line 175
+include - ROOT\config\bootstrap.php, line 205
+[main] - ROOT\bin\cake.php, line 31
+
+
+
+2017-01-27 03:28:39 Warning: Warning (2): include(): Failed opening 'X:\Documents\DataServer\apache.htdocs\frameworks\cobacake/plugins/AdminLTE/config\bootstrap.php' for inclusion (include_path='X:\XAMPP5\php\PEAR') in [X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Core\Plugin.php, line 399]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+Cake\Core\Plugin::_includeFile() - CORE\src\Core\Plugin.php, line 399
+Cake\Core\Plugin::_includeFile() - CORE\src\Core\Plugin.php, line 399
+Cake\Core\Plugin::bootstrap() - CORE\src\Core\Plugin.php, line 321
+Cake\Core\Plugin::load() - CORE\src\Core\Plugin.php, line 175
+include - ROOT\config\bootstrap.php, line 205
+[main] - ROOT\bin\cake.php, line 31
+
+
+
+2017-01-27 03:30:57 Warning: Warning (2): include(X:\Documents\DataServer\apache.htdocs\frameworks\cobacake/plugins/AdminLTE/config\bootstrap.php): failed to open stream: No such file or directory in [X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Core\Plugin.php, line 399]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+Cake\Core\Plugin::_includeFile() - CORE\src\Core\Plugin.php, line 399
+Cake\Core\Plugin::_includeFile() - CORE\src\Core\Plugin.php, line 399
+Cake\Core\Plugin::bootstrap() - CORE\src\Core\Plugin.php, line 321
+Cake\Core\Plugin::load() - CORE\src\Core\Plugin.php, line 175
+include - ROOT\config\bootstrap.php, line 205
+[main] - ROOT\bin\cake.php, line 31
+
+
+
+2017-01-27 03:30:58 Warning: Warning (2): include(): Failed opening 'X:\Documents\DataServer\apache.htdocs\frameworks\cobacake/plugins/AdminLTE/config\bootstrap.php' for inclusion (include_path='X:\XAMPP5\php\PEAR') in [X:\Documents\DataServer\apache.htdocs\frameworks\cobacake\vendor\cakephp\cakephp\src\Core\Plugin.php, line 399]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+Cake\Core\Plugin::_includeFile() - CORE\src\Core\Plugin.php, line 399
+Cake\Core\Plugin::_includeFile() - CORE\src\Core\Plugin.php, line 399
+Cake\Core\Plugin::bootstrap() - CORE\src\Core\Plugin.php, line 321
+Cake\Core\Plugin::load() - CORE\src\Core\Plugin.php, line 175
+include - ROOT\config\bootstrap.php, line 205
+[main] - ROOT\bin\cake.php, line 31
+
+
+

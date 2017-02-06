@@ -1,4 +1,15 @@
 <?php
+/*************************************************************************
+ * @author		wirjoadmodjo@gmail.com
+ * @name 		AdminLTE Template Layout TOP
+ * @version 	0.1
+ * @since		2017-02-04
+ * @category	CakePHP Template Layout ctp
+ * @desc			AdminLTE top layout dalam bentuk CakePHP ctp
+ * @copyright	MIT
+ * thanks to 	https://github.com/maiconpinto/cakephp-adminlte-theme
+ ************************************************************************/
+
 use Cake\Core\Configure;
 $theme = Configure::read('Theme');
 ?>

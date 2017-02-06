@@ -399,58 +399,6 @@
         ]
     },
     {
-        "name": "psr/http-message",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/php-fig/http-message.git",
-            "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
-            "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2016-08-06T14:39:51+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Psr\\Http\\Message\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
-            }
-        ],
-        "description": "Common interface for HTTP messages",
-        "homepage": "https://github.com/php-fig/http-message",
-        "keywords": [
-            "http",
-            "http-message",
-            "psr",
-            "psr-7",
-            "request",
-            "response"
-        ]
-    },
-    {
         "name": "cakephp/chronos",
         "version": "1.0.4",
         "version_normalized": "1.0.4.0",
@@ -508,6 +456,110 @@
         ]
     },
     {
+        "name": "psr/http-message",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/http-message.git",
+            "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+            "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-08-06T14:39:51+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Http\\Message\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for HTTP messages",
+        "homepage": "https://github.com/php-fig/http-message",
+        "keywords": [
+            "http",
+            "http-message",
+            "psr",
+            "psr-7",
+            "request",
+            "response"
+        ]
+    },
+    {
+        "name": "zendframework/zend-diactoros",
+        "version": "1.3.10",
+        "version_normalized": "1.3.10.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/zend-diactoros.git",
+            "reference": "83e8d98b9915de76c659ce27d683c02a0f99fa90"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/83e8d98b9915de76c659ce27d683c02a0f99fa90",
+            "reference": "83e8d98b9915de76c659ce27d683c02a0f99fa90",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.4 || ^7.0",
+            "psr/http-message": "~1.0"
+        },
+        "provide": {
+            "psr/http-message-implementation": "~1.0.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.6 || ^5.5",
+            "zendframework/zend-coding-standard": "~1.0.0"
+        },
+        "time": "2017-01-23T04:53:24+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.3-dev",
+                "dev-develop": "1.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zend\\Diactoros\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "description": "PSR HTTP Message implementations",
+        "homepage": "https://github.com/zendframework/zend-diactoros",
+        "keywords": [
+            "http",
+            "psr",
+            "psr-7"
+        ]
+    },
+    {
         "name": "psr/log",
         "version": "1.0.2",
         "version_normalized": "1.0.2.0",
@@ -555,6 +607,139 @@
             "psr",
             "psr-3"
         ]
+    },
+    {
+        "name": "cakephp/cakephp",
+        "version": "3.3.14",
+        "version_normalized": "3.3.14.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cakephp/cakephp.git",
+            "reference": "d12b9ab1af26421fc32120b3c9e4d18a6a0d2a6c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/cakephp/cakephp/zipball/d12b9ab1af26421fc32120b3c9e4d18a6a0d2a6c",
+            "reference": "d12b9ab1af26421fc32120b3c9e4d18a6a0d2a6c",
+            "shasum": ""
+        },
+        "require": {
+            "aura/intl": "1.1.*",
+            "cakephp/chronos": "~1.0",
+            "ext-intl": "*",
+            "ext-mbstring": "*",
+            "php": ">=5.5.9",
+            "psr/log": "^1.0",
+            "zendframework/zend-diactoros": "~1.0"
+        },
+        "replace": {
+            "cakephp/cache": "self.version",
+            "cakephp/collection": "self.version",
+            "cakephp/core": "self.version",
+            "cakephp/database": "self.version",
+            "cakephp/datasource": "self.version",
+            "cakephp/event": "self.version",
+            "cakephp/filesystem": "self.version",
+            "cakephp/form": "self.version",
+            "cakephp/i18n": "self.version",
+            "cakephp/log": "self.version",
+            "cakephp/orm": "self.version",
+            "cakephp/utility": "self.version",
+            "cakephp/validation": "self.version"
+        },
+        "require-dev": {
+            "cakephp/cakephp-codesniffer": "~2.1",
+            "phpunit/phpunit": "<6.0"
+        },
+        "suggest": {
+            "ext-openssl": "To use Security::encrypt() or have secure CSRF token generation."
+        },
+        "time": "2017-02-06T03:22:10+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Cake\\": "src"
+            },
+            "files": [
+                "src/Core/functions.php",
+                "src/Collection/functions.php",
+                "src/I18n/functions.php",
+                "src/Utility/bootstrap.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "CakePHP Community",
+                "homepage": "https://github.com/cakephp/cakephp/graphs/contributors"
+            }
+        ],
+        "description": "The CakePHP framework",
+        "homepage": "http://cakephp.org",
+        "keywords": [
+            "framework"
+        ]
+    },
+    {
+        "name": "symfony/yaml",
+        "version": "v3.2.2",
+        "version_normalized": "3.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/yaml.git",
+            "reference": "50eadbd7926e31842893c957eca362b21592a97d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/yaml/zipball/50eadbd7926e31842893c957eca362b21592a97d",
+            "reference": "50eadbd7926e31842893c957eca362b21592a97d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.9"
+        },
+        "require-dev": {
+            "symfony/console": "~2.8|~3.0"
+        },
+        "suggest": {
+            "symfony/console": "For validating YAML files using the lint command"
+        },
+        "time": "2017-01-03T13:51:32+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Yaml\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Yaml Component",
+        "homepage": "https://symfony.com"
     },
     {
         "name": "symfony/polyfill-mbstring",
@@ -615,179 +800,6 @@
             "polyfill",
             "portable",
             "shim"
-        ]
-    },
-    {
-        "name": "robmorgan/phinx",
-        "version": "v0.6.5",
-        "version_normalized": "0.6.5.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/robmorgan/phinx.git",
-            "reference": "6943cb4bb78bf9d3964967a032220b7c793b97b7"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/robmorgan/phinx/zipball/6943cb4bb78bf9d3964967a032220b7c793b97b7",
-            "reference": "6943cb4bb78bf9d3964967a032220b7c793b97b7",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4",
-            "symfony/config": "~2.8|~3.0",
-            "symfony/console": "~2.8|~3.0",
-            "symfony/yaml": "~2.8|~3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^4.8.26|^5.0"
-        },
-        "time": "2016-10-27T10:16:12+00:00",
-        "bin": [
-            "bin/phinx"
-        ],
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Phinx\\": "src/Phinx"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Woody Gilk",
-                "email": "woody.gilk@gmail.com",
-                "homepage": "http://shadowhand.me",
-                "role": "Developer"
-            },
-            {
-                "name": "Rob Morgan",
-                "email": "robbym@gmail.com",
-                "homepage": "https://robmorgan.id.au",
-                "role": "Lead Developer"
-            },
-            {
-                "name": "Richard Quadling",
-                "email": "rquadling@gmail.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Phinx makes it ridiculously easy to manage the database migrations for your PHP app.",
-        "homepage": "https://phinx.org",
-        "keywords": [
-            "database",
-            "database migrations",
-            "db",
-            "migrations",
-            "phinx"
-        ]
-    },
-    {
-        "name": "cakephp/migrations",
-        "version": "1.6.7",
-        "version_normalized": "1.6.7.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/cakephp/migrations.git",
-            "reference": "f2a5e2915f8924bd36979a1001edeef7cd455f89"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/cakephp/migrations/zipball/f2a5e2915f8924bd36979a1001edeef7cd455f89",
-            "reference": "f2a5e2915f8924bd36979a1001edeef7cd455f89",
-            "shasum": ""
-        },
-        "require": {
-            "cakephp/cakephp": "~3.1",
-            "php": ">=5.4",
-            "robmorgan/phinx": "0.6.5"
-        },
-        "require-dev": {
-            "cakephp/bake": "@stable",
-            "phpunit/phpunit": "*"
-        },
-        "suggest": {
-            "cakephp/bake": "Required if you want to generate migrations."
-        },
-        "time": "2017-01-07T16:45:31+00:00",
-        "type": "cakephp-plugin",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Migrations\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "CakePHP Community",
-                "homepage": "https://github.com/cakephp/migrations/graphs/contributors"
-            }
-        ],
-        "description": "Database Migration plugin for CakePHP 3.0 based on Phinx",
-        "homepage": "https://github.com/cakephp/migrations",
-        "keywords": [
-            "cakephp",
-            "migrations"
-        ]
-    },
-    {
-        "name": "nikic/php-parser",
-        "version": "v3.0.2",
-        "version_normalized": "3.0.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/nikic/PHP-Parser.git",
-            "reference": "adf44419c0fc014a0f191db6f89d3e55d4211744"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/adf44419c0fc014a0f191db6f89d3e55d4211744",
-            "reference": "adf44419c0fc014a0f191db6f89d3e55d4211744",
-            "shasum": ""
-        },
-        "require": {
-            "ext-tokenizer": "*",
-            "php": ">=5.5"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.0|~5.0"
-        },
-        "time": "2016-12-06T11:30:35+00:00",
-        "bin": [
-            "bin/php-parse"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "PhpParser\\": "lib/PhpParser"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Nikita Popov"
-            }
-        ],
-        "description": "A PHP parser written in PHP",
-        "keywords": [
-            "parser",
-            "php"
         ]
     },
     {
@@ -915,71 +927,6 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "symfony/var-dumper",
-        "version": "v3.2.2",
-        "version_normalized": "3.2.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/var-dumper.git",
-            "reference": "b54b23f9a19b465e76fdaac0f6732410467c83b2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/b54b23f9a19b465e76fdaac0f6732410467c83b2",
-            "reference": "b54b23f9a19b465e76fdaac0f6732410467c83b2",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.5.9",
-            "symfony/polyfill-mbstring": "~1.0"
-        },
-        "require-dev": {
-            "twig/twig": "~1.20|~2.0"
-        },
-        "suggest": {
-            "ext-symfony_debug": ""
-        },
-        "time": "2017-01-03T08:53:57+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.2-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "Resources/functions/dump.php"
-            ],
-            "psr-4": {
-                "Symfony\\Component\\VarDumper\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony mechanism for exploring and dumping PHP variables",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "debug",
-            "dump"
-        ]
-    },
-    {
         "name": "symfony/filesystem",
         "version": "v3.2.2",
         "version_normalized": "3.2.2.0",
@@ -1089,30 +1036,204 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "symfony/yaml",
+        "name": "robmorgan/phinx",
+        "version": "v0.6.5",
+        "version_normalized": "0.6.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/robmorgan/phinx.git",
+            "reference": "6943cb4bb78bf9d3964967a032220b7c793b97b7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/robmorgan/phinx/zipball/6943cb4bb78bf9d3964967a032220b7c793b97b7",
+            "reference": "6943cb4bb78bf9d3964967a032220b7c793b97b7",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4",
+            "symfony/config": "~2.8|~3.0",
+            "symfony/console": "~2.8|~3.0",
+            "symfony/yaml": "~2.8|~3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8.26|^5.0"
+        },
+        "time": "2016-10-27T10:16:12+00:00",
+        "bin": [
+            "bin/phinx"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Phinx\\": "src/Phinx"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Woody Gilk",
+                "email": "woody.gilk@gmail.com",
+                "homepage": "http://shadowhand.me",
+                "role": "Developer"
+            },
+            {
+                "name": "Rob Morgan",
+                "email": "robbym@gmail.com",
+                "homepage": "https://robmorgan.id.au",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Richard Quadling",
+                "email": "rquadling@gmail.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Phinx makes it ridiculously easy to manage the database migrations for your PHP app.",
+        "homepage": "https://phinx.org",
+        "keywords": [
+            "database",
+            "database migrations",
+            "db",
+            "migrations",
+            "phinx"
+        ]
+    },
+    {
+        "name": "cakephp/migrations",
+        "version": "1.6.7",
+        "version_normalized": "1.6.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cakephp/migrations.git",
+            "reference": "f2a5e2915f8924bd36979a1001edeef7cd455f89"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/cakephp/migrations/zipball/f2a5e2915f8924bd36979a1001edeef7cd455f89",
+            "reference": "f2a5e2915f8924bd36979a1001edeef7cd455f89",
+            "shasum": ""
+        },
+        "require": {
+            "cakephp/cakephp": "~3.1",
+            "php": ">=5.4",
+            "robmorgan/phinx": "0.6.5"
+        },
+        "require-dev": {
+            "cakephp/bake": "@stable",
+            "phpunit/phpunit": "*"
+        },
+        "suggest": {
+            "cakephp/bake": "Required if you want to generate migrations."
+        },
+        "time": "2017-01-07T16:45:31+00:00",
+        "type": "cakephp-plugin",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Migrations\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "CakePHP Community",
+                "homepage": "https://github.com/cakephp/migrations/graphs/contributors"
+            }
+        ],
+        "description": "Database Migration plugin for CakePHP 3.0 based on Phinx",
+        "homepage": "https://github.com/cakephp/migrations",
+        "keywords": [
+            "cakephp",
+            "migrations"
+        ]
+    },
+    {
+        "name": "nikic/php-parser",
+        "version": "v3.0.3",
+        "version_normalized": "3.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nikic/PHP-Parser.git",
+            "reference": "5b8182cc0abb4b0ff290ba9df6c0e1323286013a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/5b8182cc0abb4b0ff290ba9df6c0e1323286013a",
+            "reference": "5b8182cc0abb4b0ff290ba9df6c0e1323286013a",
+            "shasum": ""
+        },
+        "require": {
+            "ext-tokenizer": "*",
+            "php": ">=5.5"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0|~5.0"
+        },
+        "time": "2017-02-03T21:57:31+00:00",
+        "bin": [
+            "bin/php-parse"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PhpParser\\": "lib/PhpParser"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Nikita Popov"
+            }
+        ],
+        "description": "A PHP parser written in PHP",
+        "keywords": [
+            "parser",
+            "php"
+        ]
+    },
+    {
+        "name": "symfony/var-dumper",
         "version": "v3.2.2",
         "version_normalized": "3.2.2.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/yaml.git",
-            "reference": "50eadbd7926e31842893c957eca362b21592a97d"
+            "url": "https://github.com/symfony/var-dumper.git",
+            "reference": "b54b23f9a19b465e76fdaac0f6732410467c83b2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/yaml/zipball/50eadbd7926e31842893c957eca362b21592a97d",
-            "reference": "50eadbd7926e31842893c957eca362b21592a97d",
+            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/b54b23f9a19b465e76fdaac0f6732410467c83b2",
+            "reference": "b54b23f9a19b465e76fdaac0f6732410467c83b2",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.5.9"
+            "php": ">=5.5.9",
+            "symfony/polyfill-mbstring": "~1.0"
         },
         "require-dev": {
-            "symfony/console": "~2.8|~3.0"
+            "twig/twig": "~1.20|~2.0"
         },
         "suggest": {
-            "symfony/console": "For validating YAML files using the lint command"
+            "ext-symfony_debug": ""
         },
-        "time": "2017-01-03T13:51:32+00:00",
+        "time": "2017-01-03T08:53:57+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1121,8 +1242,11 @@
         },
         "installation-source": "dist",
         "autoload": {
+            "files": [
+                "Resources/functions/dump.php"
+            ],
             "psr-4": {
-                "Symfony\\Component\\Yaml\\": ""
+                "Symfony\\Component\\VarDumper\\": ""
             },
             "exclude-from-classmap": [
                 "/Tests/"
@@ -1134,16 +1258,20 @@
         ],
         "authors": [
             {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
             },
             {
                 "name": "Symfony Community",
                 "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "Symfony Yaml Component",
-        "homepage": "https://symfony.com"
+        "description": "Symfony mechanism for exploring and dumping PHP variables",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "debug",
+            "dump"
+        ]
     },
     {
         "name": "psy/psysh",
@@ -1723,17 +1851,17 @@
     },
     {
         "name": "composer/composer",
-        "version": "1.3.1",
-        "version_normalized": "1.3.1.0",
+        "version": "1.3.2",
+        "version_normalized": "1.3.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/composer.git",
-            "reference": "91dbca556764dcece45e1ba3aab14de2deaa9fec"
+            "reference": "e7569edb4a5eadcbb2e4ad5ed753282260f281df"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/composer/zipball/91dbca556764dcece45e1ba3aab14de2deaa9fec",
-            "reference": "91dbca556764dcece45e1ba3aab14de2deaa9fec",
+            "url": "https://api.github.com/repos/composer/composer/zipball/e7569edb4a5eadcbb2e4ad5ed753282260f281df",
+            "reference": "e7569edb4a5eadcbb2e4ad5ed753282260f281df",
             "shasum": ""
         },
         "require": {
@@ -1760,7 +1888,7 @@
             "ext-zip": "Enabling the zip extension allows you to unzip archives",
             "ext-zlib": "Allow gzip compression of HTTP requests"
         },
-        "time": "2017-01-07T17:08:51+00:00",
+        "time": "2017-01-27T17:23:42+00:00",
         "bin": [
             "bin/composer"
         ],
@@ -1801,146 +1929,18 @@
         ]
     },
     {
-        "name": "zendframework/zend-diactoros",
-        "version": "1.3.10",
-        "version_normalized": "1.3.10.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/zendframework/zend-diactoros.git",
-            "reference": "83e8d98b9915de76c659ce27d683c02a0f99fa90"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/83e8d98b9915de76c659ce27d683c02a0f99fa90",
-            "reference": "83e8d98b9915de76c659ce27d683c02a0f99fa90",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.4 || ^7.0",
-            "psr/http-message": "~1.0"
-        },
-        "provide": {
-            "psr/http-message-implementation": "~1.0.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^4.6 || ^5.5",
-            "zendframework/zend-coding-standard": "~1.0.0"
-        },
-        "time": "2017-01-23T04:53:24+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.3-dev",
-                "dev-develop": "1.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Zend\\Diactoros\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-2-Clause"
-        ],
-        "description": "PSR HTTP Message implementations",
-        "homepage": "https://github.com/zendframework/zend-diactoros",
-        "keywords": [
-            "http",
-            "psr",
-            "psr-7"
-        ]
-    },
-    {
-        "name": "cakephp/cakephp",
-        "version": "3.3.12",
-        "version_normalized": "3.3.12.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/cakephp/cakephp.git",
-            "reference": "9e41f111f68ef646bcf8b03b9b4885598e4d9de3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/cakephp/cakephp/zipball/9e41f111f68ef646bcf8b03b9b4885598e4d9de3",
-            "reference": "9e41f111f68ef646bcf8b03b9b4885598e4d9de3",
-            "shasum": ""
-        },
-        "require": {
-            "aura/intl": "1.1.*",
-            "cakephp/chronos": "~1.0",
-            "ext-intl": "*",
-            "ext-mbstring": "*",
-            "php": ">=5.5.9",
-            "psr/log": "^1.0",
-            "zendframework/zend-diactoros": "~1.0"
-        },
-        "replace": {
-            "cakephp/cache": "self.version",
-            "cakephp/collection": "self.version",
-            "cakephp/core": "self.version",
-            "cakephp/database": "self.version",
-            "cakephp/datasource": "self.version",
-            "cakephp/event": "self.version",
-            "cakephp/filesystem": "self.version",
-            "cakephp/form": "self.version",
-            "cakephp/i18n": "self.version",
-            "cakephp/log": "self.version",
-            "cakephp/orm": "self.version",
-            "cakephp/utility": "self.version",
-            "cakephp/validation": "self.version"
-        },
-        "require-dev": {
-            "cakephp/cakephp-codesniffer": "~2.1",
-            "phpunit/phpunit": "*"
-        },
-        "suggest": {
-            "ext-openssl": "To use Security::encrypt() or have secure CSRF token generation."
-        },
-        "time": "2017-01-14T02:44:01+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Cake\\": "src"
-            },
-            "files": [
-                "src/Core/functions.php",
-                "src/Collection/functions.php",
-                "src/I18n/functions.php",
-                "src/Utility/bootstrap.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "CakePHP Community",
-                "homepage": "https://github.com/cakephp/cakephp/graphs/contributors"
-            }
-        ],
-        "description": "The CakePHP framework",
-        "homepage": "http://cakephp.org",
-        "keywords": [
-            "framework"
-        ]
-    },
-    {
         "name": "cakephp/debug_kit",
-        "version": "3.6.0",
-        "version_normalized": "3.6.0.0",
+        "version": "3.8.0",
+        "version_normalized": "3.8.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/cakephp/debug_kit.git",
-            "reference": "f064138375048a3a9ddfa51fef403704ad186c3f"
+            "reference": "4a2051878107c8c4110b0b7e7d9adc317f07f73e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/f064138375048a3a9ddfa51fef403704ad186c3f",
-            "reference": "f064138375048a3a9ddfa51fef403704ad186c3f",
+            "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/4a2051878107c8c4110b0b7e7d9adc317f07f73e",
+            "reference": "4a2051878107c8c4110b0b7e7d9adc317f07f73e",
             "shasum": ""
         },
         "require": {
@@ -1956,7 +1956,7 @@
         "suggest": {
             "ext-sqlite": "DebugKit needs to store panel data in a database. SQLite is simple and easy to use."
         },
-        "time": "2017-01-19T03:11:00+00:00",
+        "time": "2017-01-31T02:52:30+00:00",
         "type": "cakephp-plugin",
         "installation-source": "dist",
         "autoload": {
@@ -1990,17 +1990,17 @@
     },
     {
         "name": "cakephp/bake",
-        "version": "1.2.12",
-        "version_normalized": "1.2.12.0",
+        "version": "1.2.14",
+        "version_normalized": "1.2.14.0",
         "source": {
             "type": "git",
             "url": "https://github.com/cakephp/bake.git",
-            "reference": "a52c3919d6e1521eb9396dcf239b24aa4e6522ed"
+            "reference": "24ef0cc781b529a8566cce4ecaf3aeaa1f08efd4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/cakephp/bake/zipball/a52c3919d6e1521eb9396dcf239b24aa4e6522ed",
-            "reference": "a52c3919d6e1521eb9396dcf239b24aa4e6522ed",
+            "url": "https://api.github.com/repos/cakephp/bake/zipball/24ef0cc781b529a8566cce4ecaf3aeaa1f08efd4",
+            "reference": "24ef0cc781b529a8566cce4ecaf3aeaa1f08efd4",
             "shasum": ""
         },
         "require": {
@@ -2012,7 +2012,7 @@
             "cakephp/cakephp-codesniffer": "^2.1",
             "phpunit/phpunit": "*"
         },
-        "time": "2017-01-22T18:32:37+00:00",
+        "time": "2017-01-31T00:59:03+00:00",
         "type": "cakephp-plugin",
         "installation-source": "dist",
         "autoload": {

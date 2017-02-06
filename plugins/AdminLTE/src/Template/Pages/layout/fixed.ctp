@@ -1,5 +1,6 @@
 <?php
 $this->layout = 'AdminLTE.fix';
+$this->assign('pageTitle','Examples');
 
 $_link[0]['title'] = 'Layout';
 $_link[0]['url'] = '#';
